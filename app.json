@@ -1,0 +1,7 @@
+{
+  "name": "Inscription-poll frontend",
+  "description": "A simple frontend app to connect with inscription-poll api",
+  "repository": "https://github.com/pepita-remembrance/arqsoft-inscription-poll",
+  "keywords": ["angular", "unq", "heroku"],
+  "image": "heroku/nodejs"
+}
