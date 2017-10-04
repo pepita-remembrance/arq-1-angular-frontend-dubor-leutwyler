@@ -4,7 +4,7 @@
   "engines": {
     "node": "6.11.1"
   },
-  "main" : "server.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "ng": "ng",
@@ -34,6 +34,7 @@
     "body-parser": "^1.18.1",
     "core-js": "^2.4.1",
     "express": "^4.15.4",
+    "jquery": "^3.2.1",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
   },

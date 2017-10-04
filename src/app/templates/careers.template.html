@@ -1,0 +1,8 @@
+<div *ngIf="student">
+  <ul class="list-group">
+    <li *ngFor="let career of student.careers">
+      <span class="badge">{{career.name}}</span>
+    </li>
+  </ul>
+</div>
+<button (click)="goBack()">Back</button>

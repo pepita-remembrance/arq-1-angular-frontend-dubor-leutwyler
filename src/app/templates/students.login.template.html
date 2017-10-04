@@ -1,0 +1,9 @@
+<div class="form-group">
+  <label for="sel1">Who are you?:</label>
+<div class="list-group">
+    <button type="button" class="list-group-item" *ngFor="let student of students"
+    [routerLink]="['/students', student.id]">
+        {{student.name}} {{student.last_name}}
+    </button>
+</div>
+</div>

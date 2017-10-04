@@ -1,5 +1,6 @@
 export class Career{
-  constructor(public id: string, public name : string, public link: string, public description : string){}
+  constructor(public id: string, public name : string, public link: string, public description : string,
+  public subjects : Subject[] = []){}
 }
 
 export class Subject{

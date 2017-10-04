@@ -9,7 +9,7 @@ const tuesdayToThursday = new MyTypes.Course(
   ])
 const offer = new MyTypes.Offer([tuesdayToThursday])
 const intro = new MyTypes.Subject("Introduccion a la programacion", offer)
-const tpi = new MyTypes.Career("1", "TPI", "Lalala", "lelele")
+const tpi = new MyTypes.Career("1", "TPI", "Tecnicatura", "Mucha programacion", [intro])
 export const CARRERS: MyTypes.Career[] = [
   tpi,
 ]
