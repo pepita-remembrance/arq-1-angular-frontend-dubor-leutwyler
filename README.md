@@ -6,6 +6,12 @@ This is the front end for the public api:
 
 [Front-end](https://sleepy-harbor-39428.herokuapp.com/)
 
+### How to use
+
+Now this is using mock data. The valid users are **Marco Gomez**, and **Joaquin Sanchez**.
+
+You can also test the form validation by typing a wrong user.
+
 # Run it locally
 
 First of all you'll need to run `npm install && npm run postinstall` to generate the dist directory.
