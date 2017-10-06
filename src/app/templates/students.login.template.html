@@ -1,9 +1,21 @@
-<div class="form-group">
-  <label for="sel1">Who are you?:</label>
-<div class="list-group">
-    <button type="button" class="list-group-item" *ngFor="let student of students"
-    [routerLink]="['/students', student.id]">
-        {{student.name}} {{student.last_name}}
-    </button>
-</div>
-</div>
+<form (ngSubmit)="onSubmit()" #studentForm="ngForm" class="form-signin">
+  <h2 class="form-signin-heading">Please sign in</h2>
+  <div *ngIf="error" class="alert alert-danger">
+    <strong>{{error}}</strong>
+  </div>
+  <label for="inputEmail" class="sr-only">Name</label>
+  <input type="text" id="inputName" class="form-control" placeholder="Name" required="" autofocus=""
+  required
+ [(ngModel)]="name" name="name" #spy>
+  <label for="inputEmail" class="sr-only">Surname</label>
+  <input type="text" id="inputName" class="form-control" placeholder="Surname" required=""
+  required
+ [(ngModel)]="surname" name="surname" #spy>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="remember-me"> Remember me
+    </label>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!studentForm.form.valid">Sign in
+  </button>
+</form>

@@ -15,7 +15,7 @@ import {StudentsService} from '../services/students.service'
   templateUrl: '../templates/careers.template.html',
 })
 
-export class CareersComponent implements OnInit{
+export class StudentComponent implements OnInit{
   student : Student
 
   constructor(private studentsService: StudentsService, private route: ActivatedRoute,

@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import {CareersService}  from './services/careers.service'
 
 import { AppComponent } from './app.component';
-import { CareersComponent } from './components/careers.component'
+import { StudentComponent } from './components/student.component'
 import { StudentsComponent } from './components/students.login.component'
 
 import { RouterModule }   from '@angular/router';
@@ -14,7 +14,7 @@ import { RouterModule }   from '@angular/router';
 @NgModule({
   declarations: [
     AppComponent,
-    CareersComponent,
+    StudentComponent,
     StudentsComponent
   ],
   imports: [
@@ -29,7 +29,7 @@ import { RouterModule }   from '@angular/router';
       },
       {
         path: 'students/:id',
-        component: CareersComponent
+        component: StudentComponent
       },
       {
         path: 'login',
