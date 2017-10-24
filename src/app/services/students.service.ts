@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { STUDENTS } from '../models/students.mock';
+import { STUDENTS } from '../models/mocks/students.mock';
 import Student from '../models/student';
 
 
