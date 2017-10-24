@@ -20,7 +20,7 @@ export class StudentsComponent implements OnInit {
   error: string;
 
   ngOnInit(): void {
-    this.getCarrers();
+    this.loadStudents();
   }
 
   constructor(private studentsService: StudentsService,
@@ -28,7 +28,7 @@ export class StudentsComponent implements OnInit {
               private router: Router, ) {
   }
 
-  getCarrers(): void {
+  loadStudents(): void {
     this.studentsService.getStudents().then(students => this.students = students);
   }
 

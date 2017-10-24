@@ -24,7 +24,7 @@ const offer2 = new MyTypes.Offer([onlyMonday, onlySaturday]);
 const intro = new MyTypes.Subject('Introduccion a la programacion', offer);
 const lyp = new MyTypes.Subject('Logica y Programacion', offer2);
 const tpi = new MyTypes.Career('1', 'TPI', 'Tecnicatura', 'Mucha programacion', [intro]);
-export const CARRERS: MyTypes.Career[] = [
+export const CAREERS: MyTypes.Career[] = [
   tpi,
 ];
 
