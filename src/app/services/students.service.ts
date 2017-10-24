@@ -22,6 +22,6 @@ export class StudentsService {
 
   getStudentBy(name: string, surname: string): Promise<Student> {
     return this.getStudents().then(students =>
-      students.find(student => student.name === name && student.last_name === student.last_name));
+      students.find(student => student.name === name && student.surname === surname));
   }
 }
