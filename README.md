@@ -16,7 +16,7 @@ You can also test the form validation by typing a wrong user.
 
 First of all you'll need to run `npm install && npm run postinstall` to generate the dist directory.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm run ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 Or also you can do `npm start` and then navigate to `http://localhost:8080/`.
 

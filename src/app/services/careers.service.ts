@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http'
+import { Http } from '@angular/http';
 
-import { CARRERS } from '../models/courses.mock'
-import { Career } from '../models/course'
+import { CARRERS } from '../models/courses.mock';
+import { Career } from '../models/course';
 
 
 @Injectable()
@@ -11,7 +11,7 @@ export class CareersService {
 
   constructor(private http: Http) {}
 
-  getCarrers() : Promise<Career[]> {
+  getCarrers(): Promise<Career[]> {
     return this.http.get(this.careersUrl)
         .toPromise()
         .then(response => response.json() as Career[])
@@ -19,7 +19,7 @@ export class CareersService {
   }
 
   private handleError(error: any): Promise<any> {
-    console.log("nope")
+    console.log('nope');
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }

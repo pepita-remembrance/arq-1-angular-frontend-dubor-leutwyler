@@ -1,15 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule }   from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
 
-import {CareersService}  from './services/careers.service'
+import {CareersService} from './services/careers.service';
 
-import { AppComponent } from './app.component';
-import { StudentComponent } from './components/student.component'
-import { StudentsComponent } from './components/students.login.component'
+import {AppComponent} from './app.component';
+import {StudentComponent} from './components/student.component';
+import {StudentsComponent} from './components/students.login.component';
 
-import { RouterModule }   from '@angular/router';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -40,4 +40,5 @@ import { RouterModule }   from '@angular/router';
   providers: [CareersService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

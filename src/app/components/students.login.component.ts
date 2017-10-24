@@ -1,45 +1,48 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {StudentsService} from '../services/students.service';
-import { OnInit } from '@angular/core';
-import { CommonModule, Location } from "@angular/common";
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import {OnInit} from '@angular/core';
+import {CommonModule, Location} from '@angular/common';
+import {Router, ActivatedRoute, ParamMap} from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
-import Student from '../models/student'
+import Student from '../models/student';
 
 @Component({
-  selector: 'students-login',
+  selector: 'app-students-login',
   providers: [StudentsService],
   templateUrl: '../templates/students.login.template.html',
 })
 
-export class StudentsComponent {
-  students : Student[];
-  name : string;
-  surname : string;
-  error : string;
+export class StudentsComponent implements OnInit {
+  students: Student[];
+  name: string;
+  surname: string;
+  error: string;
 
   ngOnInit(): void {
     this.getCarrers();
   }
 
   constructor(private studentsService: StudentsService,
-    private route: ActivatedRoute,
-    private router: Router,) {}
+              private route: ActivatedRoute,
+              private router: Router, ) {
+  }
 
-  getCarrers() : void{
+  getCarrers(): void {
     this.studentsService.getStudents().then(students => this.students = students);
   }
 
-  onSubmit(){
+  onSubmit() {
     this.studentsService.getStudentBy(this.name, this.surname)
-    .then(student =>{
-      if(student)
-      this.router.navigate([`students/${student.id}`])
-      else this.error = "Invalid name or surname"
-    }
-    ).catch(error =>
-      this.error = "Invalid name or surname"
-    )
+      .then(student => {
+          if (student) {
+            this.router.navigate([`students/${student.id}`]);
+          } else {
+            this.error = 'Invalid name or surname';
+          }
+        }
+      ).catch(error =>
+      this.error = 'Invalid name or surname'
+    );
   }
 }
