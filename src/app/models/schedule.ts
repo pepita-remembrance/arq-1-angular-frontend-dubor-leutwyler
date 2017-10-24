@@ -30,10 +30,6 @@ class Day {
   getValue(): number {
     return this.value;
   }
-
-  compare(d1, d2): boolean {
-    return d1.getValue() < d2.getValue();
-  }
 }
 
 export const Monday = new Day(0, 'Monday');

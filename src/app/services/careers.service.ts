@@ -11,7 +11,7 @@ export class CareersService {
 
   constructor(private http: Http) {}
 
-  getCarrers(): Promise<Career[]> {
+  getCareers(): Promise<Career[]> {
     return this.http.get(this.careersUrl)
         .toPromise()
         .then(response => response.json() as Career[])
