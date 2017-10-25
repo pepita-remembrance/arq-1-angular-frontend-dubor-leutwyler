@@ -38,11 +38,11 @@ export class StudentsComponent implements OnInit {
           if (student) {
             this.router.navigate([`students/${student.id}`]);
           } else {
-            this.error = 'Invalid name or surname';
+            this.error = 'Invalid fullName or surname';
           }
         }
       ).catch(error =>
-      this.error = 'Invalid name or surname'
+      this.error = 'Invalid fullName or surname'
     );
   }
 }
