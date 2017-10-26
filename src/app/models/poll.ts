@@ -1,4 +1,5 @@
 import {Career, Subject} from './career';
+import Student from './student';
 
 export type CareerOffer = Map<Subject, SubjectOffer>;
 
@@ -18,6 +19,14 @@ export class Poll {
 
   public on(subjectKey: string): SubjectOffer {
     return this.offer.get(this.career.getSubject(subjectKey));
+  }
+
+  public newPollResult(student: Student, defaultOption: DefaultOption): PollResult {
+    if (this.isOpen()) {
+      return new PollResult(this, student, defaultOption);
+    } else {
+      throw new Error('Unable to create new PollResult on closed Poll');
+    }
   }
 }
 
@@ -70,3 +79,12 @@ export class DefaultOption extends NonCourseOption {
 export const NotYet = new DefaultOption('Aun no voy a cursar');
 export const AlreadyPassed = new DefaultOption('Ya aprobe');
 export const NoSuitableSchedule = new DefaultOption('Ningun horario me sirve');
+
+export class PollResult {
+  public results: Map<Subject, OfferOption>;
+
+  constructor(public poll: Poll, public student: Student, public defaultOption: DefaultOption = NotYet) {
+    this.results = new Map<Subject, OfferOption>();
+    Array.from(poll.offer.keys()).forEach(subject => this.results.set(subject, defaultOption));
+  }
+}

@@ -4,7 +4,7 @@ import {Schedule} from './schedule';
 export class Career {
   public polls: Poll[] = [];
 
-  constructor(public id: string, public shortName: string, public description: string, public subjects: Subject[] = []) {
+  constructor(public id: string, public shortName: string, public longName: string, public subjects: Subject[] = []) {
   }
 
   public openPoll(): Poll {

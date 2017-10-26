@@ -1,22 +1,19 @@
-import { STUDENTS } from '../models/mocks/students.mock';
+import {STUDENTS} from '../models/mocks/students.mock';
 import Student from '../models/student';
-import {BaseService} from './baseService';
+import {DataSourceService} from './baseService';
+import {Injectable} from '@angular/core';
 
-
-export class StudentsService extends BaseService {
-
-  public student: Student;
-
-  getStudents(): Promise<Student[]> {
+@Injectable()
+export class StudentsService extends DataSourceService<Student> {
+  fetchData(): Promise<Student[]> {
     return Promise.resolve(STUDENTS);
   }
 
   getStudent(id: number): Promise<Student> {
-    return this.getStudents().then(students => students.find(student => student.id === id));
+    return this.fetchData().then(data => data.find(student => student.id === id));
   }
 
   getStudentBy(name: string, surname: string): Promise<Student> {
-    return this.getStudents().then(students =>
-      students.find(student => student.name === name && student.surname === surname));
+    return this.fetchData().then(data => data.find(student => student.name === name && student.surname === surname));
   }
 }
