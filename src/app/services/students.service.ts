@@ -1,16 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-
 import { STUDENTS } from '../models/mocks/students.mock';
 import Student from '../models/student';
+import {BaseService} from './baseService';
 
 
-@Injectable()
-export class StudentsService {
+export class StudentsService extends BaseService {
 
   public student: Student;
-
-  constructor(private http: Http) {}
 
   getStudents(): Promise<Student[]> {
     return Promise.resolve(STUDENTS);

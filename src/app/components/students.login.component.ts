@@ -13,23 +13,14 @@ import Student from '../models/student';
   templateUrl: '../templates/students.login.template.html',
 })
 
-export class StudentsComponent implements OnInit {
-  students: Student[];
+export class StudentsLoginComponent {
   name: string;
   surname: string;
   error: string;
 
-  ngOnInit(): void {
-    this.loadStudents();
-  }
-
   constructor(private studentsService: StudentsService,
               private route: ActivatedRoute,
               private router: Router, ) {
-  }
-
-  loadStudents(): void {
-    this.studentsService.getStudents().then(students => this.students = students);
   }
 
   onSubmit() {
