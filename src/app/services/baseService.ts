@@ -1,9 +1,7 @@
-import {Http} from '@angular/http';
-
 export abstract class DataSourceService<T> {
   public data: T[] = [];
 
-  constructor(public http: Http) {
+  constructor() {
     this.fetchData()
       .then(data => this.data = data)
       .catch(this.handleError);
