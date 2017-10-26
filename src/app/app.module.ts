@@ -5,15 +5,15 @@ import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
 import {LandingComponent} from './components/landing.component';
-// import {StudentsLoginComponent} from './components/students.login.component';
+import {StudentsLoginComponent} from './components/students.login.component';
 
 import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingComponent
-    // StudentsLoginComponent
+    LandingComponent,
+    StudentsLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -21,9 +21,11 @@ import {RouterModule} from '@angular/router';
     HttpModule,
     RouterModule.forRoot([
       {path: '', redirectTo: '/landing', pathMatch: 'full'},
-      {path: 'landing', component: LandingComponent}
-    ], {useHash: true})
+      {path: 'landing', component: LandingComponent},
+      {path: 'careers/:careerShortName/students/login', component: StudentsLoginComponent}
+    ])
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}
