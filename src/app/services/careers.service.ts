@@ -9,11 +9,11 @@ export class CareerService extends DataSourceService<Career> {
     return Promise.resolve(CAREERS);
   }
 
-  // getById(id: string): Promise<Career> {
-  //   return this.fetchData().then(data => data.find(career => career.id === id));
-  // }
-  //
-  // getByShortName(shortName: string): Promise<Career> {
-  //   return this.fetchData().then(data => data.find(career => career.shortName === shortName));
-  // }
+  getById(id: string): Promise<Career> {
+    return this.fetchData().then(data => data.find(career => career.id === id));
+  }
+
+  getByShortName(shortName: string): Promise<Career> {
+    return this.fetchData().then(data => data.find(career => career.shortName === shortName));
+  }
 }

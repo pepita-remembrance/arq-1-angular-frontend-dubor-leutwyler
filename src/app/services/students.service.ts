@@ -9,11 +9,11 @@ export class StudentService extends DataSourceService<Student> {
     return Promise.resolve(STUDENTS);
   }
 
-  // getStudent(id: number): Promise<Student> {
-  //   return this.fetchData().then(data => data.find(student => student.id === id));
-  // }
-  //
-  // getStudentBy(name: string, surname: string): Promise<Student> {
-  //   return this.fetchData().then(data => data.find(student => student.name === name && student.surname === surname));
-  // }
+  getStudent(id: number): Promise<Student> {
+    return this.fetchData().then(data => data.find(student => student.id === id));
+  }
+
+  getStudentBy(name: string, surname: string): Promise<Student> {
+    return this.fetchData().then(data => data.find(student => student.name === name && student.surname === surname));
+  }
 }

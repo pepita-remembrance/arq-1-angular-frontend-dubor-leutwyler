@@ -1,23 +1,22 @@
-<!--<form (ngSubmit)="onSubmit()" #studentForm="ngForm" class="form-signin">-->
-  <!--<h2 class="form-signin-heading">Please sign in</h2>-->
-  <!--<div *ngIf="error" class="alert alert-danger">-->
-    <!--<strong>{{error}}</strong>-->
-  <!--</div>-->
-  <!--<label for="inputName" class="sr-only">Nombre</label>-->
-  <!--<input type="text" id="inputName" class="form-control" placeholder="Name" required="" autofocus=""-->
-  <!--required-->
- <!--[(ngModel)]="name" name="name" #spy>-->
-  <!--<label for="inputSurname" class="sr-only">Apellido</label>-->
-  <!--<input type="text" id="inputSurname" class="form-control" placeholder="Surname" required=""-->
-  <!--required-->
- <!--[(ngModel)]="surname" name="surname" #spy>-->
-  <!--<div class="checkbox">-->
-    <!--<label>-->
-      <!--<input type="checkbox" value="remember-me"> Recordarme-->
-    <!--</label>-->
-  <!--</div>-->
-  <!--<button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!studentForm.form.valid">Entrar-->
-  <!--</button>-->
-<!--</form>-->
+<form (ngSubmit)="onSubmit()" #studentForm="ngForm" class="form-signin">
+  <h2 class="form-signin-heading">Quien eres?</h2>
+  <div *ngIf="error" class="alert alert-danger">
+    <strong>{{error}}</strong>
+  </div>
+  <label for="inputName" class="sr-only">Nombre</label>
+  <input type="text" id="inputName" class="form-control" placeholder="Nombre" required="" autofocus=""
+  required
+ [(ngModel)]="name" name="name" #spy>
+  <label for="inputSurname" class="sr-only">Apellido</label>
+  <input type="text" id="inputSurname" class="form-control" placeholder="Apellido" required=""
+  required
+ [(ngModel)]="surname" name="surname" #spy>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="remember-me"> Recordarme
+    </label>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!studentForm.form.valid">Entrar
+  </button>
+</form>
 
-<h1>Student login</h1>

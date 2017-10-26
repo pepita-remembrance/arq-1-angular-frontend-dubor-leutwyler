@@ -1,9 +1,7 @@
 <h1>A que Carrera quieres ir?</h1>
-<ul>
-  <li *ngFor="let career of careerService.data">
-    <a [routerLink]="['/careers',career.shortName, 'students', 'login']">
-      <button class="btn">{{career.longName}}</button>
-    </a>
-  </li>
-</ul>
+<div *ngFor="let career of careerService.data">
+  <a [routerLink]="['/careers', career.shortName, 'students', 'login']">
+    <button class="btn btn-lg btn-primary btn-block">{{career.longName}}</button>
+  </a>
+</div>
 
