@@ -32,6 +32,27 @@ export class Day {
   public getValue(): number {
     return this.value;
   }
+
+  public from(hour: number, minutes: number = 0): ScheduleBuilder {
+    return new ScheduleBuilder(this, hour, minutes);
+  }
+
+}
+
+class ScheduleBuilder {
+  constructor(public day: Day, public hour: number, public minutes: number) {
+  }
+
+  public to(toHour: number, toMinutes: number = -1): Schedule {
+    let interval: Interval;
+    if (toMinutes === -1) {
+      interval = new Interval(this.hour, this.minutes, toHour - 1, 59);
+    } else {
+      interval = new Interval(this.hour, this.minutes, toHour, toMinutes);
+    }
+    return new Schedule(this.day, interval);
+  }
+
 }
 
 export const Monday = new Day(0, 'Lunes');

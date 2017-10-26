@@ -33,10 +33,11 @@ export class Subject {
 }
 
 export class Course implements OfferOption {
-  public schedules: Schedule[];
+  public schedules: Schedule[] = [];
 
-  constructor(public id: string, ...schedules: Schedule[]) {
-    this.schedules = schedules;
+  constructor(public id: string, schedule: Schedule, ...schedules: Schedule[]) {
+    this.schedules.push(schedule);
+    this.schedules.concat(schedules);
   }
 
   public isCourse(): boolean {
