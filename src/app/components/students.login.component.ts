@@ -1,16 +1,16 @@
 import {Component} from '@angular/core';
-// import {StudentsService} from '../services/students.service';
+// import {StudentService} from '../services/students.service';
 // import {OnInit} from '@angular/core';
 // import {CommonModule, Location} from '@angular/common';
 // import {Router, ActivatedRoute, ParamMap} from '@angular/router';
 
 // import 'rxjs/add/operator/switchMap';
 // import Student from '../models/student';
-// import {CareersService} from '../services/careers.service';
+// import {CareerService} from '../services/careers.service';
 
 @Component({
   selector: 'app-students-login',
-  // providers: [StudentsService],
+  // providers: [StudentService],
   templateUrl: '../templates/students.login.template.html',
 })
 
@@ -19,8 +19,8 @@ export class StudentsLoginComponent {
   // surname: string;
   // error: string;
   //
-  // constructor(private studentsService: StudentsService,
-  //             private careerService: CareersService,
+  // constructor(private studentsService: StudentService,
+  //             private careerService: CareerService,
   //             private route: ActivatedRoute,
   //             private router: Router) {
   // }

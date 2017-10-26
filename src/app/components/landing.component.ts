@@ -1,14 +1,13 @@
 import {Component} from '@angular/core';
-// import {CareersService} from '../services/careers.service';
-// import {Router} from '@angular/router';
+// import {CareerService} from '../services/careers.service';
 
 @Component({
   selector: 'app-landing',
-  // providers: [CareersService],
+  // providers: [CareerService],
   templateUrl: '../templates/landing.template.html',
 })
 
 export class LandingComponent {
-  // constructor(public careerService: CareersService, public router: Router) {
+  // constructor(public careerService: CareerService) {
   // }
 }

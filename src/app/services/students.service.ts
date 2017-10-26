@@ -4,7 +4,7 @@ import {DataSourceService} from './baseService';
 import {Injectable} from '@angular/core';
 
 @Injectable()
-export class StudentsService extends DataSourceService<Student> {
+export class StudentService extends DataSourceService<Student> {
   fetchData(): Promise<Student[]> {
     return Promise.resolve(STUDENTS);
   }
