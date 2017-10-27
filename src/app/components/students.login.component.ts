@@ -3,12 +3,12 @@ import {Router} from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
 import {FlashMessagesService} from 'angular2-flash-messages';
-import {StudentService} from '../services/students.service';
 import {AlertingComponent} from './alerting.component';
+
+import {StudentService} from '../services/students.service';
 
 @Component({
   selector: 'app-students-login',
-  providers: [StudentService],
   templateUrl: '../templates/students.login.template.html',
 })
 
@@ -17,8 +17,8 @@ export class StudentsLoginComponent extends AlertingComponent {
   surname: string;
 
   constructor(private studentsService: StudentService,
-              flashMessagesService: FlashMessagesService,
-              private router: Router) {
+              private router: Router,
+              flashMessagesService: FlashMessagesService) {
     super(flashMessagesService);
   }
 
