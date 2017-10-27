@@ -7,6 +7,7 @@ import {RouterModule} from '@angular/router';
 import {AppComponent} from './app.component';
 import {LandingComponent} from './components/landing.component';
 import {StudentsLoginComponent} from './components/students.login.component';
+import {PollListComponent} from './components/poll.list.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import {StudentsLoginComponent} from './components/students.login.component';
     AppComponent,
     LandingComponent,
     StudentsLoginComponent,
+    PollListComponent
   ],
   imports: [
     BrowserModule,

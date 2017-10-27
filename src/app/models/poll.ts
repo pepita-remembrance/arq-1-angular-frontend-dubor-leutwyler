@@ -83,8 +83,18 @@ export const NoSuitableSchedule = new DefaultOption('Ningun horario me sirve');
 export class PollResult {
   public results: Map<Subject, OfferOption>;
 
-  constructor(public poll: Poll, public student: Student, public defaultOption: DefaultOption = NotYet) {
+  constructor(public poll: Poll, public student: Student,
+              public defaultOption: DefaultOption = NotYet, public fillDate: Date = new Date(Date.now())) {
     this.results = new Map<Subject, OfferOption>();
     Array.from(poll.offer.keys()).forEach(subject => this.results.set(subject, defaultOption));
+  }
+
+  asPartial(): PollResultPartial {
+    return new PollResultPartial(this.poll.career.longName, this.poll.career.shortName, this.poll.key, this.fillDate);
+  }
+}
+
+export class PollResultPartial {
+  constructor(public careerLongName: string, public careerShortName: string, public pollKey: string, public pollFillDate: Date) {
   }
 }
