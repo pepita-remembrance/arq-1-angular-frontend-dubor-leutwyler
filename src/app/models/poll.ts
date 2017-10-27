@@ -92,6 +92,10 @@ export class PollResult {
   asPartial(): PollResultPartial {
     return new PollResultPartial(this.poll.career.longName, this.poll.career.shortName, this.poll.key, this.fillDate);
   }
+
+  submit() {
+    this.student.pollResults.push(this);
+  }
 }
 
 export class PollResultPartial {

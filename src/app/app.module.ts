@@ -6,7 +6,6 @@ import {RouterModule} from '@angular/router';
 import {FlashMessagesModule, FlashMessagesService} from 'angular2-flash-messages';
 
 import {AppComponent} from './app.component';
-import {LandingComponent} from './components/landing.component';
 import {StudentsLoginComponent} from './components/students.login.component';
 import {PollListComponent} from './components/poll.list.component';
 
@@ -14,7 +13,6 @@ import {PollListComponent} from './components/poll.list.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LandingComponent,
     StudentsLoginComponent,
     PollListComponent
   ],
