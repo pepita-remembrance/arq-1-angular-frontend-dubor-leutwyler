@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
-import {OnInit} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {Router} from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
+import {FlashMessagesService} from 'angular2-flash-messages';
 import {StudentService} from '../services/students.service';
+import {AlertingComponent} from './alerting.component';
 
 @Component({
   selector: 'app-students-login',
@@ -11,32 +12,25 @@ import {StudentService} from '../services/students.service';
   templateUrl: '../templates/students.login.template.html',
 })
 
-export class StudentsLoginComponent implements OnInit {
+export class StudentsLoginComponent extends AlertingComponent {
   name: string;
   surname: string;
-  error: string;
-  careerShortName: string;
 
   constructor(private studentsService: StudentService,
-              private route: ActivatedRoute,
+              flashMessagesService: FlashMessagesService,
               private router: Router) {
-  }
-
-  ngOnInit(): void {
-    this.route.paramMap.switchMap(params => this.careerShortName = params.get('careerShortName'));
+    super(flashMessagesService);
   }
 
   onSubmit() {
     this.studentsService.getByName(this.name, this.surname)
       .then(student => {
           if (student) {
-            this.router.navigate(['careers', this.careerShortName, 'students', student.fileNumber, 'polls']);
+            this.router.navigate(['/students', student.fileNumber, 'polls']);
           } else {
-            this.error = 'Invalid fullName or surname';
+            this.alert(`Nombre ${this.name} o apellido ${this.surname} invalidos`);
           }
         }
-      ).catch(error =>
-      this.error = 'Invalid fullName or surname'
-    );
+      );
   }
 }
