@@ -1,41 +1,42 @@
 import {Component} from '@angular/core';
-// import {StudentService} from '../services/students.service';
-// import {OnInit} from '@angular/core';
-// import {CommonModule, Location} from '@angular/common';
-// import {Router, ActivatedRoute, ParamMap} from '@angular/router';
+import {OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
 
-// import 'rxjs/add/operator/switchMap';
-// import Student from '../models/student';
-// import {CareerService} from '../services/careers.service';
+import 'rxjs/add/operator/switchMap';
+import {StudentService} from '../services/students.service';
 
 @Component({
   selector: 'app-students-login',
-  // providers: [StudentService],
+  providers: [StudentService],
   templateUrl: '../templates/students.login.template.html',
 })
 
-export class StudentsLoginComponent {
-  // name: string;
-  // surname: string;
-  // error: string;
-  //
-  // constructor(private studentsService: StudentService,
-  //             private careerService: CareerService,
-  //             private route: ActivatedRoute,
-  //             private router: Router) {
-  // }
-  //
-  // onSubmit() {
-  // this.studentsService.getStudentBy(this.name, this.surname)
-  //   .then(student => {
-  //       if (student) {
-  //         this.router.navigate([`students/${student.id}`]);
-  //       } else {
-  //         this.error = 'Invalid fullName or surname';
-  //       }
-  //     }
-  //   ).catch(error =>
-  //   this.error = 'Invalid fullName or surname'
-  // );
-  // }
+export class StudentsLoginComponent implements OnInit {
+  name: string;
+  surname: string;
+  error: string;
+  careerShortName: string;
+
+  constructor(private studentsService: StudentService,
+              private route: ActivatedRoute,
+              private router: Router) {
+  }
+
+  ngOnInit(): void {
+    this.route.paramMap.switchMap(params => this.careerShortName = params.get('careerShortName'));
+  }
+
+  onSubmit() {
+    this.studentsService.getByName(this.name, this.surname)
+      .then(student => {
+          if (student) {
+            this.router.navigate(['careers', this.careerShortName, 'students', student.fileNumber, 'polls']);
+          } else {
+            this.error = 'Invalid fullName or surname';
+          }
+        }
+      ).catch(error =>
+      this.error = 'Invalid fullName or surname'
+    );
+  }
 }

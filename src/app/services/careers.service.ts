@@ -4,16 +4,12 @@ import {DataSourceService} from './baseService';
 import {Injectable} from '@angular/core';
 
 @Injectable()
-export class CareerService extends DataSourceService<Career> {
+export class CareerService extends DataSourceService<Career, string> {
+  extractId(obj: Career): string {
+    return obj.shortName;
+  }
+
   fetchData() {
     return Promise.resolve(CAREERS);
-  }
-
-  getById(id: string): Promise<Career> {
-    return this.fetchData().then(data => data.find(career => career.id === id));
-  }
-
-  getByShortName(shortName: string): Promise<Career> {
-    return this.fetchData().then(data => data.find(career => career.shortName === shortName));
   }
 }
