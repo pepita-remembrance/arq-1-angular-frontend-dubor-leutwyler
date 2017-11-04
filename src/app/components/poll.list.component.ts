@@ -9,6 +9,9 @@ import Student from '../models/student';
 import {AlertingComponent} from './alerting.component';
 import {FlashMessagesService} from 'angular2-flash-messages/module';
 
+import {PollResult} from '../models/poll'
+import {tpi2017s2} from '../models/mocks/poll.mock'
+
 @Component({
   selector: 'app-poll-list',
   providers: [StudentService, CareerService],
@@ -17,6 +20,7 @@ import {FlashMessagesService} from 'angular2-flash-messages/module';
 
 export class PollListComponent extends AlertingComponent implements OnInit {
   public student: Student;
+  public poll: PollResult
 
   constructor(private studentsService: StudentService,
               private router: Router,
@@ -29,7 +33,11 @@ export class PollListComponent extends AlertingComponent implements OnInit {
     this.route.paramMap.switchMap(params => params.get('fileNumber'))
       .subscribe(fileNumber =>
         this.studentsService.getById(parseInt(fileNumber, 10))
-          .then(student => this.student = student)
+          .then(student => {
+            this.student = student
+            this.poll = new PollResult(tpi2017s2, student)
+            console.log(this.poll)
+          })
       );
   }
 

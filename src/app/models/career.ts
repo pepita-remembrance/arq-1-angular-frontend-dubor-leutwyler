@@ -15,8 +15,21 @@ export class Career {
     return this.subjects.find(sub => sub.shortName === key || sub.fullName === key);
   }
 
+  public filterSubjects(keys: string[]): Subject[]{
+    let res = []
+    this.subjects.forEach(sub => {
+      if(keys.indexOf(sub.shortName) > -1 || keys.indexOf(sub.fullName) > -1){
+              res.push(sub)
+      }
+    })
+    return res;
+  }
+
   public newPoll(pollKey: string, notOfferedSubjects: Subject[]): Poll {
-    this.openPoll().close();
+    const lastPoll = this.openPoll()
+    if(lastPoll){
+        lastPoll.close()
+    }
     const offer = new Map<Subject, SubjectOffer>();
     this.subjects
       .filter(subject => !notOfferedSubjects.includes(subject))

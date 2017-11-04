@@ -11,7 +11,7 @@ import {Course} from '../career';
 
 const skippedSubjects = ['BD2', 'ProyLib', 'InArq', 'InBio', 'Politicas', 'Geo', 'Decl', 'DADC'];
 
-const tpi2017s2 = tpi.newPoll('2017s2', skippedSubjects.map(tpi.getSubject));
+export const tpi2017s2 = tpi.newPoll('2017s2', tpi.filterSubjects(skippedSubjects));
 
 tpi2017s2.on('InPr').add(
   new Course('C1',
