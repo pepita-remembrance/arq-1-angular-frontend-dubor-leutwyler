@@ -1,1 +1,16 @@
-<h1>Encuestas de Intencion de Inscripcion de: {{student.name}} {{student.surname}}</h1>
+<nav *ngIf="student" class="navbar navbar-default poll-header" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand">{{student.name}} {{student.surname}}</a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-left" role="search">
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div><!-- /.navbar-collapse -->
+</nav>
