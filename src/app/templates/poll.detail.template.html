@@ -1,0 +1,8 @@
+<div *ngIf="pollResult" class="container">
+  <h1>Encuesta de Intención de inscripcción: {{pollResult.poll.key}}</h1>
+  <ul class="list-group">
+    <li *ngFor="let res of pollResult.arrayResults" class="list-group-item">
+      {{res[0]}}
+    </li>
+  </ul>
+</div>

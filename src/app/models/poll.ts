@@ -43,7 +43,7 @@ export class SubjectOffer {
   }
 
   public add(...courseOptions: OfferOption[]): SubjectOffer {
-    this.options.concat(courseOptions);
+    this.options = this.options.concat(courseOptions);
     return this;
   }
 }
@@ -82,11 +82,16 @@ export const NoSuitableSchedule = new DefaultOption('Ningun horario me sirve');
 
 export class PollResult {
   public results: Map<Subject, OfferOption>;
+  public arrayResults: [Subject, OfferOption][] = []
 
   constructor(public poll: Poll, public student: Student,
               public defaultOption: DefaultOption = NotYet, public fillDate: Date = new Date(Date.now())) {
     this.results = new Map<Subject, OfferOption>();
-    Array.from(poll.offer.keys()).forEach(subject => this.results.set(subject, defaultOption));
+    Array.from(poll.offer.keys()).forEach(subject => {
+      this.results.set(subject, defaultOption)
+      this.arrayResults.push([subject, defaultOption])
+    });
+
   }
 
   asPartial(): PollResultPartial {

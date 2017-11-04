@@ -8,13 +8,15 @@ import {FlashMessagesModule, FlashMessagesService} from 'angular2-flash-messages
 import {AppComponent} from './app.component';
 import {StudentsLoginComponent} from './components/students.login.component';
 import {PollListComponent} from './components/poll.list.component';
+import {PollDetailComponent} from './components/poll.detail.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentsLoginComponent,
-    PollListComponent
+    PollListComponent,
+    PollDetailComponent
   ],
   imports: [
     BrowserModule,
