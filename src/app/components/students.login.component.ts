@@ -9,6 +9,7 @@ import {StudentService} from '../services/students.service';
 
 @Component({
   selector: 'app-students-login',
+  providers: [StudentService],
   templateUrl: '../templates/students.login.template.html',
 })
 
