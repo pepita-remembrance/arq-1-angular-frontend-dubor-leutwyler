@@ -39,7 +39,7 @@ const tpiSubjects = [
   ['CLP', 'Seminario: Caracteristicas de Lenguajes de Programacion'],
   ['SemMod', 'Seminario: Taller de Desarrollo de Servicios Web/Cloud Modernos'],
   // TTI/TTU
-  ['TTI/TTU', 'Seminario sobre Herramientas o Tecnicas Puntuales'],
+  ['TTI-TTU', 'Seminario sobre Herramientas o Tecnicas Puntuales'],
   // Trabajo Final
   ['TIP', 'Taller de Trabajo de Insercion Profesional'],
 ];

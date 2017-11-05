@@ -1,8 +1,21 @@
-<div *ngIf="pollResult" class="container">
-  <h1>Encuesta de Intención de inscripcción: {{pollResult.poll.key}}</h1>
-  <ul class="list-group">
-    <li *ngFor="let res of pollResult.arrayResults" class="list-group-item">
-      {{res[0]}}
-    </li>
-  </ul>
+<div *ngIf="poll" class="container">
+  <h1>Encuesta de Intención de inscripcción {{poll.key}} para {{poll.career.longName}}
+  </h1>
+  <div class="panel-group" id="accordion">
+    <div *ngFor="let res of poll.arrayOffer" class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#{{res[0].shortName}}">
+            {{res[0].shortName}}
+          </a>
+        </h4>
+      </div>
+      <div id="{{res[0].shortName}}" class="panel-collapse collapse out">
+        <div class="panel-body">
+          <div class="list-group">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

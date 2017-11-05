@@ -9,7 +9,7 @@ import Student from '../models/student';
 import {AlertingComponent} from './alerting.component';
 import {FlashMessagesService} from 'angular2-flash-messages/module';
 
-import {PollResult, NotYet} from '../models/poll'
+import {PollResult, Poll, NotYet} from '../models/poll'
 import {tpi2017s2} from '../models/mocks/poll.mock'
 
 @Component({
@@ -20,7 +20,8 @@ import {tpi2017s2} from '../models/mocks/poll.mock'
 
 export class PollListComponent extends AlertingComponent implements OnInit {
   public student: Student;
-  public poll: PollResult
+  public pollResult: PollResult
+  public poll: Poll
 
   constructor(private studentsService: StudentService,
               private router: Router,
@@ -35,7 +36,8 @@ export class PollListComponent extends AlertingComponent implements OnInit {
         this.studentsService.getById(parseInt(fileNumber, 10))
           .then(student => {
             this.student = student
-            this.poll = tpi2017s2.newPollResult(this.student, NotYet)
+            this.pollResult = tpi2017s2.newPollResult(this.student, NotYet)
+            this.poll = tpi2017s2
             console.log(this.poll)
           })
       );

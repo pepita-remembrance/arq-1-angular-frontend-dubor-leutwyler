@@ -5,8 +5,10 @@ export type CareerOffer = Map<Subject, SubjectOffer>;
 
 export class Poll {
   private open = true;
+  public arrayOffer : [Subject, SubjectOffer][]
 
   constructor(public key: string, public career: Career, public offer: CareerOffer) {
+    this.arrayOffer = Array.from(offer)
   }
 
   public close() {
@@ -107,3 +109,7 @@ export class PollResultPartial {
   constructor(public careerLongName: string, public careerShortName: string, public pollKey: string, public pollFillDate: Date) {
   }
 }
+
+// export class Answer {
+//   constructor(public subject: Subject, public offerOption : OfferOption){}
+// }

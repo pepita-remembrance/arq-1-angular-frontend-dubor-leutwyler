@@ -10,4 +10,5 @@ import {Poll, PollResult} from '../models/poll'
 
 export class PollDetailComponent {
   @Input("pollResult") pollResult: PollResult
+  @Input("poll") poll: Poll
 }
