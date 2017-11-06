@@ -1,8 +1,5 @@
 <form (ngSubmit)="onSubmit()" #studentForm="ngForm" class="form-signin">
   <h2 class="form-signin-heading">Quien eres?</h2>
-  <div *ngIf="error" class="alert alert-danger">
-    <strong>{{error}}</strong>
-  </div>
   <label for="inputName" class="sr-only">Nombre</label>
   <input type="text" id="inputName" class="form-control" placeholder="Nombre" required="" autofocus=""
   required

@@ -15,8 +15,4 @@ export abstract class AlertingComponent {
   warning(text?: string) {
     this.flashMessagesService.show(text, {timeout: 5000, cssClass: 'alert-warning'});
   }
-
-  error(text?: string) {
-    this.flashMessagesService.show(text, {timeout: 5000, cssClass: 'alert-error'});
-  }
 }
