@@ -1,4 +1,4 @@
-<div *ngIf="poll" class="container">
+<div *ngIf="poll && pollResult" class="container">
   <h1>Encuesta de Intención de inscripcción {{poll.key}} para {{poll.career.longName}}
   </h1>
   <div class="panel-group" id="accordion">
@@ -13,6 +13,10 @@
       <div id="{{res[0].shortName}}" class="panel-collapse collapse out">
         <div class="panel-body">
           <div class="list-group">
+            <a *ngFor="let option of res[1].options" class="list-group-item" [ngClass]="{'active': isSelected(res[0], option) }"
+            (click)="select(res[0], option)">
+              {{option.text}}
+            </a>
           </div>
         </div>
       </div>

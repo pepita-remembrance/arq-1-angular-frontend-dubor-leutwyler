@@ -47,10 +47,13 @@ export class Subject {
 
 export class Course implements OfferOption {
   public schedules: Schedule[] = [];
+  public text: string
+  public isSelected = false;
 
   constructor(public id: string, schedule: Schedule, ...schedules: Schedule[]) {
     this.schedules.push(schedule);
     this.schedules.concat(schedules);
+    this.text = this.textValue()
   }
 
   public isCourse(): boolean {
@@ -58,6 +61,6 @@ export class Course implements OfferOption {
   }
 
   public textValue(): string {
-    return this.id + this.schedules.map(schedule => schedule.textValue()).join(', ');
+    return this.id + " " + this.schedules.map(schedule => schedule.textValue()).join(', ');
   }
 }

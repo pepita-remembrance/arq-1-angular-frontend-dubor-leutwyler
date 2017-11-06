@@ -1,6 +1,6 @@
 import {Career, Subject} from '../career';
 
-const tpiSubjects = [
+export const tpiSubjects = [
   // Basicas
   ['InPr', 'Introduccion a la Programacion'],
   ['Orga', 'Organizacion de Computadoras'],

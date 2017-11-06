@@ -8,8 +8,11 @@ import {
 } from '../schedule';
 import {tpi} from './career.mock';
 import {Course} from '../career';
+import {NotYet, AlreadyPassed, NoSuitableSchedule} from '../poll'
 
-const skippedSubjects = ['BD2', 'ProyLib', 'InArq', 'InBio', 'Politicas', 'Geo', 'Decl', 'DADC'];
+const skippedSubjects = ['EstrD', 'Obj2', 'Redes', 'PConc', 'Mate2', 'IngSoft', 'UIs', 'EPers',
+'PF', 'DesApp', 'LabSOR', 'Ing1', 'Ing2', 'Seg', 'BD2', 'ProyLib', 'InArq', 'Obj3', 'InBio', 'Politicas',
+'Geo', 'Decl', 'videojuegos', 'DADC', 'CLP', 'SemMod', 'TTI-TTU', 'TIP'];
 
 export const tpi2017s2 = tpi.newPoll('2017s2', tpi.filterSubjects(skippedSubjects));
 
@@ -33,7 +36,10 @@ tpi2017s2.on('InPr').add(
     Lunes.from(19).to(21, 30),
     Jueves.from(19).to(21, 30),
     Miercoles.from(18).to(21)
-  )
+  ),
+  new NotYet,
+  new AlreadyPassed,
+  new NoSuitableSchedule,
 );
 
 tpi2017s2.on('Orga').add(
@@ -52,7 +58,10 @@ tpi2017s2.on('Orga').add(
   new Course('C4',
     Martes.from(19).to(22),
     Viernes.from(19).to(22)
-  )
+  ),
+  new NotYet,
+  new AlreadyPassed,
+  new NoSuitableSchedule,
 );
 
 tpi2017s2.on('Mate1').add(
@@ -67,7 +76,10 @@ tpi2017s2.on('Mate1').add(
   new Course('C3',
     Lunes.from(9).to(13),
     Miercoles.from(9).to(13)
-  )
+  ),
+  new NotYet,
+  new AlreadyPassed,
+  new NoSuitableSchedule,
 );
 
 tpi2017s2.on('BD').add(
@@ -78,7 +90,10 @@ tpi2017s2.on('BD').add(
   new Course('C2',
     Martes.from(9).to(12),
     Miercoles.from(11).to(14)
-  )
+  ),
+  new NotYet,
+  new AlreadyPassed,
+  new NoSuitableSchedule,
 );
 
 tpi2017s2.on('Obj1').add(
@@ -89,7 +104,10 @@ tpi2017s2.on('Obj1').add(
   new Course('C2',
     Lunes.from(18).to(22),
     Miercoles.from(18).to(22)
-  )
+  ),
+  new NotYet,
+  new AlreadyPassed,
+  new NoSuitableSchedule,
 );
 
 tpi2017s2.on('SO').add(
@@ -100,5 +118,8 @@ tpi2017s2.on('SO').add(
   new Course('C2',
     Lunes.from(18).to(22),
     Jueves.from(20).to(22)
-  )
+  ),
+  new NotYet,
+  new AlreadyPassed,
+  new NoSuitableSchedule,
 );

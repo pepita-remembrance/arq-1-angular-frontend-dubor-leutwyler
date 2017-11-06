@@ -33,11 +33,10 @@ export class Poll {
 }
 
 export class SubjectOffer {
-  public static defaultOptions = [];
   public options: OfferOption[] = [];
 
   constructor(courseOptions: OfferOption[]) {
-    this.options.concat(courseOptions).concat(SubjectOffer.defaultOptions);
+    this.options.concat(courseOptions).concat([new NotYet, new NoSuitableSchedule, new AlreadyPassed]);
   }
 
   public static defaultOffer() {
@@ -51,14 +50,17 @@ export class SubjectOffer {
 }
 
 export interface OfferOption {
+  text: string
+
   isCourse(): boolean;
 
   textValue(): string;
 }
 
 export class NonCourseOption implements OfferOption {
+  public isSelected = false;
 
-  constructor(private text: string) {
+  constructor(public text: string) {
   }
 
   isCourse(): boolean {
@@ -74,20 +76,31 @@ export class NonCourseOption implements OfferOption {
 export class DefaultOption extends NonCourseOption {
   constructor(text: string) {
     super(text);
-    SubjectOffer.defaultOptions.push(this);
   }
 }
 
-export const NotYet = new DefaultOption('Aun no voy a cursar');
-export const AlreadyPassed = new DefaultOption('Ya aprobe');
-export const NoSuitableSchedule = new DefaultOption('Ningun horario me sirve');
+export class NotYet extends DefaultOption{
+  constructor(){
+    super('Aun no voy a cursar')
+  }
+}
+export class AlreadyPassed extends DefaultOption{
+  constructor(){
+    super('Ya aprobe')
+  }
+}
+export class NoSuitableSchedule extends DefaultOption{
+  constructor(){
+    super('El horario no me sirve')
+  }
+}
 
 export class PollResult {
   public results: Map<Subject, OfferOption>;
   public arrayResults: [Subject, OfferOption][] = []
 
   constructor(public poll: Poll, public student: Student,
-              public defaultOption: DefaultOption = NotYet, public fillDate: Date = new Date(Date.now())) {
+              public defaultOption: DefaultOption = new NotYet, public fillDate: Date = new Date(Date.now())) {
     this.results = new Map<Subject, OfferOption>();
     Array.from(poll.offer.keys()).forEach(subject => {
       this.results.set(subject, defaultOption)

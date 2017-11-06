@@ -36,9 +36,8 @@ export class PollListComponent extends AlertingComponent implements OnInit {
         this.studentsService.getById(parseInt(fileNumber, 10))
           .then(student => {
             this.student = student
-            this.pollResult = tpi2017s2.newPollResult(this.student, NotYet)
+            this.pollResult = tpi2017s2.newPollResult(this.student, new NotYet)
             this.poll = tpi2017s2
-            console.log(this.poll)
           })
       );
   }
