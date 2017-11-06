@@ -10,7 +10,7 @@ import Student from '../models/student';
 import {AlertingComponent} from './alerting.component';
 import {FlashMessagesService} from 'angular2-flash-messages/module';
 
-import {PollResult, Poll, NotYet, SubjectOffer, DefaultOption} from '../models/poll'
+import {PollResult, Poll, NotYet, SubjectOffer, defaultOptions, DefaultOption} from '../models/poll'
 
 
 @Component({
@@ -32,8 +32,9 @@ export class PollListComponent extends AlertingComponent implements OnInit {
               private route: ActivatedRoute,
               flashMessagesService: FlashMessagesService) {
     super(flashMessagesService);
-    this.defaultOptions = SubjectOffer.defaultOptions
-    this.defaultOption = this.defaultOptions[0]
+    this.defaultOptions = defaultOptions
+    this.defaultOption = defaultOptions[0]
+    console.log(defaultOptions)
   }
 
   ngOnInit(): void {
@@ -51,6 +52,7 @@ export class PollListComponent extends AlertingComponent implements OnInit {
   }
 
   changeDefault(option){
+    this.defaultOption = option
     this.pollViewService.pollResult.arrayResults.forEach(res => {
       res[1] = option
       this.pollViewService.pollResult.results.set(res[0], option)

@@ -3,14 +3,13 @@ import { Subject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
 import { of } from 'rxjs/observable/of';
 
-import {PollResult, Poll, NotYet, SubjectOffer, DefaultOption} from '../models/poll'
+import {PollResult, Poll, NotYet, defaultOptions, DefaultOption} from '../models/poll'
 import {tpi2017s2} from '../models/mocks/poll.mock'
 
 @Injectable()
 export class PollViewService{
     public pollResult: PollResult
     public poll: Poll
-    public defaultOptions : DefaultOption[]
     public defaultOption : DefaultOption
 
     activePoll() {

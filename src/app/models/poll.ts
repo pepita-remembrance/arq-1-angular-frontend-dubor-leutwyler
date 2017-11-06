@@ -70,12 +70,12 @@ export class NoSuitableSchedule extends DefaultOption{
   }
 }
 
+export const defaultOptions = [new NotYet, new NoSuitableSchedule, new AlreadyPassed]
 export class SubjectOffer {
   public options: OfferOption[] = [];
-  public static defaultOptions = [new NotYet, new NoSuitableSchedule, new AlreadyPassed]
 
   constructor(courseOptions: OfferOption[]) {
-    this.options.concat(courseOptions).concat(SubjectOffer.defaultOptions);
+    this.options.concat(courseOptions).concat(defaultOptions);
   }
 
   public static defaultOffer() {
