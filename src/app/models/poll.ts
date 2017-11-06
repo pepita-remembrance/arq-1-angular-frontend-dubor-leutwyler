@@ -32,31 +32,6 @@ export class Poll {
   }
 }
 
-export class SubjectOffer {
-  public options: OfferOption[] = [];
-
-  constructor(courseOptions: OfferOption[]) {
-    this.options.concat(courseOptions).concat([new NotYet, new NoSuitableSchedule, new AlreadyPassed]);
-  }
-
-  public static defaultOffer() {
-    return new SubjectOffer([]);
-  }
-
-  public add(...courseOptions: OfferOption[]): SubjectOffer {
-    this.options = this.options.concat(courseOptions);
-    return this;
-  }
-}
-
-export interface OfferOption {
-  text: string
-
-  isCourse(): boolean;
-
-  textValue(): string;
-}
-
 export class NonCourseOption implements OfferOption {
   public isSelected = false;
 
@@ -95,6 +70,34 @@ export class NoSuitableSchedule extends DefaultOption{
   }
 }
 
+export class SubjectOffer {
+  public options: OfferOption[] = [];
+  public static defaultOptions = [new NotYet, new NoSuitableSchedule, new AlreadyPassed]
+
+  constructor(courseOptions: OfferOption[]) {
+    this.options.concat(courseOptions).concat(SubjectOffer.defaultOptions);
+  }
+
+  public static defaultOffer() {
+    return new SubjectOffer([]);
+  }
+
+  public add(...courseOptions: OfferOption[]): SubjectOffer {
+    this.options = this.options.concat(courseOptions);
+    return this;
+  }
+}
+
+export interface OfferOption {
+  text: string
+
+  isCourse(): boolean;
+
+  textValue(): string;
+}
+
+
+
 export class PollResult {
   public results: Map<Subject, OfferOption>;
   public arrayResults: [Subject, OfferOption][] = []
@@ -115,6 +118,14 @@ export class PollResult {
 
   submit() {
     this.student.pollResults.push(this);
+  }
+
+  setDefault(subjects: Subject[], defaultOption: DefaultOption){
+    this.arrayResults.forEach(res => {
+      if(subjects.indexOf(res[0]) > -1){
+        res[1] = defaultOption
+      }
+    })
   }
 }
 

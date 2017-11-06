@@ -44,8 +44,18 @@ export const tpiSubjects = [
   ['TIP', 'Taller de Trabajo de Insercion Profesional'],
 ];
 
+export const areas = [
+  "Programacion",
+  "Teoria de la Computacion",
+  "Sistemas Informaticos",
+  "Desarrollo de Software",
+  "Procesos Informaticos",
+  "Otros"
+]
+
 export const tpi = new Career('1', 'TPI', 'Tecnicatura Universitaria en Programacion Informatica',
-  tpiSubjects.map(([shortName, fullName]) => new Subject(shortName, fullName))
+  tpiSubjects.map(([shortName, fullName]) =>
+    new Subject(shortName, fullName, areas[Math.floor(Math.random() * areas.length)]))
 );
 
 export const CAREERS: Career[] = [

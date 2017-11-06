@@ -41,7 +41,7 @@ export class Career {
 }
 
 export class Subject {
-  constructor(public shortName: string, public fullName: string) {
+  constructor(public shortName: string, public fullName: string, public area: string = "Programacion") {
   }
 }
 

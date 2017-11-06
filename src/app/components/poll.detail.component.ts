@@ -1,6 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ApplicationRef } from '@angular/core';
 
-import {Poll, PollResult} from '../models/poll'
+
+import {PollViewService} from '../services/pollView.service';
+
+import {Poll, PollResult, SubjectOffer} from '../models/poll'
+import {Subject} from '../models/career'
 
 @Component({
   selector:   'poll-detail',
@@ -8,15 +12,30 @@ import {Poll, PollResult} from '../models/poll'
 })
 
 
-export class PollDetailComponent {
-  @Input("pollResult") pollResult: PollResult
-  @Input("poll") poll: Poll
+export class PollDetailComponent implements OnInit{
+  public arrayOffer : [Subject, SubjectOffer][]
+  public arrayOfferConst : [Subject, SubjectOffer][]
+  public pollResult : PollResult
+  public poll : Poll
+
+  constructor(public pollViewService: PollViewService, private ref: ApplicationRef){
+  }
+
+  ngOnInit(){
+    this.pollViewService.activePoll().subscribe(poll => {
+      this.poll = poll
+    })
+  }
 
   select(subject, option){
-    this.pollResult.results.set(subject, option)
+    this.pollViewService.pollResult.results.set(subject, option)
+    this.ref.tick()
+    console.log(this.pollViewService.pollResult)
   }
 
   isSelected(subject, option){
-    return this.pollResult.results.get(subject) && this.pollResult.results.get(subject).text === option.text
+
+    return this.pollViewService.pollResult && this.pollViewService.pollResult.results.get(subject) &&
+    this.pollViewService.pollResult.results.get(subject).text === option.text
   }
 }
