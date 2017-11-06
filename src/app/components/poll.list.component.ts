@@ -55,6 +55,5 @@ export class PollListComponent extends AlertingComponent implements OnInit {
       res[1] = option
       this.pollViewService.pollResult.results.set(res[0], option)
     })
-    console.log(this.pollViewService.pollResult)
   }
 }

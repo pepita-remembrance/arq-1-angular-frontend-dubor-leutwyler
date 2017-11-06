@@ -30,7 +30,6 @@ export class PollDetailComponent implements OnInit{
   select(subject, option){
     this.pollViewService.pollResult.results.set(subject, option)
     this.ref.tick()
-    console.log(this.pollViewService.pollResult)
   }
 
   isSelected(subject, option){
