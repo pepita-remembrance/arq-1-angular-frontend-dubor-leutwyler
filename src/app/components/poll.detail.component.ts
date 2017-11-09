@@ -1,22 +1,22 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
-import {Poll, PollResult} from '../models/poll'
+import {Poll, PollResult} from '../models/poll';
 
 @Component({
-  selector:   'poll-detail',
+  selector: 'app-poll-detail',
   templateUrl: '../templates/poll.detail.template.html',
 })
 
 
 export class PollDetailComponent {
-  @Input("pollResult") pollResult: PollResult
-  @Input("poll") poll: Poll
+  @Input('pollResult') pollResult: PollResult;
+  @Input('poll') poll: Poll;
 
-  select(subject, option){
-    this.pollResult.results.set(subject, option)
+  select(subject, option) {
+    this.pollResult.results.set(subject, option);
   }
 
-  isSelected(subject, option){
-    return this.pollResult.results.get(subject) && this.pollResult.results.get(subject).text === option.text
+  isSelected(subject, option) {
+    return this.pollResult.results.get(subject) && this.pollResult.results.get(subject).text === option.text;
   }
 }

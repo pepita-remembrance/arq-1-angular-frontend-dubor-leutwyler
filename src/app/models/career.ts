@@ -15,20 +15,20 @@ export class Career {
     return this.subjects.find(sub => sub.shortName === key || sub.fullName === key);
   }
 
-  public filterSubjects(keys: string[]): Subject[]{
-    let res = []
+  public filterSubjects(keys: string[]): Subject[] {
+    const res = [];
     this.subjects.forEach(sub => {
-      if(keys.indexOf(sub.shortName) > -1 || keys.indexOf(sub.fullName) > -1){
-              res.push(sub)
+      if (keys.indexOf(sub.shortName) > -1 || keys.indexOf(sub.fullName) > -1) {
+        res.push(sub);
       }
-    })
+    });
     return res;
   }
 
   public newPoll(pollKey: string, notOfferedSubjects: Subject[]): Poll {
-    const lastPoll = this.openPoll()
-    if(lastPoll){
-        lastPoll.close()
+    const lastPoll = this.openPoll();
+    if (lastPoll) {
+      lastPoll.close();
     }
     const offer = new Map<Subject, SubjectOffer>();
     this.subjects
@@ -47,13 +47,13 @@ export class Subject {
 
 export class Course implements OfferOption {
   public schedules: Schedule[] = [];
-  public text: string
+  public text: string;
   public isSelected = false;
 
   constructor(public id: string, schedule: Schedule, ...schedules: Schedule[]) {
     this.schedules.push(schedule);
     this.schedules.concat(schedules);
-    this.text = this.textValue()
+    this.text = this.textValue();
   }
 
   public isCourse(): boolean {
@@ -61,6 +61,6 @@ export class Course implements OfferOption {
   }
 
   public textValue(): string {
-    return this.id + " " + this.schedules.map(schedule => schedule.textValue()).join(', ');
+    return this.id + ' ' + this.schedules.map(schedule => schedule.textValue()).join(', ');
   }
 }
