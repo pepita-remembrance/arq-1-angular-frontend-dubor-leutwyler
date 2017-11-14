@@ -34,4 +34,8 @@ export class StudentsLoginComponent extends AlertingComponent {
         }
       );
   }
+
+  bleh() {
+    console.log('aca deberiamos ver la onda del director');
+  }
 }

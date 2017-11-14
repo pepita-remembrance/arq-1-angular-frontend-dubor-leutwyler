@@ -3,7 +3,7 @@ export class Schedule {
   }
 
   textValue(): string {
-    return this.day.textValue() + " " + this.interval.textValue();
+    return this.day.textValue() + ' ' + this.interval.textValue();
   }
 }
 
@@ -12,7 +12,10 @@ export class Interval {
   }
 
   public textValue(): string {
-    return this.hour + ':' + (this.minutes < 10 ? "0": "") + this.minutes  + ' a ' + this.hourTo + ':' + (this.minutesTo < 10 ? "0": "") + this.minutesTo;
+    return this.hour + ':' +
+    (this.minutes < 10 ? '0' : '') +
+    this.minutes  + ' a ' + this.hourTo +
+    ':' + (this.minutesTo < 10 ? '0' : '') + this.minutesTo;
   }
 }
 

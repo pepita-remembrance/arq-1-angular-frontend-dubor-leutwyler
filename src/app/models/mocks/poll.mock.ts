@@ -8,7 +8,7 @@ import {
 } from '../schedule';
 import {tpi} from './career.mock';
 import {Course} from '../career';
-import {NotYet, AlreadyPassed, NoSuitableSchedule} from '../poll'
+import {NotYet, AlreadyPassed, NoSuitableSchedule} from '../poll';
 
 const skippedSubjects = ['EstrD', 'Obj2', 'Redes', 'PConc', 'Mate2', 'IngSoft', 'UIs', 'EPers',
 'PF', 'DesApp', 'LabSOR', 'Ing1', 'Ing2', 'Seg', 'BD2', 'ProyLib', 'InArq', 'Obj3', 'InBio', 'Politicas',

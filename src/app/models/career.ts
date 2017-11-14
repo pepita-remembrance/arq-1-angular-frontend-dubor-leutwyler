@@ -2,9 +2,9 @@ import {SubjectOffer, Poll, OfferOption} from './poll';
 import {Schedule} from './schedule';
 
 export class Career {
-  public polls: Poll[] = [];
 
-  constructor(public id: string, public shortName: string, public longName: string, public subjects: Subject[] = []) {
+  constructor(public id: string, public shortName: string, public longName: string, public subjects: Subject[] = [],
+  public polls: Poll[] = []) {
   }
 
   public openPoll(): Poll {
@@ -15,20 +15,20 @@ export class Career {
     return this.subjects.find(sub => sub.shortName === key || sub.fullName === key);
   }
 
-  public filterSubjects(keys: string[]): Subject[]{
-    let res = []
+  public filterSubjects(keys: string[]): Subject[] {
+    const res = [];
     this.subjects.forEach(sub => {
-      if(keys.indexOf(sub.shortName) > -1 || keys.indexOf(sub.fullName) > -1){
-              res.push(sub)
+      if (keys.indexOf(sub.shortName) > -1 || keys.indexOf(sub.fullName) > -1) {
+              res.push(sub);
       }
-    })
+    });
     return res;
   }
 
   public newPoll(pollKey: string, notOfferedSubjects: Subject[]): Poll {
-    const lastPoll = this.openPoll()
-    if(lastPoll){
-        lastPoll.close()
+    const lastPoll = this.openPoll();
+    if (lastPoll) {
+        lastPoll.close();
     }
     const offer = new Map<Subject, SubjectOffer>();
     this.subjects
@@ -41,26 +41,36 @@ export class Career {
 }
 
 export class Subject {
-  constructor(public shortName: string, public fullName: string, public area: string = "Programacion") {
+  constructor(public shortName: string, public fullName: string, public area: string = 'Programacion') {
   }
 }
 
 export class Course implements OfferOption {
   public schedules: Schedule[] = [];
-  public text: string
+  public text: string;
   public isSelected = false;
+  public maxSlots = 40;
+  public currentStudents = 0;
 
   constructor(public id: string, schedule: Schedule, ...schedules: Schedule[]) {
     this.schedules.push(schedule);
     this.schedules.concat(schedules);
-    this.text = this.textValue()
+    this.text = this.textValue();
   }
 
   public isCourse(): boolean {
     return true;
   }
 
+  public increaseSlots() {
+    this.currentStudents = this.currentStudents + 1;
+  }
+
+  public percentageOccupied() {
+    return this.currentStudents / this.maxSlots * 100;
+  }
+
   public textValue(): string {
-    return this.id + " " + this.schedules.map(schedule => schedule.textValue()).join(', ');
+    return this.id + ' ' + this.schedules.map(schedule => schedule.textValue()).join(', ');
   }
 }

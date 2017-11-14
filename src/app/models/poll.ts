@@ -5,10 +5,10 @@ export type CareerOffer = Map<Subject, SubjectOffer>;
 
 export class Poll {
   private open = true;
-  public arrayOffer : [Subject, SubjectOffer][]
+  public arrayOffer: [Subject, SubjectOffer][];
 
   constructor(public key: string, public career: Career, public offer: CareerOffer) {
-    this.arrayOffer = Array.from(offer)
+    this.arrayOffer = Array.from(offer);
   }
 
   public close() {
@@ -54,23 +54,23 @@ export class DefaultOption extends NonCourseOption {
   }
 }
 
-export class NotYet extends DefaultOption{
-  constructor(){
-    super('Aun no voy a cursar')
+export class NotYet extends DefaultOption {
+  constructor() {
+    super('Aun no voy a cursar');
   }
 }
-export class AlreadyPassed extends DefaultOption{
-  constructor(){
-    super('Ya aprobe')
+export class AlreadyPassed extends DefaultOption {
+  constructor() {
+    super('Ya aprobe');
   }
 }
-export class NoSuitableSchedule extends DefaultOption{
-  constructor(){
-    super('El horario no me sirve')
+export class NoSuitableSchedule extends DefaultOption {
+  constructor() {
+    super('El horario no me sirve');
   }
 }
 
-export const defaultOptions = [new NotYet, new NoSuitableSchedule, new AlreadyPassed]
+export const defaultOptions = [new NotYet, new NoSuitableSchedule, new AlreadyPassed];
 export class SubjectOffer {
   public options: OfferOption[] = [];
 
@@ -89,7 +89,7 @@ export class SubjectOffer {
 }
 
 export interface OfferOption {
-  text: string
+  text: string;
 
   isCourse(): boolean;
 
@@ -100,14 +100,14 @@ export interface OfferOption {
 
 export class PollResult {
   public results: Map<Subject, OfferOption>;
-  public arrayResults: [Subject, OfferOption][] = []
+  public arrayResults: [Subject, OfferOption][] = [];
 
   constructor(public poll: Poll, public student: Student,
               public defaultOption: DefaultOption = new NotYet, public fillDate: Date = new Date(Date.now())) {
     this.results = new Map<Subject, OfferOption>();
     Array.from(poll.offer.keys()).forEach(subject => {
-      this.results.set(subject, defaultOption)
-      this.arrayResults.push([subject, defaultOption])
+      this.results.set(subject, defaultOption);
+      this.arrayResults.push([subject, defaultOption]);
     });
 
   }
@@ -120,12 +120,12 @@ export class PollResult {
     this.student.pollResults.push(this);
   }
 
-  setDefault(subjects: Subject[], defaultOption: DefaultOption){
+  setDefault(subjects: Subject[], defaultOption: DefaultOption) {
     this.arrayResults.forEach(res => {
-      if(subjects.indexOf(res[0]) > -1){
-        res[1] = defaultOption
+      if (subjects.indexOf(res[0]) > -1) {
+        res[1] = defaultOption;
       }
-    })
+    });
   }
 }
 

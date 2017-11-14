@@ -5,7 +5,7 @@ import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 import {FlashMessagesModule, FlashMessagesService} from 'angular2-flash-messages';
 
-import {PollViewService} from './services/pollView.service'
+import {PollViewService} from './services/pollView.service';
 
 import {AppComponent} from './app.component';
 import {StudentsLoginComponent} from './components/students.login.component';

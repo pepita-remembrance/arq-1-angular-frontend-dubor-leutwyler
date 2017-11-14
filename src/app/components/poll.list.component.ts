@@ -10,7 +10,7 @@ import Student from '../models/student';
 import {AlertingComponent} from './alerting.component';
 import {FlashMessagesService} from 'angular2-flash-messages/module';
 
-import {PollResult, Poll, NotYet, SubjectOffer, defaultOptions, DefaultOption} from '../models/poll'
+import {PollResult, Poll, NotYet, SubjectOffer, defaultOptions, DefaultOption} from '../models/poll';
 
 
 @Component({
@@ -21,20 +21,20 @@ import {PollResult, Poll, NotYet, SubjectOffer, defaultOptions, DefaultOption} f
 
 export class PollListComponent extends AlertingComponent implements OnInit {
   public student: Student;
-  public pollResult: PollResult
-  public poll: Poll
-  public defaultOptions : DefaultOption[]
-  public defaultOption : DefaultOption
+  public pollResult: PollResult;
+  public poll: Poll;
+  public defaultOptions: DefaultOption[];
+  public defaultOption: DefaultOption;
 
   constructor(private studentsService: StudentService,
-              public pollViewService : PollViewService,
+              public pollViewService: PollViewService,
               private router: Router,
               private route: ActivatedRoute,
               flashMessagesService: FlashMessagesService) {
     super(flashMessagesService);
-    this.defaultOptions = defaultOptions
-    this.defaultOption = defaultOptions[0]
-    console.log(defaultOptions)
+    this.defaultOptions = defaultOptions;
+    this.defaultOption = defaultOptions[0];
+    console.log(defaultOptions);
   }
 
   ngOnInit(): void {
@@ -42,20 +42,25 @@ export class PollListComponent extends AlertingComponent implements OnInit {
       .subscribe(fileNumber =>
         this.studentsService.getById(parseInt(fileNumber, 10))
           .then(student => {
-            this.student = student
-            this.pollViewService.activePoll().subscribe(somepoll =>{
-                this.poll = somepoll
-              })
-            this.pollViewService.getActivePollResult(this.student)
+            this.student = student;
+            this.pollViewService.activePoll().subscribe(somepoll => {
+                this.poll = somepoll;
+              });
+            this.pollViewService.getActivePollResult(this.student);
           })
       );
   }
 
-  changeDefault(option){
-    this.defaultOption = option
+  changeDefault(option) {
+    this.defaultOption = option;
     this.pollViewService.pollResult.arrayResults.forEach(res => {
-      res[1] = option
-      this.pollViewService.pollResult.results.set(res[0], option)
-    })
+      res[1] = option;
+      this.pollViewService.pollResult.results.set(res[0], option);
+    });
+  }
+
+  submit() {
+    console.log(this.pollViewService.submitResults);
+    console.log(`PATCH ${JSON.stringify(Array.from(this.pollViewService.submitResults))}`);
   }
 }

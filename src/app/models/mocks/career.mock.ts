@@ -45,13 +45,13 @@ export const tpiSubjects = [
 ];
 
 export const areas = [
-  "Programacion",
-  "Teoria de la Computacion",
-  "Sistemas Informaticos",
-  "Desarrollo de Software",
-  "Procesos Informaticos",
-  "Otros"
-]
+  'Programacion',
+  'Teoria de la Computacion',
+  'Sistemas Informaticos',
+  'Desarrollo de Software',
+  'Procesos Informaticos',
+  'Otros'
+];
 
 export const tpi = new Career('1', 'TPI', 'Tecnicatura Universitaria en Programacion Informatica',
   tpiSubjects.map(([shortName, fullName]) =>
