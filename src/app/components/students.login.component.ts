@@ -16,6 +16,7 @@ import {StudentService} from '../services/students.service';
 export class StudentsLoginComponent extends AlertingComponent {
   name: string;
   surname: string;
+  admin: boolean = false;
 
   constructor(private studentsService: StudentService,
               private router: Router,
@@ -33,9 +34,5 @@ export class StudentsLoginComponent extends AlertingComponent {
           }
         }
       );
-  }
-
-  bleh() {
-    console.log('aca deberiamos ver la onda del director');
   }
 }
