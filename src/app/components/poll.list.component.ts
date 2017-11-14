@@ -34,7 +34,6 @@ export class PollListComponent extends AlertingComponent implements OnInit {
     super(flashMessagesService);
     this.defaultOptions = defaultOptions;
     this.defaultOption = defaultOptions[0];
-    console.log(defaultOptions);
   }
 
   ngOnInit(): void {

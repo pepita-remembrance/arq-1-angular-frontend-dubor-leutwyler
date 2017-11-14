@@ -6,6 +6,7 @@ import {RouterModule} from '@angular/router';
 import {FlashMessagesModule, FlashMessagesService} from 'angular2-flash-messages';
 
 import {PollViewService} from './services/pollView.service';
+import {AdminService} from './services/admin.service';
 
 import {AppComponent} from './app.component';
 import {StudentsLoginComponent} from './components/students.login.component';
@@ -31,7 +32,7 @@ import {PollDetailComponent} from './components/poll.detail.component';
     ]),
     FlashMessagesModule
   ],
-  providers: [FlashMessagesService, PollViewService],
+  providers: [FlashMessagesService, PollViewService, AdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
