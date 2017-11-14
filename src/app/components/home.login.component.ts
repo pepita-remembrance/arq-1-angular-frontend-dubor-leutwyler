@@ -9,12 +9,12 @@ import {StudentService} from '../services/students.service';
 import {AdminService} from '../services/admin.service';
 
 @Component({
-  selector: 'app-students-login',
+  selector: 'app-home-login',
   providers: [StudentService],
-  templateUrl: '../templates/students.login.template.html',
+  templateUrl: '../templates/home.login.template.html',
 })
 
-export class StudentsLoginComponent extends AlertingComponent {
+export class HomeLoginComponent extends AlertingComponent {
   name: string;
   surname: string;
   admin = false;

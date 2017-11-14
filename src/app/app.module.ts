@@ -9,7 +9,7 @@ import {PollViewService} from './services/pollView.service';
 import {AdminService} from './services/admin.service';
 
 import {AppComponent} from './app.component';
-import {StudentsLoginComponent} from './components/students.login.component';
+import {HomeLoginComponent} from './components/home.login.component';
 import {PollListComponent} from './components/poll.list.component';
 import {PollDetailComponent} from './components/poll.detail.component';
 
@@ -17,7 +17,7 @@ import {PollDetailComponent} from './components/poll.detail.component';
 @NgModule({
   declarations: [
     AppComponent,
-    StudentsLoginComponent,
+    HomeLoginComponent,
     PollListComponent,
     PollDetailComponent
   ],
@@ -26,8 +26,8 @@ import {PollDetailComponent} from './components/poll.detail.component';
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
-      {path: '', redirectTo: '/students/login', pathMatch: 'full'},
-      {path: 'students/login', component: StudentsLoginComponent},
+      {path: '', redirectTo: 'login', pathMatch: 'full'},
+      {path: 'login', component: HomeLoginComponent},
       {path: 'students/:fileNumber/polls', component: PollListComponent}
     ]),
     FlashMessagesModule
