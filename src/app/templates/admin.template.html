@@ -1,0 +1,28 @@
+<nav *ngIf="admin" class="navbar navbar-default navbar-fixed-top poll-header" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand">{{admin.name}} {{admin.surname}}</a>
+  </div>
+  <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-left" role="search">
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">{{defaultOption.text}} <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li style="padding-right: 10px; padding-left: 10px">Seleccionar opcion por defecto</li>
+          <li class="divider"></li>
+          <li *ngFor="let option of defaultOptions">
+            <a (click)="changeDefault(option)">{{option.text}}</a>
+          </li>
+        </ul>
+      </div>
+    </form>
+    <form class="navbar-form navbar-left" role="search">
+      <button (click)="submit()" type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div> -->
+</nav>

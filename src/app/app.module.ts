@@ -7,11 +7,14 @@ import {FlashMessagesModule, FlashMessagesService} from 'angular2-flash-messages
 
 import {PollViewService} from './services/pollView.service';
 import {AdminService} from './services/admin.service';
+import {CareerService} from './services/careers.service'
+import {StudentService} from './services/students.service'
 
 import {AppComponent} from './app.component';
 import {HomeLoginComponent} from './components/home.login.component';
 import {PollListComponent} from './components/poll.list.component';
 import {PollDetailComponent} from './components/poll.detail.component';
+import {AdminComponent} from './components/admin.component'
 
 
 @NgModule({
@@ -19,7 +22,8 @@ import {PollDetailComponent} from './components/poll.detail.component';
     AppComponent,
     HomeLoginComponent,
     PollListComponent,
-    PollDetailComponent
+    PollDetailComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,11 +32,18 @@ import {PollDetailComponent} from './components/poll.detail.component';
     RouterModule.forRoot([
       {path: '', redirectTo: 'login', pathMatch: 'full'},
       {path: 'login', component: HomeLoginComponent},
-      {path: 'students/:fileNumber/polls', component: PollListComponent}
+      {path: 'students/:fileNumber/polls', component: PollListComponent},
+      {path: 'admins/:id', component: AdminComponent}
     ]),
-    FlashMessagesModule
+    FlashMessagesModule,
   ],
-  providers: [FlashMessagesService, PollViewService, AdminService],
+  providers: [
+    FlashMessagesService,
+    PollViewService,
+    AdminService,
+    StudentService,
+    CareerService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

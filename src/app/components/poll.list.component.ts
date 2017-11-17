@@ -15,7 +15,6 @@ import {PollResult, Poll, NotYet, SubjectOffer, defaultOptions, DefaultOption} f
 
 @Component({
   selector: 'app-poll-list',
-  providers: [StudentService, CareerService],
   templateUrl: '../templates/poll.list.template.html',
 })
 
@@ -59,7 +58,6 @@ export class PollListComponent extends AlertingComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.pollViewService.submitResults);
-    console.log(`PATCH ${JSON.stringify(Array.from(this.pollViewService.submitResults))}`);
+    this.success(`Los resultados fueron enviados con exito`);
   }
 }
