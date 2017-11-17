@@ -15,6 +15,7 @@ import {HomeLoginComponent} from './components/home.login.component';
 import {PollListComponent} from './components/poll.list.component';
 import {PollDetailComponent} from './components/poll.detail.component';
 import {AdminComponent} from './components/admin.component'
+import {CareerListComponent} from './components/career.list.component'
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import {AdminComponent} from './components/admin.component'
     PollListComponent,
     PollDetailComponent,
     AdminComponent,
+    CareerListComponent,
   ],
   imports: [
     BrowserModule,

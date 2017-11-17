@@ -12,4 +12,8 @@ export class CareerService extends DataSourceService<Career, string> {
   fetchData() {
     return Promise.resolve(CAREERS);
   }
+
+  getForAdmin(careers : string[]) {
+    return Promise.resolve(CAREERS.filter(career => careers.indexOf(career.shortName) != -1));
+  }
 }

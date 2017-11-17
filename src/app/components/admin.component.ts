@@ -3,7 +3,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 
 import {StudentService} from '../services/students.service';
-import {CareerService} from '../services/careers.service';
 import {AdminService} from '../services/admin.service'
 
 import Admin from '../models/admin'
@@ -15,10 +14,10 @@ import Admin from '../models/admin'
 })
 
 export class AdminComponent implements OnInit {
-  private admin : Admin
+  public admin : Admin
 
   constructor(private route : ActivatedRoute, private studentService : StudentService,
-  private adminService: AdminService, private careerService : CareerService) {
+  private adminService: AdminService) {
 
   }
 
