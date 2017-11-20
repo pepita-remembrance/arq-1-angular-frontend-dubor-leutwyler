@@ -1,6 +1,10 @@
+<app-student-navbar></app-student-navbar>
 <div *ngIf="poll && pollViewService" class="container">
-  <h1>Encuesta de Intención de inscripcción {{poll.key}} para {{poll.career.longName}}
-  </h1>
+  <div class="centered-text">
+    <h1>Encuesta de Preinscripcción para {{poll.career.longName}}
+    </h1>
+    <b class="gray">{{poll.key}}</b>
+  </div>
   <div class="panel-group" id="accordion">
     <div *ngFor="let res of poll.arrayOffer" class="panel panel-default">
       <div class="panel-heading">
@@ -23,3 +27,20 @@
     </div>
   </div>
 </div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom poll-header" role="navigation">
+  <form class="navbar-form navbar-left" role="search">
+    <div class="dropdown">
+      <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">Opcion por defecto <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li style="padding-right: 10px; padding-left: 10px">Seleccionar opcion por defecto</li>
+        <li class="divider"></li>
+        <li *ngFor="let option of defaultOptions">
+          <a (click)="changeDefault(option)">{{option.text}}</a>
+        </li>
+      </ul>
+      <button (click)="submit()" type="submit" class="btn btn-default">Enviar</button>
+      <a (click)="goBack()" class="btn btn-default">Atras</a>
+    </div>
+  </form>
+</nav>

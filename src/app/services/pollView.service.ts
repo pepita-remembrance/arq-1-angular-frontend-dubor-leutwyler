@@ -4,27 +4,50 @@ import { of } from 'rxjs/observable/of';
 
 import {PollResult, Poll, NotYet, defaultOptions, DefaultOption, OfferOption} from '../models/poll';
 import {Subject} from '../models/career';
-import {tpi2017s2} from '../models/mocks/poll.mock';
+import {tpi2017s2, tpiPolls} from '../models/mocks/poll.mock';
+import Student from '../models/student'
 
 @Injectable()
 export class PollViewService {
     public pollResult: PollResult;
+    public student: Student;
     public poll: Poll;
     public defaultOption: DefaultOption;
     public submitResults: Map<Subject, OfferOption> = new Map();
     public originalResults: Map<Subject, OfferOption>;
 
-    activePoll() {
-      return of(tpi2017s2);
+    allPolls() {
+      return Promise.resolve(tpiPolls);
     }
 
-    getActivePollResult(student) {
-      if (this.pollResult && this.pollResult.student === student) {
-        return of(this.pollResult);
+    getPoll(key) {
+      console.log(tpiPolls)
+      console.log(key)
+      return Promise.resolve(tpiPolls.find(poll => poll.key === key))
+    }
+
+    getPollResult(key) {
+      if (this.pollResult &&
+          this.pollResult.student === this.student &&
+          this.pollResult.poll.key === key) {
+        return Promise.resolve(this.pollResult);
       }
-      this.pollResult = tpi2017s2.newPollResult(student, this.defaultOption);
+      const pollResult = this.student.pollResults.find(pollR => pollR.poll.key === key)
+      if(pollResult){
+        this.pollResult = pollResult
+        return Promise.resolve(pollResult)
+      }
+      this.pollResult = tpi2017s2.newPollResult(this.student, this.defaultOption);
       this.originalResults = new Map(this.pollResult.results);
-      return of(this.pollResult);
+      return Promise.resolve(this.pollResult);
+    }
+
+    submit() {
+      if(this.student.pollResults.length > 0 && this.student.pollResults[this.student.pollResults.length - 1].poll.key == this.pollResult.poll.key){
+        this.student.pollResults.pop();
+      }
+      this.student.pollResults.push(this.pollResult)
+      return Promise.resolve(this.student)
     }
 
 }

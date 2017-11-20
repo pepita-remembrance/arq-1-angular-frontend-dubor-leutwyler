@@ -59,6 +59,13 @@ export class NotYet extends DefaultOption {
     super('Aun no voy a cursar');
   }
 }
+
+export class Yes extends DefaultOption {
+  constructor() {
+    super('Voy a cursar');
+  }
+}
+
 export class AlreadyPassed extends DefaultOption {
   constructor() {
     super('Ya aprobe');

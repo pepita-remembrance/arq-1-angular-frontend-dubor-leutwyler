@@ -19,20 +19,14 @@ import {PollResult, Poll, NotYet, SubjectOffer, defaultOptions, DefaultOption} f
 })
 
 export class PollListComponent extends AlertingComponent implements OnInit {
-  public student: Student;
-  public pollResult: PollResult;
-  public poll: Poll;
-  public defaultOptions: DefaultOption[];
-  public defaultOption: DefaultOption;
 
   constructor(private studentsService: StudentService,
               public pollViewService: PollViewService,
+              public careerService: CareerService,
               private router: Router,
               private route: ActivatedRoute,
               flashMessagesService: FlashMessagesService) {
     super(flashMessagesService);
-    this.defaultOptions = defaultOptions;
-    this.defaultOption = defaultOptions[0];
   }
 
   ngOnInit(): void {
@@ -40,24 +34,19 @@ export class PollListComponent extends AlertingComponent implements OnInit {
       .subscribe(fileNumber =>
         this.studentsService.getById(parseInt(fileNumber, 10))
           .then(student => {
-            this.student = student;
-            this.pollViewService.activePoll().subscribe(somepoll => {
-                this.poll = somepoll;
-              });
-            this.pollViewService.getActivePollResult(this.student);
+            this.pollViewService.student = student;
           })
       );
   }
 
-  changeDefault(option) {
-    this.defaultOption = option;
-    this.pollViewService.pollResult.arrayResults.forEach(res => {
-      res[1] = option;
-      this.pollViewService.pollResult.results.set(res[0], option);
-    });
+  active(poll) {
+    return this.pollViewService &&
+    this.pollViewService.student &&
+    this.pollViewService.student.pollResults &&
+    this.pollViewService.student.pollResults.find(somepoll => somepoll.poll.key === poll.key)
   }
 
-  submit() {
-    this.success(`Los resultados fueron enviados con exito`);
+  logout() {
+    this.router.navigate(['/login']);
   }
 }

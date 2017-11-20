@@ -16,6 +16,7 @@ import {PollListComponent} from './components/poll.list.component';
 import {PollDetailComponent} from './components/poll.detail.component';
 import {AdminComponent} from './components/admin.component'
 import {CareerListComponent} from './components/career.list.component'
+import {StudentNavbarComponent} from './components/student.navbar.component'
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import {CareerListComponent} from './components/career.list.component'
     PollDetailComponent,
     AdminComponent,
     CareerListComponent,
+    StudentNavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +37,7 @@ import {CareerListComponent} from './components/career.list.component'
       {path: '', redirectTo: 'login', pathMatch: 'full'},
       {path: 'login', component: HomeLoginComponent},
       {path: 'students/:fileNumber/polls', component: PollListComponent},
+      {path: 'students/:fileNumber/polls/:pollKey', component: PollDetailComponent},
       {path: 'admins/:id', component: AdminComponent}
     ]),
     FlashMessagesModule,
