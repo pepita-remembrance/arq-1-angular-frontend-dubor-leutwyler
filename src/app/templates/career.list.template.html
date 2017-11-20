@@ -1,5 +1,10 @@
 <div class='container' *ngIf="careers && careers.length > 0">
-  aca van tus carreras Che
+  <div *ngFor="let career of careers" class="list-group">
+    <a *ngFor="let poll of career.polls" class="list-group-item btn list-group-item-success"
+    routerLink="{{poll.key}}">
+      {{career.shortName}}: {{poll.key}}
+    <span class="glyphicon glyphicon-pencil"></span></a>
+  </div>
 </div>
 <div *ngIf="!(careers && careers.length > 0)">
   <h1>Lo sentimos, actualmente no hay ninguna carrera para administrar</h1>

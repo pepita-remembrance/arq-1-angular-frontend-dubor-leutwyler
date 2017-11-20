@@ -46,10 +46,6 @@ export class PollListComponent extends AlertingComponent implements OnInit {
     this.pollViewService.student.pollResults.find(somepoll => somepoll.poll.key === poll.key)
   }
 
-  logout() {
-    this.router.navigate(['/login']);
-  }
-
   tip(poll) {
     if(this.active(poll)) {
       return "Ya fue completada; Presiona para editar"

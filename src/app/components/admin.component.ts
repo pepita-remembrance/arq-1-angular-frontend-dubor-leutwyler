@@ -16,8 +16,10 @@ import Admin from '../models/admin'
 export class AdminComponent implements OnInit {
   public admin : Admin
 
-  constructor(private route : ActivatedRoute, private studentService : StudentService,
-  private adminService: AdminService) {
+  constructor(private route : ActivatedRoute,
+              private router : Router,
+              private studentService : StudentService,
+              private adminService: AdminService) {
 
   }
 
@@ -29,5 +31,9 @@ export class AdminComponent implements OnInit {
             this.admin = admin;
           })
       );
+  }
+
+  logout(){
+    this.router.navigate(['/login']);
   }
 }
