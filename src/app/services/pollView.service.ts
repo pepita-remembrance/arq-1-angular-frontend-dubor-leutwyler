@@ -21,8 +21,6 @@ export class PollViewService {
     }
 
     getPoll(key) {
-      console.log(tpiPolls)
-      console.log(key)
       return Promise.resolve(tpiPolls.find(poll => poll.key === key))
     }
 
@@ -44,9 +42,19 @@ export class PollViewService {
 
     submit() {
       if(this.student.pollResults.length > 0 && this.student.pollResults[this.student.pollResults.length - 1].poll.key == this.pollResult.poll.key){
+        Array.from(this.student.pollResults[this.student.pollResults.length - 1].results).forEach(pair => {
+          if(pair[1].isCourse()) {
+            pair[1].removeStudent()
+          }
+        })
         this.student.pollResults.pop();
       }
       this.student.pollResults.push(this.pollResult)
+      Array.from(this.pollResult.results).forEach(pair => {
+        if(pair[1].isCourse()) {
+          pair[1].addStudent()
+        }
+      })
       return Promise.resolve(this.student)
     }
 

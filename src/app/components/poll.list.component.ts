@@ -49,4 +49,11 @@ export class PollListComponent extends AlertingComponent implements OnInit {
   logout() {
     this.router.navigate(['/login']);
   }
+
+  tip(poll) {
+    if(this.active(poll)) {
+      return "Ya fue completada; Presiona para editar"
+    }
+    return "Debe completar esta encuesta; Presione para continuar"
+  }
 }

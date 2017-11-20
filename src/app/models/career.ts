@@ -62,8 +62,12 @@ export class Course implements OfferOption {
     return true;
   }
 
-  public increaseSlots() {
+  public addStudent() {
     this.currentStudents = this.currentStudents + 1;
+  }
+
+  public removeStudent() {
+    this.currentStudents = this.currentStudents - 1;
   }
 
   public percentageOccupied() {
