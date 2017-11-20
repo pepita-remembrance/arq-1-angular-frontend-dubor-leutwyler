@@ -5,7 +5,7 @@ import { of } from 'rxjs/observable/of';
 import {PollResult, Poll, NotYet, defaultOptions, DefaultOption, OfferOption} from '../models/poll';
 import {Subject} from '../models/career';
 import {tpi2017s2, tpiPolls} from '../models/mocks/poll.mock';
-import Student from '../models/student'
+import Student from '../models/student';
 
 @Injectable()
 export class PollViewService {
@@ -21,7 +21,7 @@ export class PollViewService {
     }
 
     getPoll(key) {
-      return Promise.resolve(tpiPolls.find(poll => poll.key === key))
+      return Promise.resolve(tpiPolls.find(poll => poll.key === key));
     }
 
     getPollResult(key) {
@@ -30,10 +30,10 @@ export class PollViewService {
           this.pollResult.poll.key === key) {
         return Promise.resolve(this.pollResult);
       }
-      const pollResult = this.student.pollResults.find(pollR => pollR.poll.key === key)
-      if(pollResult){
-        this.pollResult = pollResult
-        return Promise.resolve(pollResult)
+      const pollResult = this.student.pollResults.find(pollR => pollR.poll.key === key);
+      if (pollResult) {
+        this.pollResult = pollResult;
+        return Promise.resolve(pollResult);
       }
       this.pollResult = tpi2017s2.newPollResult(this.student, this.defaultOption);
       this.originalResults = new Map(this.pollResult.results);
@@ -41,21 +41,22 @@ export class PollViewService {
     }
 
     submit() {
-      if(this.student.pollResults.length > 0 && this.student.pollResults[this.student.pollResults.length - 1].poll.key == this.pollResult.poll.key){
+      if (this.student.pollResults.length > 0 &&
+        this.student.pollResults[this.student.pollResults.length - 1].poll.key === this.pollResult.poll.key) {
         Array.from(this.student.pollResults[this.student.pollResults.length - 1].results).forEach(pair => {
-          if(pair[1].isCourse()) {
-            pair[1].removeStudent()
+          if (pair[1].isCourse()) {
+            pair[1].removeStudent();
           }
-        })
+        });
         this.student.pollResults.pop();
       }
-      this.student.pollResults.push(this.pollResult)
+      this.student.pollResults.push(this.pollResult);
       Array.from(this.pollResult.results).forEach(pair => {
-        if(pair[1].isCourse()) {
-          pair[1].addStudent()
+        if (pair[1].isCourse()) {
+          pair[1].addStudent();
         }
-      })
-      return Promise.resolve(this.student)
+      });
+      return Promise.resolve(this.student);
     }
 
 }

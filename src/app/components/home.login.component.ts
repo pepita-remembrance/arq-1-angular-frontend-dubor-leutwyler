@@ -27,10 +27,11 @@ export class HomeLoginComponent extends AlertingComponent {
   }
 
   onSubmit() {
-    if(this.admin)
+    if (this.admin) {
       this.adminLogin();
-    else
+    } else {
       this.studentLogin();
+    }
   }
 
   private studentLogin() {

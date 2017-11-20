@@ -13,7 +13,7 @@ export class CareerService extends DataSourceService<Career, string> {
     return Promise.resolve(CAREERS);
   }
 
-  getForAdmin(careers : string[]) {
-    return Promise.resolve(CAREERS.filter(career => careers.indexOf(career.shortName) != -1));
+  getForAdmin(careers: string[]) {
+    return Promise.resolve(CAREERS.filter(career => careers.indexOf(career.shortName) !== -1));
   }
 }

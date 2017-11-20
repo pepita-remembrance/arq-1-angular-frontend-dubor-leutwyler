@@ -43,13 +43,13 @@ export class PollListComponent extends AlertingComponent implements OnInit {
     return this.pollViewService &&
     this.pollViewService.student &&
     this.pollViewService.student.pollResults &&
-    this.pollViewService.student.pollResults.find(somepoll => somepoll.poll.key === poll.key)
+    this.pollViewService.student.pollResults.find(somepoll => somepoll.poll.key === poll.key);
   }
 
   tip(poll) {
-    if(this.active(poll)) {
-      return "Ya fue completada; Presiona para editar"
+    if (this.active(poll)) {
+      return 'Ya fue completada; Presiona para editar';
     }
-    return "Debe completar esta encuesta; Presione para continuar"
+    return 'Debe completar esta encuesta; Presione para continuar';
   }
 }

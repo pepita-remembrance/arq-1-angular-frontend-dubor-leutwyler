@@ -41,19 +41,19 @@ export class PollDetailComponent extends AlertingComponent implements OnInit {
   ngOnInit() {
     this.route.params
       .subscribe(params => {
-        const fileNumber = params['fileNumber']
+        const fileNumber = params['fileNumber'];
         this.studentsService.getById(parseInt(fileNumber, 10))
           .then(student => {
             this.pollViewService.student = student;
             this.route.params
-            .subscribe(params => {
-              const key = params['pollKey']
+            .subscribe(otherparams => {
+              const key = otherparams['pollKey'];
               this.pollViewService.getPoll(key).then(somepoll => {
                   this.poll = somepoll;
                 });
               this.pollViewService.getPollResult(key);
-            })
-          })
+            });
+          });
       });
   }
 

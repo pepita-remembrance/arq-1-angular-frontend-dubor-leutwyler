@@ -3,10 +3,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 
 import {CareerService} from '../services/careers.service';
-import {AdminService} from '../services/admin.service'
+import {AdminService} from '../services/admin.service';
 
-import Admin from '../models/admin'
-import {Career} from '../models/career'
+import Admin from '../models/admin';
+import {Career} from '../models/career';
 
 
 @Component({
@@ -15,10 +15,10 @@ import {Career} from '../models/career'
 })
 
 export class CareerListComponent implements OnInit {
-  public careers : Career[]
+  public careers: Career[];
 
-  constructor(private route : ActivatedRoute, private careerService : CareerService,
-    private adminService : AdminService) {
+  constructor(private route: ActivatedRoute, private careerService: CareerService,
+    private adminService: AdminService) {
 
   }
 
@@ -26,8 +26,8 @@ export class CareerListComponent implements OnInit {
     this.route.paramMap.switchMap(params => params.get('id'))
       .subscribe(id => {
         this.adminService.getById(parseInt(id, 10)).then(admin => {
-          this.careerService.getForAdmin(admin.careers).then(careers => this.careers = careers)
-        })
+          this.careerService.getForAdmin(admin.careers).then(careers => this.careers = careers);
+        });
       });
   }
 }

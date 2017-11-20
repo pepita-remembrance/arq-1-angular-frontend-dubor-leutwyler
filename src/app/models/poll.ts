@@ -46,9 +46,9 @@ export class NonCourseOption implements OfferOption {
     return this.text;
   }
 
-  addStudent() : void {}
+  addStudent(): void {}
 
-  removeStudent() : void {}
+  removeStudent(): void {}
 
 }
 
@@ -104,9 +104,9 @@ export interface OfferOption {
 
   isCourse(): boolean;
 
-  addStudent() : void;
+  addStudent(): void;
 
-  removeStudent() : void;
+  removeStudent(): void;
 
   textValue(): string;
 }

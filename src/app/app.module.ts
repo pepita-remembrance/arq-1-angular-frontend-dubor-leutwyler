@@ -7,16 +7,16 @@ import {FlashMessagesModule, FlashMessagesService} from 'angular2-flash-messages
 
 import {PollViewService} from './services/pollView.service';
 import {AdminService} from './services/admin.service';
-import {CareerService} from './services/careers.service'
-import {StudentService} from './services/students.service'
+import {CareerService} from './services/careers.service';
+import {StudentService} from './services/students.service';
 
 import {AppComponent} from './app.component';
 import {HomeLoginComponent} from './components/home.login.component';
 import {PollListComponent} from './components/poll.list.component';
 import {PollDetailComponent} from './components/poll.detail.component';
-import {AdminComponent} from './components/admin.component'
-import {CareerListComponent} from './components/career.list.component'
-import {StudentNavbarComponent} from './components/student.navbar.component'
+import {AdminComponent} from './components/admin.component';
+import {CareerListComponent} from './components/career.list.component';
+import {StudentNavbarComponent} from './components/student.navbar.component';
 
 
 @NgModule({

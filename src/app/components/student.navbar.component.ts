@@ -27,7 +27,7 @@ export class StudentNavbarComponent extends AlertingComponent {
     super(flashMessagesService);
   }
 
-  logout(){
+  logout() {
     this.router.navigate(['/login']);
   }
 }

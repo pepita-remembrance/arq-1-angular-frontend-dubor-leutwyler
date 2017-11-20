@@ -3,9 +3,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 
 import {StudentService} from '../services/students.service';
-import {AdminService} from '../services/admin.service'
+import {AdminService} from '../services/admin.service';
 
-import Admin from '../models/admin'
+import Admin from '../models/admin';
 
 
 @Component({
@@ -14,11 +14,11 @@ import Admin from '../models/admin'
 })
 
 export class AdminComponent implements OnInit {
-  public admin : Admin
+  public admin: Admin;
 
-  constructor(private route : ActivatedRoute,
-              private router : Router,
-              private studentService : StudentService,
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private studentService: StudentService,
               private adminService: AdminService) {
 
   }
@@ -33,7 +33,7 @@ export class AdminComponent implements OnInit {
       );
   }
 
-  logout(){
+  logout() {
     this.router.navigate(['/login']);
   }
 }

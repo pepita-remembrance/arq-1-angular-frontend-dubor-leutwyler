@@ -15,7 +15,7 @@ const skippedSubjects = ['Obj2', 'Redes', 'PConc', 'Mate2', 'IngSoft', 'UIs', 'E
 'Geo', 'Decl', 'videojuegos', 'DADC', 'CLP', 'SemMod', 'TIP'];
 
 export const tpi2017s2 = tpi.newPoll('2017s2', tpi.filterSubjects(skippedSubjects));
-export const tpiPolls = [tpi2017s2]
+export const tpiPolls = [tpi2017s2];
 
 tpi2017s2.on('InPr').add(
   new Course('C1',
