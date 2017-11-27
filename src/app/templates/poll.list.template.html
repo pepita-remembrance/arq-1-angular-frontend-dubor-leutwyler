@@ -4,7 +4,7 @@
     <h1>Encuestas:</h1>
   </div>
   <div *ngFor="let career of pollViewService.student.careers" class="list-group">
-    <a *ngFor="let poll of career.polls" class="list-group-item btn"
+    <a *ngFor="let poll of career.activePolls()" class="list-group-item btn"
     [ngClass]="{'list-group-item-warning': !active(poll), 'list-group-item-success': active(poll)}"
     routerLink="{{poll.key}}" data-toggle="tooltip" [title]="tip(poll)">
       {{career.shortName}}: {{poll.key}}

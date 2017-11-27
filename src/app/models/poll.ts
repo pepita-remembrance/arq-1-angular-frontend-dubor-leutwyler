@@ -4,19 +4,29 @@ import Student from './student';
 export type CareerOffer = Map<Subject, SubjectOffer>;
 
 export class Poll {
-  private open = true;
+  private open = false;
+  public from : Date
+  public to : Date
   public arrayOffer: [Subject, SubjectOffer][];
 
-  constructor(public key: string, public career: Career, public offer: CareerOffer) {
+  constructor(public key: string, public career: Career, public offer: CareerOffer, from : Date = new Date(),
+  to: Date = new Date()) {
     this.arrayOffer = Array.from(offer);
+    this.to = to
+    this.from = from;
   }
 
   public close() {
     this.open = false;
   }
 
+  public openPoll() {
+    this.open = true;
+  }
+
   public isOpen() {
-    return this.open;
+    const today = Date.now()
+    return this.from.getTime() < today && this.to.getTime() > today;
   }
 
   public on(subjectKey: string): SubjectOffer {

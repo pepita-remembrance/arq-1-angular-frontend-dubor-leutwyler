@@ -8,11 +8,11 @@
   <input type="text" id="inputSurname" class="form-control" placeholder="Apellido" required=""
   required
  [(ngModel)]="surname" name="surname" #spy>
-  <!-- <div class="checkbox">
+  <div class="checkbox">
     <label>
       <input type="checkbox" value="remember-me" [(ngModel)]="admin" name="admin">Entrar como admin
     </label>
-  </div> -->
+  </div>
   <button class="btn btn-lg btn-default btn-block" type="submit" [disabled]="!studentForm.form.valid">Entrar
   </button>
 </form>

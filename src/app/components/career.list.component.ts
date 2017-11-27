@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {FlashMessagesService} from 'angular2-flash-messages';
+import {AlertingComponent} from './alerting.component';
 
 
 import {CareerService} from '../services/careers.service';
@@ -7,6 +9,7 @@ import {AdminService} from '../services/admin.service';
 
 import Admin from '../models/admin';
 import {Career} from '../models/career';
+import {Poll} from '../models/poll'
 
 
 @Component({
@@ -14,12 +17,16 @@ import {Career} from '../models/career';
   templateUrl: '../templates/career.list.template.html',
 })
 
-export class CareerListComponent implements OnInit {
-  public careers: Career[];
+export class CareerListComponent extends AlertingComponent implements OnInit {
+  public careers: Career[] = [];
+  public newPollKey: string = "";
+  public dateFrom: Date;
+  public dateTo : Date;
+  public selectedCareer: Career;
 
   constructor(private route: ActivatedRoute, private careerService: CareerService,
-    private adminService: AdminService) {
-
+    private adminService: AdminService, flashMessagesService: FlashMessagesService) {
+      super(flashMessagesService)
   }
 
   ngOnInit() {
@@ -29,5 +36,9 @@ export class CareerListComponent implements OnInit {
           this.careerService.getForAdmin(admin.careers).then(careers => this.careers = careers);
         });
       });
+  }
+
+  onSubmit() {
+    console.log(this.selectedCareer.newPoll(this.newPollKey, []))
   }
 }

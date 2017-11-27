@@ -1,1 +1,1 @@
-$('.selectpicker').selectpicker();
+

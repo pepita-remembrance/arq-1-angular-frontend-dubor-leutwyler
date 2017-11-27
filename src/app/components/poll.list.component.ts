@@ -40,7 +40,8 @@ export class PollListComponent extends AlertingComponent implements OnInit {
   }
 
   active(poll) {
-    return this.pollViewService &&
+    return poll.isOpen() &&
+    this.pollViewService &&
     this.pollViewService.student &&
     this.pollViewService.student.pollResults &&
     this.pollViewService.student.pollResults.find(somepoll => somepoll.poll.key === poll.key);

@@ -11,6 +11,10 @@ export class Career {
     return this.polls.find(poll => poll.isOpen());
   }
 
+  public activePolls(): Poll[] {
+    return this.polls.filter(poll => poll.isOpen())
+  }
+
   public getSubject(key: string): Subject {
     return this.subjects.find(sub => sub.shortName === key || sub.fullName === key);
   }
@@ -25,17 +29,13 @@ export class Career {
     return res;
   }
 
-  public newPoll(pollKey: string, notOfferedSubjects: Subject[]): Poll {
-    const lastPoll = this.openPoll();
-    if (lastPoll) {
-        lastPoll.close();
-    }
+  public newPoll(pollKey: string, notOfferedSubjects: Subject[], from = new Date, to = new Date): Poll {
     const offer = new Map<Subject, SubjectOffer>();
     this.subjects
       .filter(subject => !notOfferedSubjects.includes(subject))
       .map(subject => offer.set(subject, SubjectOffer.defaultOffer()));
-    const poll = new Poll(pollKey, this, offer);
-    this.polls.push(poll);
+    const poll = new Poll(pollKey, this, offer, from, to);
+    this.polls.unshift(poll);
     return poll;
   }
 }

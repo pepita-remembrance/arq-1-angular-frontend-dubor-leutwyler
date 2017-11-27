@@ -1,4 +1,44 @@
-<div class='container' *ngIf="careers && careers.length > 0">
+<div *ngIf="careers && careers.length > 0">
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Nueva encuesta</h4>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="onSubmit()" #careerForm="ngForm" class="form-career">
+            <label for="inputName">Nombre</label>
+            <input type="text" id="inputName" class="form-control" placeholder="Nombre de la encuesta" required=""
+            required
+           [(ngModel)]="newPollKey" name="key" #spy>
+           <label for="careerSelection">Carrera</label>
+           <select id="careerSelection" class="form-control" [(ngModel)]="selectedCareer" name="selectedCareer"
+           required=""
+           required>
+             <option *ngFor="let career of careers" [ngValue]="career">{{career.shortName}}</option>
+           </select>
+           <label for="dateFrom">Desde: </label>
+           <div>
+             <p-calendar id="dateFrom" [(ngModel)]="dateFrom" dateFormat="dd.mm.yy" showIcon="true" name="dateFrom"></p-calendar>
+           </div>
+           <label for="dateTo">Hasta: </label>
+           <div>
+             <p-calendar id="dateTo" [(ngModel)]="dateTo" dateFormat="dd.mm.yy" showIcon="true" name="dateTo"></p-calendar>
+           </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default" [disabled]="!careerForm.form.valid"
+          (click)="careerForm.ngSubmit.emit()" data-dismiss="modal">Crear</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div *ngFor="let career of careers" class="list-group">
     <a *ngFor="let poll of career.polls" class="list-group-item btn list-group-item-success"
     routerLink="{{poll.key}}">
@@ -6,6 +46,17 @@
     <span class="glyphicon glyphicon-pencil"></span></a>
   </div>
 </div>
+
 <div *ngIf="!(careers && careers.length > 0)">
   <h1>Lo sentimos, actualmente no hay ninguna carrera para administrar</h1>
+  <div class="row">
+    <img class=".img-responsive col-xs-8" src="../assets/we_re_sorry.jpg">
+    <div class="col-xs-4"></div>
+  </div>
 </div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom poll-header" role="navigation">
+  <form class="navbar-form navbar-left">
+      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Nueva encuesta</button>
+  </form>
+</nav>
