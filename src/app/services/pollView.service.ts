@@ -56,6 +56,7 @@ export class PollViewService {
           pair[1].addStudent();
         }
       });
+      this.pollResult.poll.studentsFinished += 1
       return Promise.resolve(this.student);
     }
 

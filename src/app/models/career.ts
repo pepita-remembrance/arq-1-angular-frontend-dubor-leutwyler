@@ -7,6 +7,10 @@ export class Career {
   public polls: Poll[] = []) {
   }
 
+  public getStudents() {
+    return 2
+  }
+
   public openPoll(): Poll {
     return this.polls.find(poll => poll.isOpen());
   }

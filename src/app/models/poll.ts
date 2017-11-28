@@ -8,6 +8,7 @@ export class Poll {
   public from : Date
   public to : Date
   public arrayOffer: [Subject, SubjectOffer][];
+  public studentsFinished = 0
 
   constructor(public key: string, public career: Career, public offer: CareerOffer, from : Date = new Date(),
   to: Date = new Date()) {
@@ -45,7 +46,7 @@ export class Poll {
 export class NonCourseOption implements OfferOption {
   public isSelected = false;
 
-  constructor(public text: string) {
+  constructor(public id: string, public text: string) {
   }
 
   isCourse(): boolean {
@@ -64,7 +65,7 @@ export class NonCourseOption implements OfferOption {
 
 export class DefaultOption extends NonCourseOption {
   constructor(text: string) {
-    super(text);
+    super(text, text);
   }
 }
 
@@ -110,6 +111,8 @@ export class SubjectOffer {
 }
 
 export interface OfferOption {
+  id: string
+
   text: string;
 
   isCourse(): boolean;
