@@ -26,7 +26,7 @@ export class CareerListComponent extends AlertingComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private careerService: CareerService,
     private adminService: AdminService,
-    public pollViewService : PollViewService,
+    public pollViewService: PollViewService,
     flashMessagesService: FlashMessagesService) {
       super(flashMessagesService);
   }
@@ -42,6 +42,6 @@ export class CareerListComponent extends AlertingComponent implements OnInit {
 
   onSubmit() {
     const newPoll = this.selectedCareer.newPoll(this.newPollKey, [], this.dateFrom, this.dateTo);
-    this.pollViewService.createPoll(newPoll).then(poll => this.success(`La encuesta fue creada con exito`))
+    this.pollViewService.createPoll(newPoll).then(poll => this.success(`La encuesta fue creada con exito`));
   }
 }

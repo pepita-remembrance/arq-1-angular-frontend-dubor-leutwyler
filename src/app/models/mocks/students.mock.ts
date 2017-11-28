@@ -8,16 +8,18 @@ const students: Student[] = [
 
 class NameRandomizer {
   public static randomString(length) {
-    const chars = ['a', 'b', 'c', 'd','e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
-    'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-    var result = '';
-    for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+    const chars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+    'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    let result = '';
+    for (let i = length; i > 0; --i) {
+      result += chars[Math.floor(Math.random() * chars.length)];
+    }
     return result;
   }
 
   public static createStudents(arr) {
-    for(var i = 2; i < 599; i += 1) {
-      arr.push(new Student(i, NameRandomizer.randomString(20), NameRandomizer.randomString(20)))
+    for (let i = 2; i < 599; i += 1) {
+      arr.push(new Student(i, NameRandomizer.randomString(20), NameRandomizer.randomString(20)));
     }
   }
 }

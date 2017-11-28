@@ -24,9 +24,9 @@ export class PollViewService {
       return Promise.resolve(tpiPolls.find(poll => poll.key === key));
     }
 
-    createPoll(poll : Poll) {
-      tpiPolls.unshift(poll)
-      return Promise.resolve(poll)
+    createPoll(poll: Poll) {
+      tpiPolls.unshift(poll);
+      return Promise.resolve(poll);
     }
 
     getPollResult(key) {
@@ -42,7 +42,7 @@ export class PollViewService {
       }
 
       return this.getPoll(key).then(poll => {
-        this.pollResult = poll.newPollResult(this.student, this.defaultOption)
+        this.pollResult = poll.newPollResult(this.student, this.defaultOption);
         this.originalResults = new Map(this.pollResult.results);
         return Promise.resolve(this.pollResult);
       }).catch();
