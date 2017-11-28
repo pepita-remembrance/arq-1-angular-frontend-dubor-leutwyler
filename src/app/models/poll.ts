@@ -92,16 +92,19 @@ export class NoSuitableSchedule extends DefaultOption {
   }
 }
 
-export const defaultOptions = [new NotYet, new NoSuitableSchedule, new AlreadyPassed];
 export class SubjectOffer {
-  public options: OfferOption[] = [];
+  public options: OfferOption[] = SubjectOffer.defaultOffer();
 
   constructor(courseOptions: OfferOption[]) {
-    this.options.concat(courseOptions).concat(defaultOptions);
+    this.options.concat(courseOptions);
   }
 
   public static defaultOffer() {
-    return new SubjectOffer([]);
+    return [
+      new NotYet,
+      new AlreadyPassed,
+      new NoSuitableSchedule,
+    ];
   }
 
   public add(...courseOptions: OfferOption[]): SubjectOffer {
@@ -137,7 +140,6 @@ export class PollResult {
       this.results.set(subject, defaultOption);
       this.arrayResults.push([subject, defaultOption]);
     });
-
   }
 
   asPartial(): PollResultPartial {

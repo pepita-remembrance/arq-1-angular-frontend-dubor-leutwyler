@@ -8,7 +8,7 @@ import {Subject, Course} from '../models/career';
 import {FlashMessagesService} from 'angular2-flash-messages/module';
 import {AlertingComponent} from './alerting.component';
 
-import {PollResult, Poll, NotYet, SubjectOffer, defaultOptions, DefaultOption, OfferOption} from '../models/poll';
+import {PollResult, Poll, NotYet, SubjectOffer, DefaultOption, OfferOption} from '../models/poll';
 import {StudentService} from '../services/students.service';
 import {AdminService} from '../services/admin.service';
 import Admin from '../models/admin';
@@ -134,5 +134,9 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
 
   logout() {
     this.router.navigate(['/login']);
+  }
+
+  goBack(): void {
+    this.router.navigate(['../../'], { relativeTo: this.route });
   }
 }

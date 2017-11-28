@@ -8,7 +8,7 @@ export class Career {
   }
 
   public getStudents() {
-    return 2;
+    return 600;
   }
 
   public openPoll(): Poll {
@@ -37,7 +37,7 @@ export class Career {
     const offer = new Map<Subject, SubjectOffer>();
     this.subjects
       .filter(subject => !notOfferedSubjects.includes(subject))
-      .map(subject => offer.set(subject, SubjectOffer.defaultOffer()));
+      .map(subject => offer.set(subject, new SubjectOffer(SubjectOffer.defaultOffer())));
     const poll = new Poll(pollKey, this, offer, from, to);
     this.polls.unshift(poll);
     return poll;

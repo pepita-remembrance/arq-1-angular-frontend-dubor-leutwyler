@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { of } from 'rxjs/observable/of';
 
-import {PollResult, Poll, NotYet, defaultOptions, DefaultOption, OfferOption} from '../models/poll';
+import {PollResult, Poll, NotYet, DefaultOption, OfferOption} from '../models/poll';
 import {Subject} from '../models/career';
 import {tpi2017s2, tpiPolls} from '../models/mocks/poll.mock';
 import Student from '../models/student';
@@ -24,6 +24,11 @@ export class PollViewService {
       return Promise.resolve(tpiPolls.find(poll => poll.key === key));
     }
 
+    createPoll(poll : Poll) {
+      tpiPolls.unshift(poll)
+      return Promise.resolve(poll)
+    }
+
     getPollResult(key) {
       if (this.pollResult &&
           this.pollResult.student === this.student &&
@@ -35,9 +40,12 @@ export class PollViewService {
         this.pollResult = pollResult;
         return Promise.resolve(pollResult);
       }
-      this.pollResult = tpi2017s2.newPollResult(this.student, this.defaultOption);
-      this.originalResults = new Map(this.pollResult.results);
-      return Promise.resolve(this.pollResult);
+
+      return this.getPoll(key).then(poll => {
+        this.pollResult = poll.newPollResult(this.student, this.defaultOption)
+        this.originalResults = new Map(this.pollResult.results);
+        return Promise.resolve(this.pollResult);
+      }).catch();
     }
 
     submit() {

@@ -43,9 +43,6 @@ tpi2017s2.on('InPr').add(
     Jueves.from(19).to(21, 30),
     Miercoles.from(18).to(21)
   ),
-  new NotYet,
-  new AlreadyPassed,
-  new NoSuitableSchedule,
 );
 
 tpi2017s2.on('Orga').add(
@@ -65,9 +62,6 @@ tpi2017s2.on('Orga').add(
     Martes.from(19).to(22),
     Viernes.from(19).to(22)
   ),
-  new NotYet,
-  new AlreadyPassed,
-  new NoSuitableSchedule,
 );
 
 tpi2017s2.on('Mate1').add(
@@ -83,9 +77,6 @@ tpi2017s2.on('Mate1').add(
     Lunes.from(9).to(13),
     Miercoles.from(9).to(13)
   ),
-  new NotYet,
-  new AlreadyPassed,
-  new NoSuitableSchedule,
 );
 
 tpi2017s2.on('EstrD').add(
@@ -97,9 +88,6 @@ tpi2017s2.on('EstrD').add(
     Martes.from(9).to(12),
     Miercoles.from(11).to(14)
   ),
-  new NotYet,
-  new AlreadyPassed,
-  new NoSuitableSchedule,
 );
 
 tpi2017s2.on('BD').add(
@@ -111,9 +99,6 @@ tpi2017s2.on('BD').add(
     Martes.from(9).to(12),
     Miercoles.from(11).to(14)
   ),
-  new NotYet,
-  new AlreadyPassed,
-  new NoSuitableSchedule,
 );
 
 tpi2017s2.on('Obj1').add(
@@ -125,9 +110,6 @@ tpi2017s2.on('Obj1').add(
     Lunes.from(18).to(22),
     Miercoles.from(18).to(22)
   ),
-  new NotYet,
-  new AlreadyPassed,
-  new NoSuitableSchedule,
 );
 
 tpi2017s2.on('SO').add(
@@ -139,14 +121,8 @@ tpi2017s2.on('SO').add(
     Lunes.from(18).to(22),
     Jueves.from(20).to(22)
   ),
-  new NotYet,
-  new AlreadyPassed,
-  new NoSuitableSchedule,
 );
 
 tpi2017s2.on('TTI-TTU').add(
-  new NotYet,
-  new AlreadyPassed,
-  new NoSuitableSchedule,
   new Yes,
 );

@@ -10,7 +10,7 @@ import Student from '../models/student';
 import {AlertingComponent} from './alerting.component';
 import {FlashMessagesService} from 'angular2-flash-messages/module';
 
-import {PollResult, Poll, NotYet, SubjectOffer, defaultOptions, DefaultOption} from '../models/poll';
+import {PollResult, Poll, NotYet, SubjectOffer, DefaultOption} from '../models/poll';
 
 
 @Component({

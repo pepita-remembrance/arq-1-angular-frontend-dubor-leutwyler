@@ -8,7 +8,7 @@ import {Subject} from '../models/career';
 import {FlashMessagesService} from 'angular2-flash-messages/module';
 import {AlertingComponent} from './alerting.component';
 
-import {PollResult, Poll, NotYet, SubjectOffer, defaultOptions, DefaultOption} from '../models/poll';
+import {PollResult, Poll, NotYet, SubjectOffer, DefaultOption} from '../models/poll';
 import {StudentService} from '../services/students.service';
 
 
@@ -34,8 +34,8 @@ export class PollDetailComponent extends AlertingComponent implements OnInit {
               private route: ActivatedRoute,
               flashMessagesService: FlashMessagesService) {
     super(flashMessagesService);
-    this.defaultOptions = defaultOptions;
-    this.defaultOption = defaultOptions[0];
+    this.defaultOptions = SubjectOffer.defaultOffer();
+    this.defaultOption = SubjectOffer.defaultOffer()[0];
   }
 
   ngOnInit() {
@@ -82,9 +82,5 @@ export class PollDetailComponent extends AlertingComponent implements OnInit {
 
   submit() {
     this.pollViewService.submit().then(student => this.router.navigate(['students', `${student.fileNumber}`, 'polls']));
-  }
-
-  goBack(): void {
-    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }
