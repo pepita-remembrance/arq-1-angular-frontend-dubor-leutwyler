@@ -1,4 +1,4 @@
-import {Component, OnInit, ApplicationRef} from '@angular/core';
+import {Component, Input, OnInit, ApplicationRef} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
@@ -19,6 +19,7 @@ import {PollResult, Poll, NotYet, SubjectOffer, DefaultOption} from '../models/p
 })
 
 export class StudentNavbarComponent extends AlertingComponent {
+  @Input() back : boolean = false;
 
   constructor(public pollViewService: PollViewService,
               private router: Router,
