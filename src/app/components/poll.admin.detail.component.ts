@@ -48,9 +48,9 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Materia';
+  xAxisLabel = 'Comisiones';
   showYAxisLabel = true;
-  yAxisLabel = 'Comisiones';
+  yAxisLabel = 'Materias';
 
   // pie
   pie_showLabels = true;
