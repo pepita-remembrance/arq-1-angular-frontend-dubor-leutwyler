@@ -8,7 +8,7 @@ export class Career {
   }
 
   public getStudents() {
-    return 2
+    return 2;
   }
 
   public openPoll(): Poll {
@@ -16,7 +16,7 @@ export class Career {
   }
 
   public activePolls(): Poll[] {
-    return this.polls.filter(poll => poll.isOpen())
+    return this.polls.filter(poll => poll.isOpen());
   }
 
   public getSubject(key: string): Subject {

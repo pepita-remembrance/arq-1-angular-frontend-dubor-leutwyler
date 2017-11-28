@@ -9,7 +9,7 @@ import {AdminService} from '../services/admin.service';
 
 import Admin from '../models/admin';
 import {Career} from '../models/career';
-import {Poll} from '../models/poll'
+import {Poll} from '../models/poll';
 
 
 @Component({
@@ -19,14 +19,14 @@ import {Poll} from '../models/poll'
 
 export class CareerListComponent extends AlertingComponent implements OnInit {
   public careers: Career[] = [];
-  public newPollKey: string = "";
+  public newPollKey = '';
   public dateFrom: Date;
-  public dateTo : Date;
+  public dateTo: Date;
   public selectedCareer: Career;
 
   constructor(private route: ActivatedRoute, private careerService: CareerService,
     private adminService: AdminService, flashMessagesService: FlashMessagesService) {
-      super(flashMessagesService)
+      super(flashMessagesService);
   }
 
   ngOnInit() {
@@ -39,6 +39,6 @@ export class CareerListComponent extends AlertingComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.selectedCareer.newPoll(this.newPollKey, []))
+    console.log(this.selectedCareer.newPoll(this.newPollKey, []));
   }
 }

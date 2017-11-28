@@ -5,15 +5,15 @@ export type CareerOffer = Map<Subject, SubjectOffer>;
 
 export class Poll {
   private open = false;
-  public from : Date
-  public to : Date
+  public from: Date;
+  public to: Date;
   public arrayOffer: [Subject, SubjectOffer][];
-  public studentsFinished = 0
+  public studentsFinished = 0;
 
-  constructor(public key: string, public career: Career, public offer: CareerOffer, from : Date = new Date(),
+  constructor(public key: string, public career: Career, public offer: CareerOffer, from: Date = new Date(),
   to: Date = new Date()) {
     this.arrayOffer = Array.from(offer);
-    this.to = to
+    this.to = to;
     this.from = from;
   }
 
@@ -26,7 +26,7 @@ export class Poll {
   }
 
   public isOpen() {
-    const today = Date.now()
+    const today = Date.now();
     return this.from.getTime() < today && this.to.getTime() > today;
   }
 
@@ -111,7 +111,7 @@ export class SubjectOffer {
 }
 
 export interface OfferOption {
-  id: string
+  id: string;
 
   text: string;
 

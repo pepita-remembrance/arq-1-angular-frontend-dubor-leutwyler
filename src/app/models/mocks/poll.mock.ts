@@ -15,12 +15,12 @@ const skippedSubjects = ['Obj2', 'Redes', 'PConc', 'Mate2', 'IngSoft', 'UIs', 'E
 'Geo', 'Decl', 'videojuegos', 'DADC', 'CLP', 'SemMod', 'TIP'];
 
 
-const from = new Date("November 26, 2017 10:13:00");
-const to = new Date("December 26, 2017 10:13:00");
+const from = new Date('November 26, 2017 10:13:00');
+const to = new Date('December 26, 2017 10:13:00');
 export const tpi2017s2 = tpi.newPoll('2017s2', tpi.filterSubjects(skippedSubjects), from, to);
 export const tpiPolls = [tpi2017s2];
 
-tpi2017s2.openPoll()
+tpi2017s2.openPoll();
 
 tpi2017s2.on('InPr').add(
   new Course('C1',

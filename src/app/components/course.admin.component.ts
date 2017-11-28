@@ -23,9 +23,9 @@ import Admin from '../models/admin';
 
 
 export class CourseAdminComponent extends AlertingComponent implements OnInit {
-  public course : Course
-  public subject: Subject
-  public admin: Admin
+  public course: Course;
+  public subject: Subject;
+  public admin: Admin;
   public multi;
 
   colorScheme = {
@@ -49,7 +49,7 @@ export class CourseAdminComponent extends AlertingComponent implements OnInit {
               private adminService: AdminService,
               flashMessagesService: FlashMessagesService) {
     super(flashMessagesService);
-    this.view = [window.innerWidth, 200]
+    this.view = [window.innerWidth, 200];
   }
 
   ngOnInit() {
@@ -66,16 +66,16 @@ export class CourseAdminComponent extends AlertingComponent implements OnInit {
                   this.route.params
                   .subscribe(otherparams2 => {
                     const subject = otherparams['subject'];
-                    var res = Array.from(somepoll.offer).find(sub => sub[0].shortName === subject)
-                    this.subject = res[0]
-                    const comision = params['comision']
+                    const res = Array.from(somepoll.offer).find(sub => sub[0].shortName === subject);
+                    this.subject = res[0];
+                    const comision = params['comision'];
                     this.course = res[1].options.filter(option => option.isCourse()).map(course =>
-                      course as Course).find(course => course.id === comision)
+                      course as Course).find(course => course.id === comision);
                     this.multi = [
-                      {"name" : "Anotados", "value": this.course.currentStudents},
-                      {"name" : "Espacios libres", "value": this.course.maxSlots - this.course.currentStudents}
-                    ]
-                  })
+                      {'name' : 'Anotados', 'value': this.course.currentStudents},
+                      {'name' : 'Espacios libres', 'value': this.course.maxSlots - this.course.currentStudents}
+                    ];
+                  });
                 });
             });
           });

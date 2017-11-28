@@ -23,8 +23,8 @@ import Admin from '../models/admin';
 
 
 export class PollAdminDetailComponent extends AlertingComponent implements OnInit {
-  public poll : Poll
-  public admin: Admin
+  public poll: Poll;
+  public admin: Admin;
   public multi;
   public pie_view;
   public pie_multi;
@@ -40,13 +40,13 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
     domain: [
       '#0FCE00', '#4ED200', '#90D500', '#D3D900', '#DDA000', '#E16000', '#E51C00'
     ]
-  }
+  };
 
   public view = [900, 200];
   showXAxis = true;
   showYAxis = true;
   gradient = false;
-  showLegend = true
+  showLegend = true;
   showXAxisLabel = true;
   xAxisLabel = 'Materia';
   showYAxisLabel = true;
@@ -68,8 +68,8 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
               private adminService: AdminService,
               flashMessagesService: FlashMessagesService) {
     super(flashMessagesService);
-    this.view = [window.innerWidth, 200]
-    this.pie_view = [window.innerWidth, 200]
+    this.view = [window.innerWidth, 200];
+    this.pie_view = [window.innerWidth, 200];
   }
 
   ngOnInit() {
@@ -84,11 +84,11 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
               const key = otherparams['pollKey'];
               this.pollViewService.getPoll(key).then(somepoll => {
                   this.poll = somepoll;
-                  this.multi = this.offertoChartInfo(this.poll.offer)
+                  this.multi = this.offertoChartInfo(this.poll.offer);
                   this.pie_multi = [
-                    {"name": "Listos", "value": this.poll.studentsFinished},
-                    {"name": "Faltan", "value": this.poll.career.getStudents() - this.poll.studentsFinished}
-                  ]
+                    {'name': 'Listos', 'value': this.poll.studentsFinished},
+                    {'name': 'Faltan', 'value': this.poll.career.getStudents() - this.poll.studentsFinished}
+                  ];
                 });
             });
           });
@@ -96,26 +96,27 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
   }
 
   onSelect(event) {
-    const fullRoute = this.route.snapshot.url.reduce((x, y) => x.concat([y.path]), [])
-    this.router.navigate(fullRoute.concat([event.name, event.series]))
+    const fullRoute = this.route.snapshot.url.reduce((x, y) => x.concat([y.path]), []);
+    this.router.navigate(fullRoute.concat([event.name, event.series]));
   }
 
   offertoChartInfo(offer: Map<Subject, SubjectOffer>) {
-    var res = []
-    for(var i = 1; i <= this.maxComision(offer); i = i + 1) {
-      res.push({"name": "C" + i, "series": []})
+    const res = [];
+    for (let i = 1; i <= this.maxComision(offer); i += 1) {
+      res.push({'name': 'C' + i, 'series': []});
     }
     Array.from(offer).forEach(entry =>
         this.offerOptionstoCharInfo(res, entry[0].shortName , entry[1].options)
-    )
+    );
     return res;
   }
 
-  offerOptionstoCharInfo(offer,subjectName : string, offerOptions: OfferOption[]) {
-    var res = offerOptions.filter(option => option.isCourse()).map(course => course as Course)
+  offerOptionstoCharInfo(offer, subjectName: string, offerOptions: OfferOption[]) {
+    const res = offerOptions.filter(option => option.isCourse()).map(course => course as Course)
     .forEach(course => {
-      offer.find(option => option.name === course.id).series.unshift({"name": subjectName, "value" : course.currentStudents / course.maxSlots * 100})
-    })
+      offer.find(option => option.name === course.id).series
+      .unshift({'name': subjectName, 'value' : course.currentStudents / course.maxSlots * 100});
+    });
   }
 
   onResize(event) {
@@ -123,12 +124,12 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
     this.pie_view = [event.target.innerWidth, 200];
   }
 
-  private maxComision(offer: Map<Subject, SubjectOffer>){
-    var maxComision = 0
+  private maxComision(offer: Map<Subject, SubjectOffer>) {
+    let maxComision = 0;
     Array.from(offer).forEach(entry => {
-      maxComision = Math.max(maxComision, entry[1].options.filter(option => option.isCourse()).length)
-    })
-    return maxComision
+      maxComision = Math.max(maxComision, entry[1].options.filter(option => option.isCourse()).length);
+    });
+    return maxComision;
   }
 
   logout() {
