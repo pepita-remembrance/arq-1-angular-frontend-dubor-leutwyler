@@ -7,6 +7,8 @@ import {RouterModule} from '@angular/router';
 import {CalendarModule} from 'primeng/primeng';
 import {MenuItem} from 'primeng/components/common/api';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
+import { NgxUIModule } from '@swimlane/ngx-ui';
+
 import {FlashMessagesModule, FlashMessagesService} from 'angular2-flash-messages';
 
 import {PollViewService} from './services/pollView.service';
@@ -23,6 +25,7 @@ import {CourseAdminComponent} from './components/course.admin.component';
 import {AdminComponent} from './components/admin.component';
 import {CareerListComponent} from './components/career.list.component';
 import {StudentNavbarComponent} from './components/student.navbar.component';
+import {HeatMapComponentMinMax} from './components/heatmap_minmax.component'
 
 
 @NgModule({
@@ -36,12 +39,14 @@ import {StudentNavbarComponent} from './components/student.navbar.component';
     AdminComponent,
     CareerListComponent,
     StudentNavbarComponent,
+    HeatMapComponentMinMax,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     CalendarModule,
     NgxChartsModule,
+    NgxUIModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot([

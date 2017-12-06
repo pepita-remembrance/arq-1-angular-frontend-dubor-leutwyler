@@ -30,6 +30,7 @@
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
     "@swimlane/ngx-charts": "^4.4.0",
+    "@swimlane/ngx-ui": "^19.1.0",
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
@@ -46,8 +47,8 @@
     "moment": "^2.19.2",
     "primeng": "^4.2.4",
     "rxjs": "^5.4.2",
-    "zone.js": "^0.8.14",
-    "typescript": "~2.3.3"
+    "typescript": "~2.3.3",
+    "zone.js": "^0.8.14"
   },
   "devDependencies": {
     "codelyzer": "~3.1.1",

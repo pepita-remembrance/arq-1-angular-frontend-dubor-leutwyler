@@ -29,7 +29,7 @@
     </ngx-charts-pie-chart>
 </div>
 <div *ngIf="multi">
-<ngx-charts-heat-map
+<ngx-charts-heat-map-min-max
   (window:resize)="onResize($event)"
   [view]="view"
   [scheme]="colorScheme"
@@ -43,5 +43,5 @@
   [xAxisLabel]="xAxisLabel"
   [yAxisLabel]="yAxisLabel"
   (select)="onSelect($event)">
-</ngx-charts-heat-map>
+</ngx-charts-heat-map-min-max>
 </div>
