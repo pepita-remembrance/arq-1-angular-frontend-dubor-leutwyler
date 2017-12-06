@@ -7,7 +7,6 @@ import {RouterModule} from '@angular/router';
 import {CalendarModule} from 'primeng/primeng';
 import {MenuItem} from 'primeng/components/common/api';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
-import { NgxUIModule } from '@swimlane/ngx-ui';
 
 import {FlashMessagesModule, FlashMessagesService} from 'angular2-flash-messages';
 
@@ -46,7 +45,6 @@ import {HeatMapComponentMinMax} from './components/heatmap_minmax.component'
     BrowserAnimationsModule,
     CalendarModule,
     NgxChartsModule,
-    NgxUIModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
