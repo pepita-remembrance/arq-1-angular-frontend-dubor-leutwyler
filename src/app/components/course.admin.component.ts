@@ -23,9 +23,10 @@ import Admin from '../models/admin';
 
 
 export class CourseAdminComponent extends AlertingComponent implements OnInit {
-  public course: Course;
-  public subject: Subject;
-  public admin: Admin;
+  @Input() public course: Course;
+  @Input() public admin: Admin;
+  @Input() public subject: Subject;
+  @Input() public courses: number;
   public multi;
 
   colorScheme = {
@@ -49,37 +50,14 @@ export class CourseAdminComponent extends AlertingComponent implements OnInit {
               private adminService: AdminService,
               flashMessagesService: FlashMessagesService) {
     super(flashMessagesService);
-    this.view = [window.innerWidth, 200];
+    this.view = [400, 300];
   }
 
   ngOnInit() {
-    this.route.params
-      .subscribe(params => {
-        const id = params['id'];
-        this.adminService.getById(parseInt(id, 10))
-          .then(admin => {
-            this.admin = admin;
-            this.route.params
-            .subscribe(otherparams => {
-              const key = otherparams['pollKey'];
-              this.pollViewService.getPoll(key).then(somepoll => {
-                  this.route.params
-                  .subscribe(otherparams2 => {
-                    const subject = otherparams['subject'];
-                    const res = Array.from(somepoll.offer).find(sub => sub[0].shortName === subject);
-                    this.subject = res[0];
-                    const comision = params['comision'];
-                    this.course = res[1].options.filter(option => option.isCourse()).map(course =>
-                      course as Course).find(course => course.id === comision);
-                    this.multi = [
-                      {'name' : 'Anotados', 'value': this.course.currentStudents},
-                      {'name' : 'Espacios libres', 'value': this.course.maxSlots - this.course.currentStudents}
-                    ];
-                  });
-                });
-            });
-          });
-      });
+      this.multi = [
+        {'name' : 'Anotados', 'value': this.course.currentStudents},
+        {'name' : 'Espacios libres', 'value': this.course.maxSlots - this.course.currentStudents}
+      ];
   }
 
   onSelect(event) {
@@ -87,7 +65,7 @@ export class CourseAdminComponent extends AlertingComponent implements OnInit {
   }
 
   onResize(event) {
-    this.view = [event.target.innerWidth, 200];
+    this.view = [event.window.innerWidth / this.courses, 300];
   }
 
   logout() {

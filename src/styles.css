@@ -27,6 +27,14 @@ body {
   color : #666;
 }
 
+.marginleft {
+  margin-left: 100px;
+}
+
+.marginright {
+  margin-right: 200px !important;
+}
+
 #grayOutDiv {
   background-color: #333;
   opacity: 0.7;

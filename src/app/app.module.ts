@@ -3,6 +3,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
+import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import {CalendarModule} from 'primeng/primeng';
 import {MenuItem} from 'primeng/components/common/api';
@@ -24,7 +25,8 @@ import {CourseAdminComponent} from './components/course.admin.component';
 import {AdminComponent} from './components/admin.component';
 import {CareerListComponent} from './components/career.list.component';
 import {StudentNavbarComponent} from './components/student.navbar.component';
-import {HeatMapComponentMinMax} from './components/heatmap_minmax.component'
+import {HeatMapComponentMinMaxComponent} from './components/heatmap_minmax.component';
+import {SubjectAdminComponent} from './components/subject.component';
 
 
 @NgModule({
@@ -38,7 +40,8 @@ import {HeatMapComponentMinMax} from './components/heatmap_minmax.component'
     AdminComponent,
     CareerListComponent,
     StudentNavbarComponent,
-    HeatMapComponentMinMax,
+    HeatMapComponentMinMaxComponent,
+    SubjectAdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ import {HeatMapComponentMinMax} from './components/heatmap_minmax.component'
     NgxChartsModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     RouterModule.forRoot([
       {path: '', redirectTo: 'login', pathMatch: 'full'},
       {path: 'login', component: HomeLoginComponent},
@@ -54,7 +58,7 @@ import {HeatMapComponentMinMax} from './components/heatmap_minmax.component'
       {path: 'students/:fileNumber/polls/:pollKey', component: PollDetailComponent},
       {path: 'admins/:id', component: AdminComponent},
       {path: 'admins/:id/polls/:pollKey', component: PollAdminDetailComponent},
-      {path: 'admins/:id/polls/:pollKey/:subject/:comision', component: CourseAdminComponent},
+      {path: 'admins/:id/polls/:pollKey/:subject', component: SubjectAdminComponent},
     ]),
     FlashMessagesModule,
   ],
@@ -63,6 +67,7 @@ import {HeatMapComponentMinMax} from './components/heatmap_minmax.component'
     PollViewService,
     AdminService,
     StudentService,
+    HttpClient,
     CareerService,
   ],
   bootstrap: [AppComponent]

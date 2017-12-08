@@ -20,7 +20,7 @@ import { calculateViewDimensions, ViewDimensions } from '@swimlane/ngx-charts/re
 import { ColorHelper } from '@swimlane/ngx-charts/release/common/color.helper';
 
 @Component({
-  selector: 'ngx-charts-heat-map-min-max',
+  selector: 'app-ngx-charts-heat-map-min-max',
   template: `
     <ngx-charts-chart
       [view]="[width, height]"
@@ -73,10 +73,10 @@ import { ColorHelper } from '@swimlane/ngx-charts/release/common/color.helper';
 })
 
 
-export class HeatMapComponentMinMax extends BaseChartComponent {
+export class HeatMapComponentMinMaxComponent extends BaseChartComponent {
 
   @Input() legend;
-  @Input() legendTitle: string = 'Legend';
+  @Input() legendTitle = 'Legend';
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -87,7 +87,7 @@ export class HeatMapComponentMinMax extends BaseChartComponent {
   @Input() innerPadding: number | number[] = 8;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
-  @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipDisabled = false;
   @Input() tooltipText: any;
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
@@ -104,10 +104,10 @@ export class HeatMapComponentMinMax extends BaseChartComponent {
   transform: string;
   rects: any[];
   margin = [10, 20, 10, 20];
-  xAxisHeight: number = 0;
-  yAxisWidth: number = 0;
+  xAxisHeight = 0;
+  yAxisWidth = 0;
   legendOptions: any;
-  scaleType: string = 'linear';
+  scaleType = 'linear';
 
   update(): void {
     super.update();
@@ -273,7 +273,9 @@ export class HeatMapComponentMinMax extends BaseChartComponent {
       }
     }
 
-    if (num) return 'linear';
+    if (num) {
+      return 'linear';
+    }
     return 'ordinal';
   }
 

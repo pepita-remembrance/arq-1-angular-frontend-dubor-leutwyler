@@ -97,7 +97,7 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
 
   onSelect(event) {
     const fullRoute = this.route.snapshot.url.reduce((x, y) => x.concat([y.path]), []);
-    this.router.navigate(fullRoute.concat([event.name, event.series]));
+    this.router.navigate(fullRoute.concat([event.name]));
   }
 
   offertoChartInfo(offer: Map<Subject, SubjectOffer>) {

@@ -19,7 +19,7 @@ import {PollResult, Poll, NotYet, SubjectOffer, DefaultOption} from '../models/p
 })
 
 export class StudentNavbarComponent extends AlertingComponent {
-  @Input() back : boolean = false;
+  @Input() back = false;
 
   constructor(public pollViewService: PollViewService,
               private router: Router,

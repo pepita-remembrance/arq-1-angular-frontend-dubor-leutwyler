@@ -15,33 +15,14 @@
     </form>
   </div><!-- /.navbar-collapse -->
 </nav>
-<div *ngIf="poll">
-  <h1 class="centered-text">{{poll.key}}</h1>
-  <ngx-charts-pie-chart *ngIf="pie_multi"
-      [view]="pie_view"
-      [scheme]="pie_colorScheme"
-      [results]="pie_multi"
-      [explodeSlices]="pie_explodeSlices"
-      [labels]="pie_showLabels"
-      [doughnut]="pie_doughnut"
-      [gradient]="pie_gradient"
-      (select)="onSelect($event)">
-    </ngx-charts-pie-chart>
-</div>
-<div *ngIf="multi">
-<app-ngx-charts-heat-map-min-max
-  (window:resize)="onResize($event)"
-  [view]="view"
-  [scheme]="colorScheme"
-  [results]="multi"
-  [legend]="showLegend"
-  [gradient]="gradient"
-  [xAxis]="showXAxis"
-  [yAxis]="showYAxis"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
-  (select)="onSelect($event)">
-</app-ngx-charts-heat-map-min-max>
+<div class="container marginright" *ngIf="subject">
+  <div class="row">
+    <h1 class="centered-text marginleft">{{subject.shortName}}
+    </h1>
+    <div *ngFor="let course of courses" class="col-xs-{{rowSize}}" style="{ box-shadow: 5px 10px; }">
+      <h4 class="gray centered-text marginleft">{{course.id}}</h4>
+      <app-course-admin-detail [admin]="admin" [course]="course" [subject]="subject" [courses]="length">
+      </app-course-admin-detail>
+    </div>
+  </div>
 </div>
