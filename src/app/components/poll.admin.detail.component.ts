@@ -82,7 +82,8 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
             this.route.params
             .subscribe(otherparams => {
               const key = otherparams['pollKey'];
-              this.pollViewService.getPoll(key).then(somepoll => {
+              const careerKey = otherparams['careerKey'];
+              this.pollViewService.getPoll(careerKey, key).then(somepoll => {
                   this.poll = somepoll;
                   this.multi = this.offertoChartInfo(this.poll.offer);
                   this.pie_multi = [

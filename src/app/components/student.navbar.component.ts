@@ -33,6 +33,6 @@ export class StudentNavbarComponent extends AlertingComponent {
   }
 
   goBack(): void {
-    this.router.navigate(['../'], { relativeTo: this.route });
+    this.router.navigate(['../../'], { relativeTo: this.route });
   }
 }

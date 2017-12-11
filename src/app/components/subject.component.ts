@@ -50,7 +50,8 @@ export class SubjectAdminComponent extends AlertingComponent implements OnInit {
             this.route.params
             .subscribe(otherparams => {
               const key = otherparams['pollKey'];
-              this.pollViewService.getPoll(key).then(somepoll => {
+              const careerKey = otherparams['careerKey'];
+              this.pollViewService.getPoll(careerKey, key).then(somepoll => {
                   this.route.params
                   .subscribe(otherparams2 => {
                     const subject = otherparams['subject'];

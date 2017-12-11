@@ -6,6 +6,9 @@ import {PollResult, Poll, NotYet, DefaultOption, OfferOption} from '../models/po
 import {Subject} from '../models/career';
 import {tpi2017s2, tpiPolls} from '../models/mocks/poll.mock';
 import Student from '../models/student';
+import {Career} from '../models/career';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 @Injectable()
 export class PollViewService {
@@ -13,15 +16,25 @@ export class PollViewService {
     public student: Student;
     public poll: Poll;
     public defaultOption: DefaultOption;
-    public submitResults: Map<Subject, OfferOption> = new Map();
-    public originalResults: Map<Subject, OfferOption>;
+    public submitResults: Map<string, OfferOption> = new Map();
+    public originalResults: Map<string, OfferOption>;
+    public careers: Career[]
+
+    studentsUrl = 'https://ins-poll-staging-pr-8.herokuapp.com/students';
+    careersUrl = 'https://ins-poll-staging-pr-8.herokuapp.com/careers';
+
+    constructor(
+      private http: HttpClient
+    ) {
+    }
 
     allPolls() {
       return Promise.resolve(tpiPolls);
     }
 
-    getPoll(key) {
-      return Promise.resolve(tpiPolls.find(poll => poll.key === key));
+    getPoll(careerKey, key) {
+      return this.http.get<Poll>
+      (`${this.careersUrl}/${careerKey}/polls/${key}`).toPromise()
     }
 
     createPoll(poll: Poll) {
@@ -29,43 +42,43 @@ export class PollViewService {
       return Promise.resolve(poll);
     }
 
-    getPollResult(key) {
+    getPollResult(careerKey, key) {
       if (this.pollResult &&
           this.pollResult.student === this.student &&
           this.pollResult.poll.key === key) {
         return Promise.resolve(this.pollResult);
       }
-      const pollResult = this.student.pollResults.find(pollR => pollR.poll.key === key);
-      if (pollResult) {
-        this.pollResult = pollResult;
-        return Promise.resolve(pollResult);
-      }
-
-      return this.getPoll(key).then(poll => {
-        this.pollResult = poll.newPollResult(this.student, this.defaultOption);
-        this.originalResults = new Map(this.pollResult.results);
-        return Promise.resolve(this.pollResult);
-      }).catch();
+      return this.http.get<PollResult>
+      (`${this.studentsUrl}/${this.student.fileNumber}/careers/${careerKey}/polls/${key}`).toPromise().then(
+        pollResult => {
+          this.originalResults = pollResult.results
+          this.pollResult = pollResult
+        }
+      )
     }
 
-    submit() {
-      if (this.student.pollResults.length > 0 &&
-        this.student.pollResults[this.student.pollResults.length - 1].poll.key === this.pollResult.poll.key) {
-        Array.from(this.student.pollResults[this.student.pollResults.length - 1].results).forEach(pair => {
-          if (pair[1].isCourse()) {
-            pair[1].removeStudent();
-          }
-        });
-        this.student.pollResults.pop();
-      }
-      this.student.pollResults.push(this.pollResult);
-      Array.from(this.pollResult.results).forEach(pair => {
-        if (pair[1].isCourse()) {
-          pair[1].addStudent();
-        }
-      });
-      this.pollResult.poll.studentsFinished += 1;
-      return Promise.resolve(this.student);
+    submit(careerKey, key) {
+      // if (this.student.pollResults.length > 0 &&
+      //   this.student.pollResults[this.student.pollResults.length - 1].poll.key === this.pollResult.poll.key) {
+      //   Array.from(this.student.pollResults[this.student.pollResults.length - 1].results).forEach(pair => {
+      //     if (pair[1].isCourse()) {
+      //       pair[1].removeStudent();
+      //     }
+      //   });
+      //   this.student.pollResults.pop();
+      // }
+      // this.student.pollResults.push(this.pollResult);
+      // Array.from(this.pollResult.results).forEach(pair => {
+      //   if (pair[1].isCourse()) {
+      //     pair[1].addStudent();
+      //   }
+      // });
+      // this.pollResult.poll.studentsFinished += 1
+      // return Promise.resolve(this.student);
+      return this.http.patch<PollResult>
+      (`${this.studentsUrl}/${this.student.fileNumber}/careers/${careerKey}/polls/${key}`, this.submitResults)
+      .toPromise().then(result => {console.log(result); return result
+      })
     }
 
 }

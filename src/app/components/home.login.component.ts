@@ -37,6 +37,7 @@ export class HomeLoginComponent extends AlertingComponent {
   private studentLogin() {
     this.studentsService.getByName(this.name, this.surname)
       .then(student => {
+        console.log(student)
           if (student) {
             this.router.navigate(['/students', student.fileNumber, 'polls']);
           } else {

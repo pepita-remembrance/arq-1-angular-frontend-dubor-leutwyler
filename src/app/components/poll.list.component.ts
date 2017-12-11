@@ -30,26 +30,34 @@ export class PollListComponent extends AlertingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.switchMap(params => params.get('fileNumber'))
-      .subscribe(fileNumber =>
-        this.studentsService.getById(parseInt(fileNumber, 10))
-          .then(student => {
+    this.route.params.subscribe(params => {
+      const fileNumber = params['fileNumber']
+      this.studentsService.getById(parseInt(fileNumber, 10))
+        .then(student => {
+          this.careerService.getForAdmin(student.careers.map(career => career.shortName))
+          .then(careers => {
             this.pollViewService.student = student;
+            this.pollViewService.careers = careers;
           })
-      );
+        })
+      });
   }
 
   active(poll) {
-    return poll.isOpen() &&
+    return poll.isOpen &&
     this.pollViewService &&
     this.pollViewService.student &&
     this.pollViewService.student.pollResults &&
     this.pollViewService.student.pollResults.find(somepoll => somepoll.poll.key === poll.key);
   }
 
+  activePolls(career) {
+    return career.polls.filter(poll => poll.isOpen);
+  }
+
   tip(poll) {
     if (this.active(poll)) {
-      return 'Ya fue completada; Presiona para editar';
+      return 'Ya fue completada; Presione para editar';
     }
     return 'Debe completar esta encuesta; Presione para continuar';
   }

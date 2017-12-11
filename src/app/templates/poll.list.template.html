@@ -1,12 +1,12 @@
 <app-student-navbar></app-student-navbar>
-<div class="container" *ngIf="pollViewService && pollViewService.student && pollViewService.student.careers">
+<div class="container" *ngIf="pollViewService && pollViewService.student && pollViewService.careers">
   <div *ngIf="pollViewService.student.careers.length > 0" class="centered-text">
     <h1>Encuestas:</h1>
   </div>
-  <div *ngFor="let career of pollViewService.student.careers" class="list-group">
-    <a *ngFor="let poll of career.activePolls()" class="list-group-item btn"
+  <div *ngFor="let career of pollViewService.careers" class="list-group">
+    <a *ngFor="let poll of activePolls(career)" class="list-group-item btn"
     [ngClass]="{'list-group-item-warning': !active(poll), 'list-group-item-success': active(poll)}"
-    routerLink="{{poll.key}}" data-toggle="tooltip" [title]="tip(poll)">
+    routerLink="{{poll.career.shortName}}/{{poll.key}}" data-toggle="tooltip" [title]="tip(poll)">
       {{career.shortName}}: {{poll.key}}
     <span class="glyphicon" [ngClass]="{'glyphicon-pencil': !active(poll), 'glyphicon-ok' : active(poll)}"></span></a>
   </div>

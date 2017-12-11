@@ -37,7 +37,7 @@ export class Career {
     const offer = new Map<Subject, SubjectOffer>();
     this.subjects
       .filter(subject => !notOfferedSubjects.includes(subject))
-      .map(subject => offer.set(subject, new SubjectOffer(SubjectOffer.defaultOffer())));
+      .map(subject => offer.set(subject, new SubjectOffer([])));
     const poll = new Poll(pollKey, this, offer, from, to);
     this.polls.unshift(poll);
     return poll;

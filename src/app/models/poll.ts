@@ -71,7 +71,7 @@ export class DefaultOption extends NonCourseOption {
 
 export class NotYet extends DefaultOption {
   constructor() {
-    super('Aun no voy a cursar');
+    super('No voy a cursar');
   }
 }
 
@@ -88,22 +88,22 @@ export class AlreadyPassed extends DefaultOption {
 }
 export class NoSuitableSchedule extends DefaultOption {
   constructor() {
-    super('El horario no me sirve');
+    super('Ningun horario me sirve');
   }
 }
 
 export class SubjectOffer {
-  public options: OfferOption[] = SubjectOffer.defaultOffer();
+  public options: OfferOption[] = [];
 
   constructor(courseOptions: OfferOption[]) {
-    this.options.concat(courseOptions);
+    // this.options.concat(courseOptions);
   }
 
   public static defaultOffer() {
     return [
-      new NotYet,
-      new AlreadyPassed,
-      new NoSuitableSchedule,
+      {key: 'No voy a cursar', isCourse: false},
+      {key: 'Ya aprobe', isCourse: false},
+      {key: 'Ningun horario me sirve', isCourse: false},
     ];
   }
 
@@ -130,16 +130,16 @@ export interface OfferOption {
 
 
 export class PollResult {
-  public results: Map<Subject, OfferOption>;
-  public arrayResults: [Subject, OfferOption][] = [];
+  public results: Map<string, OfferOption>;
+  public arrayResults: [string, OfferOption][] = [];
 
   constructor(public poll: Poll, public student: Student,
               public defaultOption: DefaultOption = new NotYet, public fillDate: Date = new Date(Date.now())) {
-    this.results = new Map<Subject, OfferOption>();
-    Array.from(poll.offer.keys()).forEach(subject => {
+    this.results = new Map<string, OfferOption>();
+    for(var subject in poll.offer){
       this.results.set(subject, defaultOption);
       this.arrayResults.push([subject, defaultOption]);
-    });
+    }
   }
 
   asPartial(): PollResultPartial {
@@ -150,7 +150,7 @@ export class PollResult {
     this.student.pollResults.push(this);
   }
 
-  setDefault(subjects: Subject[], defaultOption: DefaultOption) {
+  setDefault(subjects: string[], defaultOption: DefaultOption) {
     this.arrayResults.forEach(res => {
       if (subjects.indexOf(res[0]) > -1) {
         res[1] = defaultOption;
