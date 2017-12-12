@@ -1,5 +1,6 @@
 <app-student-navbar back="true"></app-student-navbar>
-<div *ngIf="poll && pollViewService" class="container">
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+<div *ngIf="poll && pollViewService && !loading" class="container">
   <div class="centered-text">
     <h1>Encuesta de Preinscripcción para {{poll.carrer.longName}}
     </h1>

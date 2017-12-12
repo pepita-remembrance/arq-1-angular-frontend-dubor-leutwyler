@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class StudentService extends DataSourceService<Student, number> {
-  studentsUrl = 'https://ins-poll-staging-pr-8.herokuapp.com/students';
+  studentsUrl = 'https://ins-poll-develop.herokuapp.com/students';
 
   constructor(
     private http: HttpClient

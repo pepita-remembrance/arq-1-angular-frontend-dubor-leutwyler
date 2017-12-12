@@ -42,7 +42,7 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
     ]
   };
 
-  public view = [900, 200];
+  public view = [900, 1000];
   showXAxis = true;
   showYAxis = true;
   gradient = false;
@@ -68,7 +68,7 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
               private adminService: AdminService,
               flashMessagesService: FlashMessagesService) {
     super(flashMessagesService);
-    this.view = [window.innerWidth, 200];
+    this.view = [window.innerWidth, 1000];
     this.pie_view = [window.innerWidth, 200];
   }
 
@@ -86,9 +86,10 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
               this.pollViewService.getPoll(careerKey, key).then(somepoll => {
                   this.poll = somepoll;
                   this.multi = this.offertoChartInfo(this.poll.offer);
+                  this.view = [window.innerWidth, Object.keys(this.poll.offer).length * 30 ];
                   this.pie_multi = [
-                    {'name': 'Listos', 'value': this.poll.studentsFinished},
-                    {'name': 'Faltan', 'value': this.poll.career.getStudents() - this.poll.studentsFinished}
+                    {'name': 'Listos', 'value': 0}, //this.poll.studentsFinished
+                    {'name': 'Faltan', 'value': 30} //this.poll.career.getStudents() - this.poll.studentsFinished
                   ];
                 });
             });
@@ -102,34 +103,39 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
   }
 
   offertoChartInfo(offer: Map<Subject, SubjectOffer>) {
+    console.log(offer)
     const res = [];
     for (let i = 1; i <= this.maxComision(offer); i += 1) {
       res.push({'name': 'C' + i, 'series': []});
     }
-    Array.from(offer).forEach(entry =>
-        this.offerOptionstoCharInfo(res, entry[0].shortName , entry[1].options)
-    );
+    for(var entry in offer) {
+      this.offerOptionstoCharInfo(res, entry , offer[entry])
+    }
     return res;
   }
 
   offerOptionstoCharInfo(offer, subjectName: string, offerOptions: OfferOption[]) {
-    const res = offerOptions.filter(option => option.isCourse()).map(course => course as Course)
+    const res = offerOptions.filter(option => option.isCourse).map(course => course)
     .forEach(course => {
-      offer.find(option => option.name === course.id).series
-      .unshift({'name': subjectName, 'value' : course.currentStudents / course.maxSlots * 100});
+      offer.find(option => option.name === course.key).series
+      .unshift({'name': subjectName, 'value' : Math.random() * 100}); //course.currentStudents / course.maxSlots * 100
     });
   }
 
   onResize(event) {
-    this.view = [event.target.innerWidth, 200];
+    this.view = [event.target.innerWidth, this.view[1]];
     this.pie_view = [event.target.innerWidth, 200];
   }
 
   private maxComision(offer: Map<Subject, SubjectOffer>) {
     let maxComision = 0;
-    Array.from(offer).forEach(entry => {
-      maxComision = Math.max(maxComision, entry[1].options.filter(option => option.isCourse()).length);
-    });
+    for(var entry in offer) {
+        let currComisions = 0
+        offer[entry].forEach(option => {
+            currComisions = currComisions + (option.isCourse ? 1 : 0)
+        })
+        maxComision = Math.max(maxComision, currComisions);
+    }
     return maxComision;
   }
 
@@ -138,6 +144,6 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
   }
 
   goBack(): void {
-    this.router.navigate(['../../'], { relativeTo: this.route });
+    this.router.navigate(['../../../'], { relativeTo: this.route });
   }
 }

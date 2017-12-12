@@ -55,8 +55,8 @@ export class CourseAdminComponent extends AlertingComponent implements OnInit {
 
   ngOnInit() {
       this.multi = [
-        {'name' : 'Anotados', 'value': this.course.currentStudents},
-        {'name' : 'Espacios libres', 'value': this.course.maxSlots - this.course.currentStudents}
+        {'name' : 'Anotados', 'value': 0}, // this.poll.career.getStudents() - this.poll.studentsFinished
+        {'name' : 'Espacios libres', 'value': 40} // this.course.maxSlots - this.course.currentStudents
       ];
   }
 

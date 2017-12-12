@@ -52,6 +52,7 @@ export class Subject {
 export class Course implements OfferOption {
   public schedules: Schedule[] = [];
   public text: string;
+  public key : string;
   public isSelected = false;
   public maxSlots = 40;
   public currentStudents = 0;
@@ -60,6 +61,7 @@ export class Course implements OfferOption {
     this.schedules.push(schedule);
     this.schedules.concat(schedules);
     this.text = this.textValue();
+    this.key = id;
   }
 
   public isCourse(): boolean {

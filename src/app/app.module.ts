@@ -8,7 +8,7 @@ import {RouterModule} from '@angular/router';
 import {CalendarModule} from 'primeng/primeng';
 import {MenuItem} from 'primeng/components/common/api';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
-
+import { LoadingModule } from 'ngx-loading';
 import {FlashMessagesModule, FlashMessagesService} from 'angular2-flash-messages';
 
 import {PollViewService} from './services/pollView.service';
@@ -51,6 +51,7 @@ import {SubjectAdminComponent} from './components/subject.component';
     FormsModule,
     HttpModule,
     HttpClientModule,
+    LoadingModule,
     RouterModule.forRoot([
       {path: '', redirectTo: 'login', pathMatch: 'full'},
       {path: 'login', component: HomeLoginComponent},

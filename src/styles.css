@@ -19,6 +19,11 @@ body {
   text-align-last: center;
 }
 
+.all-page {
+  width: 100%;
+  height: 100%;
+}
+
 .navbar-brand > a {
   color: #fff;
 }

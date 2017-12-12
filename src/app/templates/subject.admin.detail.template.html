@@ -17,10 +17,10 @@
 </nav>
 <div class="container marginright" *ngIf="subject">
   <div class="row">
-    <h1 class="centered-text marginleft">{{subject.shortName}}
+    <h1 class="centered-text marginleft">{{subject}}
     </h1>
     <div *ngFor="let course of courses" class="col-xs-{{rowSize}}" style="{ box-shadow: 5px 10px; }">
-      <h4 class="gray centered-text marginleft">{{course.id}}</h4>
+      <h4 class="gray centered-text marginleft">{{course.key}}</h4>
       <app-course-admin-detail [admin]="admin" [course]="course" [subject]="subject" [courses]="length">
       </app-course-admin-detail>
     </div>

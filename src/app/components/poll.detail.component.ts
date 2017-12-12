@@ -14,6 +14,7 @@ import {CareerService} from '../services/careers.service';
 
 
 
+
 @Component({
   selector:   'app-poll-detail',
   templateUrl: '../templates/poll.detail.template.html',
@@ -29,6 +30,7 @@ export class PollDetailComponent extends AlertingComponent implements OnInit {
   public defaultOption;
   public key
   public careerKey
+  public loading = false;
 
   constructor(public pollViewService: PollViewService,
               public studentsService: StudentService,
@@ -50,7 +52,7 @@ export class PollDetailComponent extends AlertingComponent implements OnInit {
         this.careerKey = params['careerKey']
         this.studentsService.getById(parseInt(fileNumber, 10))
           .then(student => {
-            this.careerService.getForAdmin(student.careers.map(career => career.shortName)).then(careers => {
+            this.careerService.getForStudent(student.careers.map(career => career.shortName)).then(careers => {
               this.pollViewService.getPoll(this.careerKey ,this.key).then(somepoll => {
                 this.pollViewService.student = student;
                 this.pollViewService.careers = careers;
@@ -93,8 +95,12 @@ export class PollDetailComponent extends AlertingComponent implements OnInit {
   }
 
   submit() {
-    this.pollViewService.submit(this.careerKey, this.key).then(result => this.router
-      .navigate(['students', `${this.pollViewService.student.fileNumber}`, 'polls']));
+    this.loading = true;
+    this.pollViewService.submit(this.careerKey, this.key).then(result => {
+      this.loading = false;
+      this.router
+      .navigate(['students', `${this.pollViewService.student.fileNumber}`, 'polls'])
+    });
   }
 
   getText(option) {

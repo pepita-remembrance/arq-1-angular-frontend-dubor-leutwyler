@@ -45,8 +45,10 @@ export class Poll {
 
 export class NonCourseOption implements OfferOption {
   public isSelected = false;
+  public key;
 
   constructor(public id: string, public text: string) {
+    this.key = id
   }
 
   isCourse(): boolean {
@@ -115,6 +117,8 @@ export class SubjectOffer {
 
 export interface OfferOption {
   id: string;
+
+  key: string;
 
   text: string;
 

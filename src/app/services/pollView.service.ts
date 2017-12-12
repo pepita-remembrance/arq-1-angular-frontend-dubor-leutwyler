@@ -20,8 +20,8 @@ export class PollViewService {
     public originalResults: Map<string, OfferOption>;
     public careers: Career[]
 
-    studentsUrl = 'https://ins-poll-staging-pr-8.herokuapp.com/students';
-    careersUrl = 'https://ins-poll-staging-pr-8.herokuapp.com/careers';
+    studentsUrl = 'https://ins-poll-develop.herokuapp.com/students';
+    careersUrl = 'https://ins-poll-develop.herokuapp.com/careers';
 
     constructor(
       private http: HttpClient
@@ -58,23 +58,6 @@ export class PollViewService {
     }
 
     submit(careerKey, key) {
-      // if (this.student.pollResults.length > 0 &&
-      //   this.student.pollResults[this.student.pollResults.length - 1].poll.key === this.pollResult.poll.key) {
-      //   Array.from(this.student.pollResults[this.student.pollResults.length - 1].results).forEach(pair => {
-      //     if (pair[1].isCourse()) {
-      //       pair[1].removeStudent();
-      //     }
-      //   });
-      //   this.student.pollResults.pop();
-      // }
-      // this.student.pollResults.push(this.pollResult);
-      // Array.from(this.pollResult.results).forEach(pair => {
-      //   if (pair[1].isCourse()) {
-      //     pair[1].addStudent();
-      //   }
-      // });
-      // this.pollResult.poll.studentsFinished += 1
-      // return Promise.resolve(this.student);
       return this.http.patch<PollResult>
       (`${this.studentsUrl}/${this.student.fileNumber}/careers/${careerKey}/polls/${key}`, this.submitResults)
       .toPromise().then(result => {console.log(result); return result

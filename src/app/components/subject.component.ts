@@ -55,11 +55,22 @@ export class SubjectAdminComponent extends AlertingComponent implements OnInit {
                   this.route.params
                   .subscribe(otherparams2 => {
                     const subject = otherparams['subject'];
-                    const res = Array.from(somepoll.offer).find(sub => sub[0].shortName === subject);
+                    let res;
+                    for(var entry in somepoll.offer){
+                      if(entry === subject){
+                        res = [entry, somepoll.offer[entry]]
+                        break;
+                      }
+                    }
                     this.subject = res[0];
-                    this.courses = res[1].options.filter(option => option.isCourse()).map(course => course as Course);
+                    this.courses = []
+                    res[1].forEach(option => {
+                      if(option.isCourse) {
+                        this.courses.push(option)
+                      }
+                    });
                     this.rowSize = 12 / this.courses.length;
-                    length = this.courses.length;
+                    this.length = this.courses.length;
                   });
                 });
             });
