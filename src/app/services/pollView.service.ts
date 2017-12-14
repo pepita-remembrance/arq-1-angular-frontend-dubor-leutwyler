@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { of } from 'rxjs/observable/of';
 
-import {PollResult, Poll, NotYet, DefaultOption, OfferOption} from '../models/poll';
+import {PollResult, Poll, PartialPoll, NotYet, DefaultOption, OfferOption} from '../models/poll';
 import {Subject} from '../models/career';
 import {tpi2017s2, tpiPolls} from '../models/mocks/poll.mock';
 import Student from '../models/student';
@@ -15,6 +15,7 @@ export class PollViewService {
     public pollResult: PollResult;
     public student: Student;
     public poll: Poll;
+    public polls: PartialPoll[]
     public defaultOption: DefaultOption;
     public submitResults: Map<string, OfferOption> = new Map();
     public originalResults: Map<string, OfferOption>;
@@ -53,6 +54,7 @@ export class PollViewService {
         pollResult => {
           this.originalResults = pollResult.results
           this.pollResult = pollResult
+          return pollResult
         }
       )
     }

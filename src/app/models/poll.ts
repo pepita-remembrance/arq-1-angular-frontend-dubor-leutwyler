@@ -3,6 +3,11 @@ import Student from './student';
 
 export type CareerOffer = Map<Subject, SubjectOffer>;
 
+export class PartialPoll {
+  constructor(public key: string, public isOpen: boolean, public career: Career) {
+  }
+}
+
 export class Poll {
   private open = false;
   public from: Date;

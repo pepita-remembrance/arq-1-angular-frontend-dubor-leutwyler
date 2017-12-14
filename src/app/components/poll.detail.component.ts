@@ -52,17 +52,16 @@ export class PollDetailComponent extends AlertingComponent implements OnInit {
         this.careerKey = params['careerKey']
         this.studentsService.getById(parseInt(fileNumber, 10))
           .then(student => {
-            this.careerService.getForStudent(student.careers.map(career => career.shortName)).then(careers => {
               this.pollViewService.getPoll(this.careerKey ,this.key).then(somepoll => {
                 this.pollViewService.student = student;
-                this.pollViewService.careers = careers;
-                this.poll = somepoll;
-                this.pollViewService.getPollResult(this.careerKey, this.key);
-                for(var p in this.poll.offer) {
-                  this.arrayOffer.push([p, this.poll.offer[p]])
-                }
+                this.pollViewService.getPollResult(this.careerKey, this.key)
+                .then(pollResult => {
+                  for(var p in somepoll.offer) {
+                    this.arrayOffer.push([p, somepoll.offer[p]])
+                  }
+                  this.poll = somepoll
+                })
               });
-            })
           });
       });
   }

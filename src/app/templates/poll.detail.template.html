@@ -11,9 +11,8 @@
       <div class="panel-heading">
         <a data-toggle="collapse" data-parent="#accordion" href="#{{res[0]}}">
           <h4 class="panel-title">
-            {{res[0]}}
-          </h4>
-        </a>
+            {{res[0]}}<span class="badge text-right pull-right">{{getText(pollViewService.pollResult.results[res[0]])}}</span>
+          </h4></a>
       </div>
       <div id="{{res[0]}}" class="panel-collapse collapse out">
         <div class="panel-body">

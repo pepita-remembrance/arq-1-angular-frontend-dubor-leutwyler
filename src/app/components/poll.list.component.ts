@@ -34,10 +34,10 @@ export class PollListComponent extends AlertingComponent implements OnInit {
       const fileNumber = params['fileNumber']
       this.studentsService.getById(parseInt(fileNumber, 10))
         .then(student => {
-          this.careerService.getForStudent(student.careers.map(career => career.shortName))
-          .then(careers => {
+          this.studentsService.getPollsById(student.fileNumber)
+          .then(polls => {
             this.pollViewService.student = student;
-            this.pollViewService.careers = careers;
+            this.pollViewService.polls = polls.reverse();
           })
         })
       });

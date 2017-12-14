@@ -4,6 +4,8 @@ import {DataSourceService} from './dataSource.service';
 import {Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import {PartialPoll} from '../models/poll'
+
 
 @Injectable()
 export class StudentService extends DataSourceService<Student, number> {
@@ -28,6 +30,10 @@ export class StudentService extends DataSourceService<Student, number> {
     return this.fetchData().then(data => {
       return data.find(student => (student.name === name) && (student.surname === surname))
     });
+  }
+
+  getPollsById(id: number): Promise<PartialPoll[]> {
+    return this.http.get<PartialPoll[]>(`${this.studentsUrl}/${id}/polls`).toPromise<PartialPoll[]>()
   }
 
   getById(id : number) {
