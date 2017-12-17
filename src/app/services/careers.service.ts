@@ -9,8 +9,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class CareerService extends DataSourceService<Career, string> {
   asd = {"shortName":"TPI","longName":"Tecnicatura Universitaria en Programacion Informatica"}
 
-  allCareersUrl = 'https://ins-poll-develop.herokuapp.com/debug/careers';
-  careersUrl = 'https://ins-poll-develop.herokuapp.com/admins/careers';
+  allCareersUrl = 'https://ins-poll-back-develop.herokuapp.com/debug/careers';
+  careersUrl = 'https://ins-poll-back-develop.herokuapp.com/admins/careers';
 
   constructor(
     private http: HttpClient

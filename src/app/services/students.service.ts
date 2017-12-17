@@ -9,7 +9,7 @@ import {PartialPoll} from '../models/poll'
 
 @Injectable()
 export class StudentService extends DataSourceService<Student, number> {
-  studentsUrl = 'https://ins-poll-develop.herokuapp.com/students';
+  studentsUrl = 'https://ins-poll-back-develop.herokuapp.com/students';
 
   constructor(
     private http: HttpClient

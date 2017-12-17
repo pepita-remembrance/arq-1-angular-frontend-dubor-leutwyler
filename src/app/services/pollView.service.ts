@@ -21,8 +21,8 @@ export class PollViewService {
     public originalResults: Map<string, OfferOption>;
     public careers: Career[]
 
-    studentsUrl = 'https://ins-poll-develop.herokuapp.com/students';
-    careersUrl = 'https://ins-poll-develop.herokuapp.com/admins/careers';
+    studentsUrl = 'https://ins-poll-back-develop.herokuapp.com/students';
+    careersUrl = 'https://ins-poll-back-develop.herokuapp.com/admins/careers';
 
     constructor(
       private http: HttpClient

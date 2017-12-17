@@ -10,7 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class AdminService extends DataSourceService<Admin, number> {
 
-  adminsUrl = 'https://ins-poll-develop.herokuapp.com/admins';
+  adminsUrl = 'https://ins-poll-back-develop.herokuapp.com/admins';
 
   constructor(
     private http: HttpClient
