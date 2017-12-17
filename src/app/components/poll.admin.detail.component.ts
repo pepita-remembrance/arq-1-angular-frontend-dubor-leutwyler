@@ -28,6 +28,7 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
   public multi;
   public pie_view;
   public pie_multi;
+  
 
   pie_colorScheme = {
     domain: ['#5AA454', '#A10A28']
@@ -53,6 +54,7 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
   yAxisLabel = 'Materias';
 
   // pie
+  pie_showLagend = true;
   pie_showLabels = true;
   pie_explodeSlices = false;
   pie_doughnut = false;
@@ -69,29 +71,34 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
               flashMessagesService: FlashMessagesService) {
     super(flashMessagesService);
     this.view = [window.innerWidth, 1000];
-    this.pie_view = [window.innerWidth, 200];
   }
 
   ngOnInit() {
     this.route.params
       .subscribe(params => {
         const id = params['id'];
+        const key = params['pollKey'];
+        const careerKey = params['careerKey'];
         this.adminService.getById(parseInt(id, 10))
           .then(admin => {
             this.admin = admin;
-            this.route.params
-            .subscribe(otherparams => {
-              const key = otherparams['pollKey'];
-              const careerKey = otherparams['careerKey'];
-              this.pollViewService.getPoll(careerKey, key).then(somepoll => {
-                  this.poll = somepoll;
-                  this.multi = this.offertoChartInfo(this.poll.offer);
-                  this.view = [window.innerWidth, Object.keys(this.poll.offer).length * 30 ];
+            this.pollViewService.getPoll(careerKey, key).then(somepoll => {
+              this.poll = somepoll;
+              this.adminService.getCareersById(id).then(careers => {
+                const students = Array.from(careers).find(c => c.shortName === careerKey).students
+                this.adminService.getPollsById(id).then(polls => {
+                  this.poll.answered = Array.from(polls).find(p => p.key === key).answered
+                  this.pie_view = [window.innerWidth, 200];
                   this.pie_multi = [
-                    {'name': 'Listos', 'value': 0}, //this.poll.studentsFinished
-                    {'name': 'Faltan', 'value': 30} //this.poll.career.getStudents() - this.poll.studentsFinished
+                    {"name" : "Listos", "value" : this.poll.answered}, //this.poll.studentsFinished
+                    {"name" : "Faltan", "value" : students - this.poll.answered} //this.poll.career.getStudents() - this.poll.studentsFinished
                   ];
-                });
+                })
+              })
+              this.adminService.getTally(careerKey, key).then(offer =>
+                this.multi = this.offertoChartInfo(offer, this.poll.offer)
+              )
+              this.view = [window.innerWidth, Object.keys(this.poll.offer).length * 30 ];
             });
           });
       });
@@ -102,23 +109,28 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
     this.router.navigate(fullRoute.concat([event.name]));
   }
 
-  offertoChartInfo(offer: Map<Subject, SubjectOffer>) {
-    console.log(offer)
+  offertoChartInfo(offer, completeOffer) {
     const res = [];
-    for (let i = 1; i <= this.maxComision(offer); i += 1) {
+    for (let i = 1; i <= this.maxComision(completeOffer); i += 1) {
       res.push({'name': 'C' + i, 'series': []});
     }
-    for(var entry in offer) {
-      this.offerOptionstoCharInfo(res, entry , offer[entry])
+    offer.forEach(op => this.offerOptionstoCharInfo(res, op.subject.shortName, op.options))
+    for(var entry in completeOffer) {
+      completeOffer[entry].filter(op => op.isCourse).forEach(course => {
+        const partialRes = res.find(r => r.name === course.key)
+        if(!partialRes.series.find(r => r['name'] === entry)){
+            partialRes.series.unshift({'name': entry, 'value': 0})
+        }
+      })
     }
     return res;
   }
 
-  offerOptionstoCharInfo(offer, subjectName: string, offerOptions: OfferOption[]) {
-    const res = offerOptions.filter(option => option.isCourse).map(course => course)
+  offerOptionstoCharInfo(offer, subjectName: string, offerOptions) {
+    const res = offerOptions.filter(option => option.option.isCourse)
     .forEach(course => {
-      offer.find(option => option.name === course.key).series
-      .unshift({'name': subjectName, 'value' : Math.random() * 100}); //course.currentStudents / course.maxSlots * 100
+      offer.find(option => option.name === course.option.key).series
+      .unshift({'name': subjectName, 'value' : Number(course.students.length) / Number(course.option.quota) * 100}); //course.currentStudents / course.maxSlots * 100
     });
   }
 

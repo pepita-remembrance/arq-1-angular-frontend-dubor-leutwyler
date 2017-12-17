@@ -28,6 +28,7 @@ export class SubjectAdminComponent extends AlertingComponent implements OnInit {
   public courses: Course[];
   public rowSize: number;
   public length: number;
+  public studentsPerCourse: Map<string, any[]> = new Map()
 
 
   constructor(public pollViewService: PollViewService,
@@ -44,35 +45,36 @@ export class SubjectAdminComponent extends AlertingComponent implements OnInit {
     this.route.params
       .subscribe(params => {
         const id = params['id'];
+        const key = params['pollKey'];
+        const subject = params['subject'];
+        const careerKey = params['careerKey'];
         this.adminService.getById(parseInt(id, 10))
           .then(admin => {
             this.admin = admin;
-            this.route.params
-            .subscribe(otherparams => {
-              const key = otherparams['pollKey'];
-              const careerKey = otherparams['careerKey'];
-              this.pollViewService.getPoll(careerKey, key).then(somepoll => {
-                  this.route.params
-                  .subscribe(otherparams2 => {
-                    const subject = otherparams['subject'];
-                    let res;
-                    for(var entry in somepoll.offer){
-                      if(entry === subject){
-                        res = [entry, somepoll.offer[entry]]
-                        break;
-                      }
-                    }
-                    this.subject = res[0];
-                    this.courses = []
-                    res[1].forEach(option => {
-                      if(option.isCourse) {
-                        this.courses.push(option)
-                      }
-                    });
-                    this.rowSize = 12 / this.courses.length;
-                    this.length = this.courses.length;
-                  });
+            this.pollViewService.getPoll(careerKey, key).then(somepoll => {
+              let res;
+              for(var entry in somepoll.offer){
+                if(entry === subject){
+                  res = [entry, somepoll.offer[entry]]
+                  break;
+                }
+              }
+              this.adminService.getTally(careerKey, key).then(otherpoll => {
+                Array.from(otherpoll).find(p => p['subject'].shortName === subject)['options']
+                .filter(option => option.option.isCourse).forEach(course => {
+                  this.studentsPerCourse.set(course.option.key, course.students)
+                  console.log(course.students)
+                })
+                this.subject = res[0];
+                this.courses = []
+                res[1].forEach(option => {
+                  if(option.isCourse === true) {
+                    this.courses.push(option)
+                  }
                 });
+                this.rowSize = 12 / this.courses.length;
+                this.length = this.courses.length;
+              })
             });
           });
       });

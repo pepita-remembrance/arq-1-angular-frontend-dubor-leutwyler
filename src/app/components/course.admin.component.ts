@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, OnChanges, ApplicationRef } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
-
 import {PollViewService} from '../services/pollView.service';
 
 import {Subject, Course} from '../models/career';
@@ -12,8 +11,6 @@ import {PollResult, Poll, NotYet, SubjectOffer, DefaultOption, OfferOption} from
 import {StudentService} from '../services/students.service';
 import {AdminService} from '../services/admin.service';
 import Admin from '../models/admin';
-
-
 
 
 @Component({
@@ -27,19 +24,21 @@ export class CourseAdminComponent extends AlertingComponent implements OnInit {
   @Input() public admin: Admin;
   @Input() public subject: Subject;
   @Input() public courses: number;
+  @Input() public studentsPerCourse: Map<string, any[]>;
   public multi;
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28']
+    domain: ['#A10A28', '#5AA454']
   };
 
   // pie
-  view;
+  view = [1, 1]
   showLabels = true;
   explodeSlices = false;
   doughnut = false;
   gradient = false;
 
+  occupied
 
 
   constructor(public pollViewService: PollViewService,
@@ -50,22 +49,28 @@ export class CourseAdminComponent extends AlertingComponent implements OnInit {
               private adminService: AdminService,
               flashMessagesService: FlashMessagesService) {
     super(flashMessagesService);
-    this.view = [400, 300];
   }
 
   ngOnInit() {
-      this.multi = [
-        {'name' : 'Anotados', 'value': 0}, // this.poll.career.getStudents() - this.poll.studentsFinished
-        {'name' : 'Espacios libres', 'value': 40} // this.course.maxSlots - this.course.currentStudents
-      ];
+    console.log(this.studentsPerCourse)
+    this.view = [window.innerWidth, 400]
+    this.occupied =
+    this.studentsPerCourse.get(this.course.key) ? this.studentsPerCourse.get(this.course.key).length : 0;
+    this.multi = [
+      {'name' : 'Anotados', 'value': this.occupied},
+      {'name' : 'Espacios libres', 'value': this.course.quota - this.occupied}
+    ];
+  }
+
+  students(){
+    return this.studentsPerCourse.get(this.course.key)
   }
 
   onSelect(event) {
-    console.log(event);
   }
 
-  onResize(event) {
-    this.view = [event.window.innerWidth / this.courses, 300];
+  onResize() {
+    this.view = [window.innerWidth, 400]
   }
 
   logout() {

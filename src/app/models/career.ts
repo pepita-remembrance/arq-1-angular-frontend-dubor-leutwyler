@@ -3,6 +3,8 @@ import {Schedule} from './schedule';
 
 export class Career {
 
+  public students : number
+
   constructor(public id: string, public shortName: string, public longName: string, public subjects: Subject[] = [],
   public polls: Poll[] = []) {
   }
@@ -56,6 +58,8 @@ export class Course implements OfferOption {
   public isSelected = false;
   public maxSlots = 40;
   public currentStudents = 0;
+  public quota
+  public students: any
 
   constructor(public id: string, schedule: Schedule, ...schedules: Schedule[]) {
     this.schedules.push(schedule);

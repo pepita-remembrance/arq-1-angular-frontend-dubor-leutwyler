@@ -50,11 +50,12 @@ export class HomeLoginComponent extends AlertingComponent {
     this.adminService.getByName(this.name, this.surname)
       .then(admin => {
           if (admin) {
-            this.router.navigate(['/admins', admin.id]);
+            this.router.navigate(['/admins', admin.fileNumber]);
           } else {
             this.alert(`${this.name} ${this.surname} no es administrador`);
           }
         }
-      );
+      )
+      .catch(error => console.log(error));
   }
 }

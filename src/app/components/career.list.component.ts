@@ -9,7 +9,7 @@ import {AdminService} from '../services/admin.service';
 import {PollViewService} from '../services/pollView.service';
 
 import Admin from '../models/admin';
-import {Career} from '../models/career';
+import {Career, Subject} from '../models/career';
 import {Poll} from '../models/poll';
 
 @Component({
@@ -18,11 +18,16 @@ import {Poll} from '../models/poll';
 })
 
 export class CareerListComponent extends AlertingComponent implements OnInit {
-  public careers: Career[] = [];
+  public polls: Poll[] = [];
+  public careers: Career[] = []
   public newPollKey = '';
   public dateFrom: Date;
+  public newPoll = {key : '', offer: {}}
   public dateTo: Date;
   public selectedCareer: Career;
+  public subjects: Subject[]
+  public subjectToAdd
+  public loading = false;
 
   constructor(private route: ActivatedRoute, private careerService: CareerService,
     private adminService: AdminService,
@@ -32,12 +37,29 @@ export class CareerListComponent extends AlertingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap.switchMap(params => params.get('id'))
-      .subscribe(id => {
-        this.adminService.getById(parseInt(id, 10)).then(admin => {
-          this.careerService.getForAdmin(admin.careers).then(careers => this.careers = careers);
+    this.loading = true;
+    this.route.params
+      .subscribe(params => {
+        const id = params['id']
+        this.adminService.getPollsById(Number(id)).then(polls => {
+          this.polls = polls.reverse();
+          this.loading = false;
         });
+        this.adminService.getCareersById(Number(id)).then(careers => {
+          this.careers = careers
+        })
       });
+  }
+
+  onChange() {
+    this.careerService.getById(this.selectedCareer.shortName).then(career => {
+      this.subjects = career.subjects
+    })
+  }
+
+  onChangeSubject() {
+    this.newPoll.offer[this.subjectToAdd.shortName] = []
+    console.log(this.newPoll)
   }
 
   onSubmit() {

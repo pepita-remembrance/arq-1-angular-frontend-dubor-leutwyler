@@ -17,7 +17,7 @@
 </nav>
 <div *ngIf="poll">
   <h1 class="centered-text">{{poll.key}}</h1>
-  <ngx-charts-pie-chart *ngIf="pie_multi"
+  <ngx-charts-pie-chart *ngIf="pie_multi && (pie_multi[0].value != undefined) && (pie_multi[1].value != undefined)"
       [view]="pie_view"
       [scheme]="pie_colorScheme"
       [results]="pie_multi"

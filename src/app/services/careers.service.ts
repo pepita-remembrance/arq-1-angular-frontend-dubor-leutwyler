@@ -9,7 +9,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class CareerService extends DataSourceService<Career, string> {
   asd = {"shortName":"TPI","longName":"Tecnicatura Universitaria en Programacion Informatica"}
 
-  careersUrl = 'https://ins-poll-develop.herokuapp.com/careers';
+  allCareersUrl = 'https://ins-poll-develop.herokuapp.com/debug/careers';
+  careersUrl = 'https://ins-poll-develop.herokuapp.com/admins/careers';
 
   constructor(
     private http: HttpClient
@@ -25,7 +26,7 @@ export class CareerService extends DataSourceService<Career, string> {
     if(!this.http) return Promise.resolve([])
     return this.http
     .get<{ shortName: string, longName : string }[]>
-    (this.careersUrl).toPromise().then(careers => {
+    (this.allCareersUrl).toPromise().then(careers => {
         const promises : Promise<Career[]>[] = []
         careers.forEach(career => {
           promises.push(this.http.get<Career[]>(`${this.careersUrl}/${career.shortName}`).toPromise())

@@ -40,6 +40,10 @@ body {
   margin-right: 200px !important;
 }
 
+.marginbot {
+  margin-bottom: 20px;
+}
+
 #grayOutDiv {
   background-color: #333;
   opacity: 0.7;

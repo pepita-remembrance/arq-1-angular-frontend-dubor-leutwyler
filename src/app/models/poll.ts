@@ -13,7 +13,7 @@ export class Poll {
   public from: Date;
   public to: Date;
   public arrayOffer: [Subject, SubjectOffer][];
-  public studentsFinished = 0;
+  public answered : number;
 
   constructor(public key: string, public career: Career, public offer: CareerOffer, from: Date = new Date(),
   to: Date = new Date()) {

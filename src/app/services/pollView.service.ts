@@ -22,7 +22,7 @@ export class PollViewService {
     public careers: Career[]
 
     studentsUrl = 'https://ins-poll-develop.herokuapp.com/students';
-    careersUrl = 'https://ins-poll-develop.herokuapp.com/careers';
+    careersUrl = 'https://ins-poll-develop.herokuapp.com/admins/careers';
 
     constructor(
       private http: HttpClient
@@ -62,8 +62,7 @@ export class PollViewService {
     submit(careerKey, key) {
       return this.http.patch<PollResult>
       (`${this.studentsUrl}/${this.student.fileNumber}/careers/${careerKey}/polls/${key}`, this.submitResults)
-      .toPromise().then(result => {console.log(result); return result
-      })
+      .toPromise()
     }
 
 }

@@ -15,14 +15,13 @@
     </form>
   </div><!-- /.navbar-collapse -->
 </nav>
-<div class="container marginright" *ngIf="subject">
-  <div class="row">
-    <h1 class="centered-text marginleft">{{subject}}
-    </h1>
-    <div *ngFor="let course of courses" class="col-xs-{{rowSize}}" style="{ box-shadow: 5px 10px; }">
-      <h4 class="gray centered-text marginleft">{{course.key}}</h4>
-      <app-course-admin-detail [admin]="admin" [course]="course" [subject]="subject" [courses]="length">
-      </app-course-admin-detail>
-    </div>
+<div *ngIf="subject">
+  <h1 class="centered-text">{{subject}}
+  </h1>
+  <div *ngFor="let course of courses" style="{ box-shadow: 5px 10px; }">
+    <h4 class="gray centered-text">{{course.key}}</h4>
+    <app-course-admin-detail *ngIf="studentsPerCourse"[admin]="admin" [course]="course" [subject]="subject" [courses]="length"
+    [studentsPerCourse]="studentsPerCourse">
+    </app-course-admin-detail>
   </div>
 </div>

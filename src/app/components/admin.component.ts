@@ -24,13 +24,14 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap.switchMap(params => params.get('id'))
-      .subscribe(id =>
-        this.adminService.getById(parseInt(id, 10))
+    this.route.params
+      .subscribe(params => {
+        const id = params['id']
+        this.adminService.getById(Number(id))
           .then(admin => {
             this.admin = admin;
           })
-      );
+      });
   }
 
   logout() {
