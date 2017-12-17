@@ -4,7 +4,7 @@ This is the front end for the public api:
 
 ## Frontend Url
 
-[Front-end](https://sleepy-harbor-39428.herokuapp.com/)
+[Front-end](https://ins-poll-front-arqsoft-2017s2.herokuapp.com/)
 
 ### How to use
 
