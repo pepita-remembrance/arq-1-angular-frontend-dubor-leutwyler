@@ -5,12 +5,13 @@ import {Poll, SubjectOffer} from '../models/poll';
 import {DataSourceService} from './dataSource.service';
 import {Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {environment} from '../../environments/environment'
 
 
 @Injectable()
 export class AdminService extends DataSourceService<Admin, number> {
 
-  adminsUrl = 'https://ins-poll-back-develop.herokuapp.com/admins';
+  adminsUrl = `https://ins-poll-back${environment.URL_SUFFIX}.herokuapp.com/admins`;
 
   constructor(
     private http: HttpClient
@@ -51,5 +52,9 @@ export class AdminService extends DataSourceService<Admin, number> {
   getTally(shortName: string, pollKey) {
     return this.http.get<Map<Subject, SubjectOffer>>
     (`${this.adminsUrl}/careers/${shortName}/polls/${pollKey}/tally`).toPromise()
+  }
+
+  seed() {
+    return this.http.get<Admin[]>(`https://ins-poll-back-develop.herokuapp.com/seed`).toPromise()
   }
 }

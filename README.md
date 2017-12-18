@@ -8,6 +8,8 @@ This is the front end for the public api:
 
 ### How to use
 
+First of all we are using in the backend an architecture that separates the database logic with the model. So in order to test the look and feel faster than with a normal implementation we are using as a proof of concept an ___in memory database___ that initially is empty. By pressing the button seed the database will allow us to use the following data:
+
 The valid users are **Marco Gomez**, and **Joaquin Sanchez** as normal students, and **Gabriela Arevalo** and **Pablo Suarez** as admins.
 
 # Run it locally

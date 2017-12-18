@@ -5,11 +5,13 @@ import {Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import {PartialPoll} from '../models/poll'
+import {environment} from '../../environments/environment'
+
 
 
 @Injectable()
 export class StudentService extends DataSourceService<Student, number> {
-  studentsUrl = 'https://ins-poll-back-develop.herokuapp.com/students';
+  studentsUrl = `https://ins-poll-back${environment.URL_SUFFIX}.herokuapp.com/students`;
 
   constructor(
     private http: HttpClient

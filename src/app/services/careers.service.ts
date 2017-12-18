@@ -3,14 +3,15 @@ import {CAREERS} from '../models/mocks/career.mock';
 import {DataSourceService} from './dataSource.service';
 import {Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {environment} from '../../environments/environment'
 
 
 @Injectable()
 export class CareerService extends DataSourceService<Career, string> {
   asd = {"shortName":"TPI","longName":"Tecnicatura Universitaria en Programacion Informatica"}
 
-  allCareersUrl = 'https://ins-poll-back-develop.herokuapp.com/debug/careers';
-  careersUrl = 'https://ins-poll-back-develop.herokuapp.com/admins/careers';
+  allCareersUrl = `https://ins-poll-back${environment.URL_SUFFIX}.herokuapp.com/debug/careers`;
+  careersUrl = `https://ins-poll-back${environment.URL_SUFFIX}.herokuapp.com/admins/careers`;
 
   constructor(
     private http: HttpClient

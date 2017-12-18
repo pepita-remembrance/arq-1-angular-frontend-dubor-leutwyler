@@ -8,6 +8,7 @@ import {tpi2017s2, tpiPolls} from '../models/mocks/poll.mock';
 import Student from '../models/student';
 import {Career} from '../models/career';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {environment} from '../../environments/environment'
 
 
 @Injectable()
@@ -21,8 +22,8 @@ export class PollViewService {
     public originalResults: Map<string, OfferOption>;
     public careers: Career[]
 
-    studentsUrl = 'https://ins-poll-back-develop.herokuapp.com/students';
-    careersUrl = 'https://ins-poll-back-develop.herokuapp.com/admins/careers';
+    studentsUrl = `https://ins-poll-back${environment.URL_SUFFIX}.herokuapp.com/students`;
+    careersUrl = `https://ins-poll-back${environment.URL_SUFFIX}.herokuapp.com/admins/careers`;
 
     constructor(
       private http: HttpClient
