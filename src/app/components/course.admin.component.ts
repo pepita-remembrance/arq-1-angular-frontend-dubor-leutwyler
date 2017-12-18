@@ -52,7 +52,6 @@ export class CourseAdminComponent extends AlertingComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.studentsPerCourse)
     this.view = [window.innerWidth, 400]
     this.occupied =
     this.studentsPerCourse.get(this.course.key) ? this.studentsPerCourse.get(this.course.key).length : 0;

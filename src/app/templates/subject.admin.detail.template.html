@@ -15,13 +15,71 @@
     </form>
   </div><!-- /.navbar-collapse -->
 </nav>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
 <div *ngIf="subject">
   <h1 class="centered-text">{{subject}}
   </h1>
-  <div *ngFor="let course of courses" style="{ box-shadow: 5px 10px; }">
-    <h4 class="gray centered-text">{{course.key}}</h4>
-    <app-course-admin-detail *ngIf="studentsPerCourse"[admin]="admin" [course]="course" [subject]="subject" [courses]="length"
-    [studentsPerCourse]="studentsPerCourse">
-    </app-course-admin-detail>
+  <div class="[ form-group ] centered-text">
+      <input type="checkbox" [(ngModel)]="vistaDeCursos" name="fancy-checkbox-default" id="fancy-checkbox-default" autocomplete="off" />
+      <div class="[ btn-group ]">
+          <label for="fancy-checkbox-default" class="[ btn btn-default ]">
+              <span class="[ glyphicon glyphicon-ok ]"></span>
+              <span> </span>
+          </label>
+          <label for="fancy-checkbox-default" class="[ btn btn-default active ]">
+              Vista de cursos
+          </label>
+      </div>
+  </div>
+  <div *ngIf="vistaDeCursos">
+    <div *ngFor="let course of courses" style="{ box-shadow: 5px 10px; }">
+      <h4 class="gray centered-text">{{course.key}}</h4>
+      <app-course-admin-detail *ngIf="studentsPerCourse" [admin]="admin" [course]="course" [subject]="subject" [courses]="length"
+      [studentsPerCourse]="studentsPerCourse">
+      </app-course-admin-detail>
+    </div>
+    <div *ngIf="courses.length === 0">
+      <h1>Lo sentimos, esta materia no tiene ningún curso</h1>
+      <div class="row">
+        <img class=".img-responsive col-xs-8" src="../assets/we_re_sorry.jpg">
+        <div class="col-xs-4"></div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!vistaDeCursos && summarySingle">
+    <a data-toggle="collapse" href="#subjectTable">
+      <ngx-charts-advanced-pie-chart
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="summarySingle"
+        [gradient]="gradient"
+        (select)="onSelect($event)">
+      </ngx-charts-advanced-pie-chart>
+    </a>
+    <div class="collapse out" id="subjectTable">
+      <table *ngIf="students() && students().length > 0" class="table table-hover table-sm">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Email</th>
+            <th scope="col">Opcion elegida</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of students()">
+            <th scope="row">{{student.student.fileNumber}}</th>
+            <td>{{student.student.name}}</td>
+            <td>{{student.student.surname}}</td>
+            <td>{{student.student.email}}</td>
+            <td>{{student.option}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="!(students() && students().length > 0)" class="centered-text">
+        Aún está vacía
+      </div>
+    </div>
   </div>
 </div>

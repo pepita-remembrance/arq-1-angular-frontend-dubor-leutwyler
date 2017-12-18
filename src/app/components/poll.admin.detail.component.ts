@@ -28,7 +28,8 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
   public multi;
   public pie_view;
   public pie_multi;
-  
+  loading = true
+
 
   pie_colorScheme = {
     domain: ['#5AA454', '#A10A28']
@@ -49,7 +50,7 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Comisiones';
+  xAxisLabel = 'Opciones';
   showYAxisLabel = true;
   yAxisLabel = 'Materias';
 
@@ -90,14 +91,15 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
                   this.poll.answered = Array.from(polls).find(p => p.key === key).answered
                   this.pie_view = [window.innerWidth, 200];
                   this.pie_multi = [
-                    {"name" : "Listos", "value" : this.poll.answered}, //this.poll.studentsFinished
-                    {"name" : "Faltan", "value" : students - this.poll.answered} //this.poll.career.getStudents() - this.poll.studentsFinished
+                    {"name" : "Listos", "value" : this.poll.answered},
+                    {"name" : "Faltan", "value" : students - this.poll.answered}
                   ];
                 })
               })
-              this.adminService.getTally(careerKey, key).then(offer =>
+              this.adminService.getTally(careerKey, key).then(offer => {
                 this.multi = this.offertoChartInfo(offer, this.poll.offer)
-              )
+                this.loading = false
+              })
               this.view = [window.innerWidth, Object.keys(this.poll.offer).length * 30 ];
             });
           });
@@ -109,11 +111,17 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
     this.router.navigate(fullRoute.concat([event.name]));
   }
 
+  onSelectPie(event) {
+  }
+
   offertoChartInfo(offer, completeOffer) {
     const res = [];
     for (let i = 1; i <= this.maxComision(completeOffer); i += 1) {
       res.push({'name': 'C' + i, 'series': []});
     }
+    res.push({'name': 'Ningun horario me sirve', series: []})
+    res.push({'name': 'Voy a cursar TTI segun oferta del Departamento de Ciencia y Tecnologia', series: []})
+    res.push({'name': 'Voy a cursar TTU segun oferta del Departamento de Ciencia y Tecnologia', series: []})
     offer.forEach(op => this.offerOptionstoCharInfo(res, op.subject.shortName, op.options))
     for(var entry in completeOffer) {
       completeOffer[entry].filter(op => op.isCourse).forEach(course => {
@@ -127,10 +135,10 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
   }
 
   offerOptionstoCharInfo(offer, subjectName: string, offerOptions) {
-    const res = offerOptions.filter(option => option.option.isCourse)
+    const res = offerOptions.filter(op => op.option.key != 'Ya aprobe' && op.option.key != 'No voy a cursar')
     .forEach(course => {
-      offer.find(option => option.name === course.option.key).series
-      .unshift({'name': subjectName, 'value' : Number(course.students.length) / Number(course.option.quota) * 100}); //course.currentStudents / course.maxSlots * 100
+      offer.find(option => {console.log(course.option.key);return option.name === course.option.key}).series
+      .unshift({'name': subjectName, 'value' : Number(course.students.length) / (course.option.quota ? Number(course.option.quota) : 30) * 100});
     });
   }
 

@@ -29,6 +29,19 @@ export class SubjectAdminComponent extends AlertingComponent implements OnInit {
   public rowSize: number;
   public length: number;
   public studentsPerCourse: Map<string, any[]> = new Map()
+  public vistaDeCursos = false
+  public summarySingle : any[] = []
+  loading = true
+
+  view = [1, 1]
+  showLabels = true;
+  explodeSlices = false;
+  doughnut = false;
+  gradient = false;
+
+  colorScheme = {
+    domain: []
+  };
 
 
   constructor(public pollViewService: PollViewService,
@@ -42,6 +55,7 @@ export class SubjectAdminComponent extends AlertingComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.view = [window.innerWidth, 400]
     this.route.params
       .subscribe(params => {
         const id = params['id'];
@@ -55,15 +69,19 @@ export class SubjectAdminComponent extends AlertingComponent implements OnInit {
               let res;
               for(var entry in somepoll.offer){
                 if(entry === subject){
+                  somepoll.offer[entry].forEach(op => {
+                    this.summarySingle.push({'name' : op.key, 'value' : 0})
+                    this.colorScheme.domain.push(this.getRandomColor())
+                  })
                   res = [entry, somepoll.offer[entry]]
                   break;
                 }
               }
               this.adminService.getTally(careerKey, key).then(otherpoll => {
                 Array.from(otherpoll).find(p => p['subject'].shortName === subject)['options']
-                .filter(option => option.option.isCourse).forEach(course => {
+                .forEach(course => {
                   this.studentsPerCourse.set(course.option.key, course.students)
-                  console.log(course.students)
+                  this.summarySingle.find(op => op.name === course.option.key).value += course.students.length
                 })
                 this.subject = res[0];
                 this.courses = []
@@ -74,10 +92,14 @@ export class SubjectAdminComponent extends AlertingComponent implements OnInit {
                 });
                 this.rowSize = 12 / this.courses.length;
                 this.length = this.courses.length;
+                this.loading = false
               })
             });
           });
       });
+  }
+
+  onSelect(event){
   }
 
   logout() {
@@ -86,5 +108,17 @@ export class SubjectAdminComponent extends AlertingComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
+  students(){
+    const res = []
+    Array.from(this.studentsPerCourse).forEach(pair => pair[1].forEach(student => {
+      res.push({option: pair[0], student: student})
+    }))
+    return Array.from(res)
+  }
+
+  private getRandomColor() {
+    return '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6)
   }
 }

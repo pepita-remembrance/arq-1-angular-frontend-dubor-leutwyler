@@ -15,6 +15,7 @@
     </form>
   </div><!-- /.navbar-collapse -->
 </nav>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
 <div *ngIf="poll">
   <h1 class="centered-text">{{poll.key}}</h1>
   <ngx-charts-pie-chart *ngIf="pie_multi && (pie_multi[0].value != undefined) && (pie_multi[1].value != undefined)"
@@ -25,7 +26,7 @@
       [labels]="pie_showLabels"
       [doughnut]="pie_doughnut"
       [gradient]="pie_gradient"
-      (select)="onSelect($event)">
+      (select)="onSelectPie($event)">
     </ngx-charts-pie-chart>
 </div>
 <div *ngIf="multi">
