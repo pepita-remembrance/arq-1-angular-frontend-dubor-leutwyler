@@ -55,6 +55,6 @@ export class AdminService extends DataSourceService<Admin, number> {
   }
 
   seed() {
-    return this.http.get<Admin[]>(`https://ins-poll-back-develop.herokuapp.com/seed`).toPromise()
+    return this.http.get<Admin[]>(`https://ins-poll-back${environment.URL_SUFFIX}.herokuapp.com/seed`).toPromise()
   }
 }
