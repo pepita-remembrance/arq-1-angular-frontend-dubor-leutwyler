@@ -16,6 +16,9 @@
       </div>
       <div id="{{res[0]}}" class="panel-collapse collapse out">
         <div class="panel-body">
+          <blockquote *ngIf="poll.extraData && poll.extraData[res[0]]">
+            {{poll.extraData[res[0]]}}
+          </blockquote>
           <div class="list-group">
             <a *ngFor="let option of res[1]" class="list-group-item" [ngClass]="{'active': isSelected(res[0], option) }"
             (click)="select(res[0], option)">
