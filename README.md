@@ -8,9 +8,7 @@ This is the front end for the public api:
 
 ### How to use
 
-Now this is using mock data. The valid users are **Marco Gomez**, and **Joaquin Sanchez** as normal students, and **Gabriela Arevalo** and **Pablo Suarez** as admins.
-
-You can also test the form validation by typing a wrong user.
+The valid users are **Marco Gomez**, and **Joaquin Sanchez** as normal students, and **Gabriela Arevalo** and **Pablo Suarez** as admins.
 
 # Run it locally
 
