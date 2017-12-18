@@ -65,7 +65,13 @@ export class HomeLoginComponent extends AlertingComponent {
   seed() {
     this.loading = true
     this.adminService.seed()
-    .then(x => this.loading = false)
-    .catch(error => this.loading = false)
+    .then(x => {
+      this.success(`Datos creados`);
+      this.loading = false
+    })
+    .catch(error => {
+      this.success(`Datos creados`);
+      this.loading = false
+    })
   }
 }
