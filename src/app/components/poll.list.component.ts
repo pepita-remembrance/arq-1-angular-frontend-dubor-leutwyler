@@ -19,6 +19,7 @@ import {PollResult, Poll, NotYet, SubjectOffer, DefaultOption} from '../models/p
 })
 
 export class PollListComponent extends AlertingComponent implements OnInit {
+  loading = true
 
   constructor(private studentsService: StudentService,
               public pollViewService: PollViewService,
@@ -34,6 +35,7 @@ export class PollListComponent extends AlertingComponent implements OnInit {
       const fileNumber = params['fileNumber']
       this.studentsService.getById(parseInt(fileNumber, 10))
         .then(student => {
+          this.loading = false
           this.pollViewService.student = student;
           this.pollViewService.polls = student.polls.reverse();
         })

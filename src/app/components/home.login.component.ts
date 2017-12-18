@@ -18,6 +18,7 @@ export class HomeLoginComponent extends AlertingComponent {
   name: string;
   surname: string;
   admin = false;
+  loading = false
 
   constructor(private studentsService: StudentService,
               private router: Router,
@@ -35,9 +36,11 @@ export class HomeLoginComponent extends AlertingComponent {
   }
 
   private studentLogin() {
+    this.loading = true
     this.studentsService.getByName(this.name, this.surname)
       .then(student => {
           if (student) {
+            this.loading = false
             this.router.navigate(['/students', student.fileNumber, 'polls']);
           } else {
             this.alert(`Nombre ${this.name} o apellido ${this.surname} invalidos`);
@@ -47,9 +50,11 @@ export class HomeLoginComponent extends AlertingComponent {
   }
 
   private adminLogin() {
+    this.loading = true
     this.adminService.getByName(this.name, this.surname)
       .then(admin => {
           if (admin) {
+            this.loading = false
             this.router.navigate(['/admins', admin.fileNumber]);
           } else {
             this.alert(`${this.name} ${this.surname} no es administrador`);

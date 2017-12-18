@@ -30,7 +30,7 @@ export class PollDetailComponent extends AlertingComponent implements OnInit {
   public defaultOption;
   public key
   public careerKey
-  public loading = false;
+  public loading = true;
 
   constructor(public pollViewService: PollViewService,
               public studentsService: StudentService,
@@ -60,6 +60,7 @@ export class PollDetailComponent extends AlertingComponent implements OnInit {
                     this.arrayOffer.push([p, somepoll.offer[p]])
                   }
                   this.poll = somepoll
+                  this.loading = false
                 })
               });
           });
