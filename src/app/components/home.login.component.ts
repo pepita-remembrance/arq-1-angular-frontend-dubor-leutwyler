@@ -39,28 +39,26 @@ export class HomeLoginComponent extends AlertingComponent {
     this.loading = true
     this.studentsService.getByName(this.name, this.surname)
       .then(student => {
-          if (student) {
-            this.loading = false
-            this.router.navigate(['/students', student.fileNumber, 'polls']);
-          } else {
-            this.alert(`Nombre ${this.name} o apellido ${this.surname} invalidos`);
-          }
+        this.loading = false
+        if (student) {
+          this.router.navigate(['/students', student.fileNumber, 'polls']);
+        } else {
+          this.alert(`Nombre ${this.name} o apellido ${this.surname} invalidos`);
         }
-      );
+      });
   }
 
   private adminLogin() {
     this.loading = true
     this.adminService.getByName(this.name, this.surname)
       .then(admin => {
-          if (admin) {
-            this.loading = false
-            this.router.navigate(['/admins', admin.fileNumber]);
-          } else {
-            this.alert(`${this.name} ${this.surname} no es administrador`);
-          }
+        this.loading = false
+        if (admin) {
+          this.router.navigate(['/admins', admin.fileNumber]);
+        } else {
+          this.alert(`${this.name} ${this.surname} no es administrador`);
         }
-      )
+      })
       .catch(error => console.log(error));
   }
 }
