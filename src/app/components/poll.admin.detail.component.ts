@@ -122,6 +122,7 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
     res.push({'name': 'Ningun horario me sirve', series: []})
     res.push({'name': 'Voy a cursar TTI segun oferta del Departamento de Ciencia y Tecnologia', series: []})
     res.push({'name': 'Voy a cursar TTU segun oferta del Departamento de Ciencia y Tecnologia', series: []})
+    res.push({'name': 'Voy a rendir libre', series: []})
     offer.forEach(op => this.offerOptionstoCharInfo(res, op.subject.shortName, op.options))
     for(var entry in completeOffer) {
       completeOffer[entry].filter(op => op.isCourse).forEach(course => {
@@ -137,7 +138,7 @@ export class PollAdminDetailComponent extends AlertingComponent implements OnIni
   offerOptionstoCharInfo(offer, subjectName: string, offerOptions) {
     const res = offerOptions.filter(op => op.option.key != 'Ya aprobe' && op.option.key != 'No voy a cursar')
     .forEach(course => {
-      offer.find(option => {console.log(course.option.key);return option.name === course.option.key}).series
+      offer.find(option => option.name === course.option.key).series
       .unshift({'name': subjectName, 'value' : Number(course.students.length) / (course.option.quota ? Number(course.option.quota) : 30) * 100});
     });
   }
